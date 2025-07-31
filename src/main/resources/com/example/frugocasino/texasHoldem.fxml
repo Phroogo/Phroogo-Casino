@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.frugocasino.TexasHoldemController">
+    <children>
+        <Label alignment="CENTER" layoutX="434.0" layoutY="-5.0" prefHeight="189.0" prefWidth="1054.0" text="TEXAS HOLD'EM" textAlignment="CENTER" textFill="#1989ab">
+            <font>
+                <Font name="Comic Sans MS Bold" size="96.0" />
+            </font>
+        </Label>
+        <Label fx:id="moneyLabel" alignment="CENTER_RIGHT" layoutX="1555.0" layoutY="14.0" prefHeight="39.0" prefWidth="351.0">
+            <font>
+                <Font name="Comic Sans MS Bold" size="40.0" />
+            </font>
+        </Label>
+        <Label fx:id="phrogMoneyLabel" alignment="CENTER_RIGHT" layoutX="1555.0" layoutY="70.0" prefHeight="39.0" prefWidth="351.0" textFill="#1989ab">
+            <font>
+                <Font name="Comic Sans MS Bold" size="31.0" />
+            </font>
+        </Label>
+        <Button fx:id="backButton" layoutX="14.0" layoutY="1027.0" mnemonicParsing="false" onAction="#switchToCasinoButton" prefHeight="33.0" prefWidth="69.0" text="Back">
+            <font>
+                <Font name="Comic Sans MS Bold" size="19.0" />
+            </font>
+        </Button>
+        <Button fx:id="playButton" layoutX="822.0" layoutY="810.0" mnemonicParsing="false" onAction="#playPoker" prefHeight="88.0" prefWidth="301.0" text="PLAY ($50)">
+            <font>
+                <Font name="Comic Sans MS Bold" size="42.0" />
+            </font>
+        </Button>
+      <ImageView fx:id="playerCard1" fitHeight="263.0" fitWidth="184.0" layoutX="819.0" layoutY="673.0" pickOnBounds="true" preserveRatio="true" rotate="-5.7" visible="false">
+         <image>
+            <Image url="@../../../images/deck/deckBack.png" />
+         </image></ImageView>
+      <ImageView fx:id="playerCard2" fitHeight="263.0" fitWidth="184.0" layoutX="942.0" layoutY="673.0" pickOnBounds="true" preserveRatio="true" rotate="5.4" visible="false">
+         <image>
+            <Image url="@../../../images/deck/deckBack.png" />
+         </image></ImageView>
+      <ImageView fx:id="deckBack" fitHeight="263.0" fitWidth="184.0" layoutX="1722.0" layoutY="803.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/deck/deckBack.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="flopCard3" fitHeight="263.0" fitWidth="184.0" layoutX="879.0" layoutY="359.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/deck/deckBack.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="flopCard2" fitHeight="263.0" fitWidth="184.0" layoutX="658.0" layoutY="359.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/deck/deckBack.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="flopCard4" fitHeight="263.0" fitWidth="184.0" layoutX="1100.0" layoutY="359.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/deck/deckBack.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="flopCard1" fitHeight="263.0" fitWidth="184.0" layoutX="437.0" layoutY="358.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/deck/deckBack.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="flopCard5" fitHeight="263.0" fitWidth="184.0" layoutX="1321.0" layoutY="358.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/deck/deckBack.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="botCard1" fitHeight="197.0" fitWidth="138.0" layoutX="167.0" layoutY="639.0" pickOnBounds="true" preserveRatio="true" rotate="7.1" visible="false">
+         <image>
+            <Image url="@../../../images/deck/deckBack.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="botCard2" fitHeight="197.0" fitWidth="138.0" layoutX="248.0" layoutY="663.0" pickOnBounds="true" preserveRatio="true" rotate="24.1" visible="false">
+         <image>
+            <Image url="@../../../images/deck/deckBack.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="checkButton" alignment="CENTER" disable="true" layoutX="604.0" layoutY="984.0" mnemonicParsing="false" onAction="#pokerCheck" prefHeight="63.0" prefWidth="192.0" text="CHECK" visible="false">
+         <font>
+            <Font name="Comic Sans MS Bold" size="28.0" />
+         </font>
+      </Button>
+      <Label fx:id="evaluationLabel" alignment="CENTER" layoutX="497.0" layoutY="208.0" prefHeight="101.0" prefWidth="950.0" visible="false">
+         <font>
+            <Font name="Comic Sans MS Bold" size="47.0" />
+         </font>
+      </Label>
+      <Button fx:id="playAgainButton" alignment="CENTER" disable="true" layoutX="819.0" layoutY="964.0" mnemonicParsing="false" onAction="#playAgain" prefHeight="63.0" prefWidth="308.0" text="PLAY AGAIN ($50)" visible="false">
+         <font>
+            <Font name="Comic Sans MS Bold" size="28.0" />
+         </font>
+      </Button>
+      <Button fx:id="foldButton" alignment="CENTER" disable="true" layoutX="1153.0" layoutY="984.0" mnemonicParsing="false" onAction="#pokerFold" prefHeight="63.0" prefWidth="192.0" text="FOLD" visible="false">
+         <font>
+            <Font name="Comic Sans MS Bold" size="28.0" />
+         </font>
+      </Button>
+      <Button fx:id="raiseButton" alignment="CENTER" disable="true" layoutX="875.0" layoutY="984.0" mnemonicParsing="false" onAction="#pokerRaise" prefHeight="63.0" prefWidth="192.0" text="RAISE" visible="false">
+         <font>
+            <Font name="Comic Sans MS Bold" size="28.0" />
+         </font>
+      </Button>
+      <TextField fx:id="raiseAmount" disable="true" layoutX="875.0" layoutY="933.0" prefHeight="47.0" prefWidth="192.0" promptText="Enter amount to raise" visible="false">
+         <font>
+            <Font name="Comic Sans MS Bold" size="16.0" />
+         </font>
+      </TextField>
+      <Label fx:id="betLabel" alignment="CENTER_RIGHT" layoutX="1555.0" layoutY="70.0" prefHeight="39.0" prefWidth="351.0">
+         <font>
+            <Font name="Comic Sans MS Bold" size="29.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

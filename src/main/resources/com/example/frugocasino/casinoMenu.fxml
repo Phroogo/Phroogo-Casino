@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.frugocasino.CasinoMenuController">
+   <children>
+      <Label alignment="CENTER" layoutX="433.0" layoutY="42.0" prefHeight="189.0" prefWidth="1054.0" text="PHROOGO CASINO" textAlignment="CENTER" textFill="#1989ab">
+         <font>
+            <Font name="Comic Sans MS Bold" size="96.0" />
+         </font>
+      </Label>
+      <Button alignment="CENTER" layoutX="806.0" layoutY="714.0" mnemonicParsing="false" onAction="#switchToCasino" prefHeight="83.0" prefWidth="311.0" text="Enter">
+         <font>
+            <Font name="Comic Sans MS Bold" size="49.0" />
+         </font>
+      </Button>
+      <Label fx:id="moneyLabel" alignment="CENTER_RIGHT" layoutX="1555.0" layoutY="14.0" prefHeight="39.0" prefWidth="351.0">
+         <font>
+            <Font name="Comic Sans MS Bold" size="40.0" />
+         </font>
+      </Label>
+      <Label fx:id="phrogMoneyLabel" alignment="CENTER_RIGHT" layoutX="1555.0" layoutY="70.0" prefHeight="39.0" prefWidth="351.0" textFill="#1989ab">
+         <font>
+            <Font name="Comic Sans MS Bold" size="31.0" />
+         </font>
+      </Label>
+      <Button fx:id="freeMoneyButton" disable="true" layoutX="861.0" layoutY="939.0" mnemonicParsing="false" onAction="#freeMoney" text="Free money" visible="false">
+         <font>
+            <Font name="Comic Sans MS Bold" size="29.0" />
+         </font>
+      </Button>
+      <Button alignment="CENTER" layoutX="833.0" layoutY="838.0" mnemonicParsing="false" onAction="#toggleShop" prefHeight="7.0" prefWidth="255.0" text="Shop">
+         <font>
+            <Font name="Comic Sans MS Bold" size="38.0" />
+         </font>
+      </Button>
+      <Region fx:id="grayOverlay" onMouseClicked="#toggleShop" opacity="0.5" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: black;" visible="false" />
+      <ScrollPane fx:id="shopPane" hbarPolicy="NEVER" layoutX="262.0" layoutY="90.0" prefHeight="900.0" prefWidth="1400.0" vbarPolicy="NEVER" visible="false" />
+      <Button fx:id="closeShopButton" alignment="CENTER" layoutX="1632.0" layoutY="54.0" mnemonicParsing="false" onAction="#toggleShop" prefHeight="68.0" prefWidth="25.0" style="-fx-background-color: transparent; -fx-text-fill: red;" text="x" visible="false">
+         <font>
+            <Font name="Comic Sans MS Bold" size="32.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

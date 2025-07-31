@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.frugocasino.ShopController">
+   <children>
+      <ScrollPane fitToWidth="true" hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1400.0" style="-fx-background-color: transparent;" vbarPolicy="NEVER">
+         <content>
+            <GridPane gridLinesVisible="true" hgap="20.0" prefHeight="1200.0" prefWidth="1400.0" vgap="20.0">
+              <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="140.0" />
+               </padding>
+               <children>
+                  <Button fx:id="a0" mnemonicParsing="false" onAction="#perkDisplay" prefHeight="237.0" prefWidth="291.0" text="Click the button!" />
+                  <Button fx:id="a1" mnemonicParsing="false" onAction="#perkDisplay" prefHeight="237.0" prefWidth="291.0" text="Click the button!" GridPane.columnIndex="1" />
+                  <Button fx:id="a2" mnemonicParsing="false" onAction="#perkDisplay" prefHeight="237.0" prefWidth="291.0" text="Click the button!" GridPane.columnIndex="2" />
+                  <Button fx:id="a3" mnemonicParsing="false" onAction="#perkDisplay" prefHeight="237.0" prefWidth="291.0" text="Click the button!" GridPane.columnIndex="3" />
+                  <Button fx:id="a4" mnemonicParsing="false" onAction="#perkDisplay" prefHeight="237.0" prefWidth="291.0" text="Click the button!" GridPane.columnIndex="4" />
+                  <Button fx:id="a5" mnemonicParsing="false" onAction="#perkDisplay" prefHeight="237.0" prefWidth="291.0" text="Click the button!" GridPane.rowIndex="1" />
+                  <Button fx:id="a6" mnemonicParsing="false" onAction="#perkDisplay" prefHeight="237.0" prefWidth="291.0" text="Click the button!" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Button fx:id="a7" mnemonicParsing="false" onAction="#perkDisplay" prefHeight="237.0" prefWidth="291.0" text="Click the button!" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <Button fx:id="a8" mnemonicParsing="false" onAction="#perkDisplay" prefHeight="237.0" prefWidth="291.0" text="Click the button!" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                  <Button fx:id="a9" mnemonicParsing="false" onAction="#perkDisplay" prefHeight="237.0" prefWidth="291.0" text="Click the button!" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                  <Button fx:id="a10" mnemonicParsing="false" onAction="#perkDisplay" prefHeight="237.0" prefWidth="291.0" text="Click the button!" GridPane.rowIndex="2" />
+                  <Button fx:id="a11" mnemonicParsing="false" onAction="#perkDisplay" prefHeight="237.0" prefWidth="291.0" text="Click the button!" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Button fx:id="a12" mnemonicParsing="false" onAction="#perkDisplay" prefHeight="237.0" prefWidth="291.0" text="Click the button!" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <Button fx:id="a13" mnemonicParsing="false" onAction="#perkDisplay" prefHeight="237.0" prefWidth="291.0" text="Click the button!" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                  <Button fx:id="a14" mnemonicParsing="false" onAction="#perkDisplay" prefHeight="237.0" prefWidth="291.0" text="Click the button!" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                  <Button fx:id="a15" mnemonicParsing="false" onAction="#perkDisplay" prefHeight="237.0" prefWidth="291.0" text="Click the button!" GridPane.rowIndex="3" />
+                  <Button fx:id="a16" mnemonicParsing="false" onAction="#perkDisplay" prefHeight="237.0" prefWidth="291.0" text="Click the button!" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Button fx:id="a17" mnemonicParsing="false" onAction="#perkDisplay" prefHeight="237.0" prefWidth="291.0" text="Click the button!" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                  <Button fx:id="a18" mnemonicParsing="false" onAction="#perkDisplay" prefHeight="237.0" prefWidth="291.0" text="Click the button!" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                  <Button fx:id="a19" mnemonicParsing="false" onAction="#perkDisplay" prefHeight="237.0" prefWidth="291.0" text="Click the button!" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+                  <Button fx:id="a20" mnemonicParsing="false" onAction="#perkDisplay" prefHeight="237.0" prefWidth="291.0" text="Click the button!" GridPane.rowIndex="4" />
+                  <Button fx:id="a21" mnemonicParsing="false" onAction="#perkDisplay" prefHeight="237.0" prefWidth="291.0" text="Click the button!" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <Button fx:id="a22" mnemonicParsing="false" onAction="#perkDisplay" prefHeight="237.0" prefWidth="291.0" text="Click the button!" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                  <Button fx:id="a23" mnemonicParsing="false" onAction="#perkDisplay" prefHeight="237.0" prefWidth="291.0" text="Click the button!" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                  <Button fx:id="a24" mnemonicParsing="false" onAction="#perkDisplay" prefHeight="237.0" prefWidth="291.0" text="Click the button!" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+               </children>
+            </GridPane>
+         </content>
+      </ScrollPane>
+      <Button layoutX="563.0" layoutY="35.0" mnemonicParsing="false" onAction="#refundPerks" prefHeight="53.0" prefWidth="273.0" text="Refund Perks">
+         <font>
+            <Font name="Comic Sans MS Bold" size="35.0" />
+         </font>
+      </Button>
+      <Label fx:id="phrogMoneyLabel" alignment="CENTER_RIGHT" layoutX="1035.0" layoutY="35.0" prefHeight="39.0" prefWidth="351.0" textFill="#1989ab">
+         <font>
+            <Font name="Comic Sans MS Bold" size="40.0" />
+         </font>
+      </Label>
+      <AnchorPane fx:id="perkInfoPane" layoutY="700.0" prefHeight="200.0" prefWidth="1400.0" style="-fx-background-color: aqua;" visible="false">
+         <children>
+            <Label fx:id="perkName" alignment="CENTER" layoutX="509.0" layoutY="15.0" prefHeight="61.0" prefWidth="383.0" text="BLACKERJACK">
+               <font>
+                  <Font name="Comic Sans MS Bold" size="27.0" />
+               </font>
+            </Label>
+            <Label fx:id="perkDescription" alignment="TOP_LEFT" layoutX="445.0" layoutY="76.0" prefHeight="112.0" prefWidth="510.0" text="Increases the payout from blackjack games by 5% per level (currently x1.0)." wrapText="true">
+               <font>
+                  <Font name="Comic Sans MS Bold" size="23.0" />
+               </font>
+            </Label>
+            <Button fx:id="buyPerkButton" layoutX="1208.0" layoutY="70.0" mnemonicParsing="false" onAction="#buyPerk" prefHeight="61.0" prefWidth="149.0" text="buy it ig" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
