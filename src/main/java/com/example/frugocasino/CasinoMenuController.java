@@ -24,7 +24,7 @@ public class CasinoMenuController{
     public void initialize() {
         moneyLabel.setText("$" + GlobalCasinoState.getMoneyBalance());
         phrogMoneyLabel.setText("P$" + GlobalCasinoState.getPhrogMoneyBalance());
-        if (GlobalCasinoState.getMoneyBalance() < 0) {
+        if (GlobalCasinoState.getMoneyBalance() <= 0) {
             freeMoneyButton.setVisible(true);
             freeMoneyButton.setDisable(false);
         }
