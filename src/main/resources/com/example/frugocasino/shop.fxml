@@ -36,16 +36,46 @@
                   <Insets bottom="20.0" left="20.0" right="20.0" top="140.0" />
                </padding>
                <children>
-                  <Button fx:id="a0" mnemonicParsing="false" onAction="#perkDisplay" prefHeight="237.0" prefWidth="291.0" text="Click the button!" />
-                  <Button fx:id="a1" mnemonicParsing="false" onAction="#perkDisplay" prefHeight="237.0" prefWidth="291.0" text="Click the button!" GridPane.columnIndex="1" />
-                  <Button fx:id="a2" mnemonicParsing="false" onAction="#perkDisplay" prefHeight="237.0" prefWidth="291.0" text="Click the button!" GridPane.columnIndex="2" />
-                  <Button fx:id="a3" mnemonicParsing="false" onAction="#perkDisplay" prefHeight="237.0" prefWidth="291.0" text="Click the button!" GridPane.columnIndex="3" />
-                  <Button fx:id="a4" mnemonicParsing="false" onAction="#perkDisplay" prefHeight="237.0" prefWidth="291.0" text="Click the button!" GridPane.columnIndex="4" />
-                  <Button fx:id="a5" mnemonicParsing="false" onAction="#perkDisplay" prefHeight="237.0" prefWidth="291.0" text="Click the button!" GridPane.rowIndex="1" />
-                  <Button fx:id="a6" mnemonicParsing="false" onAction="#perkDisplay" prefHeight="237.0" prefWidth="291.0" text="Click the button!" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Button fx:id="a7" mnemonicParsing="false" onAction="#perkDisplay" prefHeight="237.0" prefWidth="291.0" text="Click the button!" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                  <Button fx:id="a8" mnemonicParsing="false" onAction="#perkDisplay" prefHeight="237.0" prefWidth="291.0" text="Click the button!" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                  <Button fx:id="a9" mnemonicParsing="false" onAction="#perkDisplay" prefHeight="237.0" prefWidth="291.0" text="Click the button!" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                  <Button fx:id="a0" alignment="CENTER" mnemonicParsing="false" onAction="#perkDisplay" prefHeight="237.0" prefWidth="291.0" text="Slut Machine" wrapText="true">
+                     <font>
+                        <Font name="Comic Sans MS Bold" size="30.0" />
+                     </font></Button>
+                  <Button fx:id="a1" alignment="CENTER" mnemonicParsing="false" onAction="#perkDisplay" prefHeight="237.0" prefWidth="291.0" text="All on Red" GridPane.columnIndex="1">
+                     <font>
+                        <Font name="Comic Sans MS Bold" size="30.0" />
+                     </font></Button>
+                  <Button fx:id="a2" alignment="CENTER" mnemonicParsing="false" onAction="#perkDisplay" prefHeight="237.0" prefWidth="291.0" text="BlackerJack" GridPane.columnIndex="2">
+                     <font>
+                        <Font name="Comic Sans MS Bold" size="30.0" />
+                     </font></Button>
+                  <Button fx:id="a3" alignment="CENTER" mnemonicParsing="false" onAction="#perkDisplay" prefHeight="237.0" prefWidth="291.0" text="Poker Face" textAlignment="CENTER" GridPane.columnIndex="3">
+                     <font>
+                        <Font name="Comic Sans MS Bold" size="30.0" />
+                     </font></Button>
+                  <Button fx:id="a4" alignment="CENTER" mnemonicParsing="false" onAction="#perkDisplay" prefHeight="237.0" prefWidth="291.0" text="Winner Mentality" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="4">
+                     <font>
+                        <Font name="Comic Sans MS Bold" size="30.0" />
+                     </font></Button>
+                  <Button fx:id="a5" mnemonicParsing="false" onAction="#perkDisplay" prefHeight="237.0" prefWidth="291.0" text="Phrog Machine" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Comic Sans MS Bold" size="30.0" />
+                     </font></Button>
+                  <Button fx:id="a6" mnemonicParsing="false" onAction="#perkDisplay" prefHeight="237.0" prefWidth="291.0" text="Phrog on Red" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Comic Sans MS Bold" size="30.0" />
+                     </font></Button>
+                  <Button fx:id="a7" mnemonicParsing="false" onAction="#perkDisplay" prefHeight="237.0" prefWidth="291.0" text="PhrogJack" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Comic Sans MS Bold" size="30.0" />
+                     </font></Button>
+                  <Button fx:id="a8" mnemonicParsing="false" onAction="#perkDisplay" prefHeight="237.0" prefWidth="291.0" text="Phrog Face" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Comic Sans MS Bold" size="30.0" />
+                     </font></Button>
+                  <Button fx:id="a9" mnemonicParsing="false" onAction="#perkDisplay" prefHeight="237.0" prefWidth="291.0" text="Phrog Mentality" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Comic Sans MS Bold" size="30.0" />
+                     </font></Button>
                   <Button fx:id="a10" mnemonicParsing="false" onAction="#perkDisplay" prefHeight="237.0" prefWidth="291.0" text="Click the button!" GridPane.rowIndex="2" />
                   <Button fx:id="a11" mnemonicParsing="false" onAction="#perkDisplay" prefHeight="237.0" prefWidth="291.0" text="Click the button!" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <Button fx:id="a12" mnemonicParsing="false" onAction="#perkDisplay" prefHeight="237.0" prefWidth="291.0" text="Click the button!" GridPane.columnIndex="2" GridPane.rowIndex="2" />
@@ -75,7 +105,7 @@
             <Font name="Comic Sans MS Bold" size="40.0" />
          </font>
       </Label>
-      <AnchorPane fx:id="perkInfoPane" layoutY="700.0" prefHeight="200.0" prefWidth="1400.0" style="-fx-background-color: aqua;" visible="false">
+      <AnchorPane fx:id="perkInfoPane" layoutY="700.0" prefHeight="200.0" prefWidth="1400.0" style="-fx-background-color: aqua;">
          <children>
             <Label fx:id="perkName" alignment="CENTER" layoutX="509.0" layoutY="15.0" prefHeight="61.0" prefWidth="383.0" text="BLACKERJACK">
                <font>
@@ -87,7 +117,10 @@
                   <Font name="Comic Sans MS Bold" size="23.0" />
                </font>
             </Label>
-            <Button fx:id="buyPerkButton" layoutX="1208.0" layoutY="70.0" mnemonicParsing="false" onAction="#buyPerk" prefHeight="61.0" prefWidth="149.0" text="buy it ig" />
+            <Button fx:id="buyPerkButton" alignment="CENTER_RIGHT" layoutX="1141.0" layoutY="70.0" mnemonicParsing="false" onAction="#buyPerk" prefHeight="62.0" prefWidth="216.0" text="buy it ig">
+               <font>
+                  <Font name="Comic Sans MS Bold" size="30.0" />
+               </font></Button>
          </children>
       </AnchorPane>
    </children>

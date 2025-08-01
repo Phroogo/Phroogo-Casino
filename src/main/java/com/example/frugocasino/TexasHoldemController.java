@@ -421,9 +421,10 @@ public class TexasHoldemController {
         }
     }
 
-        public void playerWin() {
-            evaluationLabel.setText("You have won! You get $" + 2 * bet + "!");
-        GlobalCasinoState.changeMoneyBalance((int)(2 * bet));
+    public void playerWin() {
+        evaluationLabel.setText("You have won! You get $" + (int)(2 * bet + bet * GlobalCasinoPerks.getTexasPokerMoneyMultiplier() + bet * GlobalCasinoPerks.getGlobalMoneyMultiplier()) + "!");
+        GlobalCasinoState.changeMoneyBalance((int)(2 * bet + bet * GlobalCasinoPerks.getTexasPokerMoneyMultiplier() + bet * GlobalCasinoPerks.getGlobalMoneyMultiplier()));
+        GlobalCasinoState.changePhrogMoneyBalance(GlobalCasinoState.calculatePhrogCoins((int)(bet + bet * GlobalCasinoPerks.getTexasPokerPhrogMoneyMultiplier() + bet * GlobalCasinoPerks.getGlobalPhrogMoneyMultiplier())));
         moneyLabel.setText("$" + GlobalCasinoState.getMoneyBalance());
     }
     public void botWin() {

@@ -189,7 +189,8 @@ public class BlackjackController {
             insuranceLabel.setVisible(true);
             if(dealerTotal > 21) {
                 insuranceLabel.setText("Dealer has busted!");
-                GlobalCasinoState.changeMoneyBalance((int)(2 * bet * GlobalCasinoPerks.getBlackjackMoneyMultiplier() * GlobalCasinoPerks.getGlobalMoneyMultiplier()));
+                GlobalCasinoState.changeMoneyBalance((int)(2 * bet + bet * GlobalCasinoPerks.getRouletteTableMoneyMultiplier() + bet * GlobalCasinoPerks.getGlobalMoneyMultiplier()));
+                GlobalCasinoState.changePhrogMoneyBalance(GlobalCasinoState.calculatePhrogCoins((int)(bet + bet * GlobalCasinoPerks.getBlackjackPhrogMoneyMultiplier() + bet * GlobalCasinoPerks.getGlobalPhrogMoneyMultiplier())));
                 moneyLabel.setText("$" + GlobalCasinoState.getMoneyBalance());
             } else if(dealerTotal > playerTotal) {
                 insuranceLabel.setText("Dealer has won.");
@@ -199,7 +200,8 @@ public class BlackjackController {
                 moneyLabel.setText("$" + GlobalCasinoState.getMoneyBalance());
             } else {
                 insuranceLabel.setText("You won! Congratulations");
-                GlobalCasinoState.changeMoneyBalance((int)(2 * bet * GlobalCasinoPerks.getBlackjackMoneyMultiplier() * GlobalCasinoPerks.getGlobalMoneyMultiplier()));
+                GlobalCasinoState.changeMoneyBalance((int)(2 * bet + bet * GlobalCasinoPerks.getRouletteTableMoneyMultiplier() + bet * GlobalCasinoPerks.getGlobalMoneyMultiplier()));
+                GlobalCasinoState.changePhrogMoneyBalance(GlobalCasinoState.calculatePhrogCoins((int)(bet + bet * GlobalCasinoPerks.getBlackjackPhrogMoneyMultiplier() + bet * GlobalCasinoPerks.getGlobalPhrogMoneyMultiplier())));
                 moneyLabel.setText("$" + GlobalCasinoState.getMoneyBalance());
             }
             endGame();
@@ -287,7 +289,8 @@ public class BlackjackController {
             insuranceLabel.setVisible(true);
             dealerCard2.setImage(new Image(getClass().getResourceAsStream("/images/deck/" +  dealerHand.getLast() + ".png")));
             insuranceLabel.setText("Dealer had blackjack but you bought the insurance");
-            GlobalCasinoState.changeMoneyBalance((int)(3 * bet * GlobalCasinoPerks.getBlackjackMoneyMultiplier() * GlobalCasinoPerks.getGlobalMoneyMultiplier()));
+            GlobalCasinoState.changeMoneyBalance((int)(3 * bet + 1.5 * bet * GlobalCasinoPerks.getRouletteTableMoneyMultiplier() + 1.5 * bet * GlobalCasinoPerks.getGlobalMoneyMultiplier()));
+            GlobalCasinoState.changePhrogMoneyBalance(GlobalCasinoState.calculatePhrogCoins((int)(1.5 * bet + 1.5 * bet * GlobalCasinoPerks.getBlackjackPhrogMoneyMultiplier() + 1.5 * bet * GlobalCasinoPerks.getGlobalPhrogMoneyMultiplier())));
             moneyLabel.setText("$" + GlobalCasinoState.getMoneyBalance());
             dealerTotalLabel.setText("Dealer total is: " + getTotal(dealerHandValue));
             endGame();

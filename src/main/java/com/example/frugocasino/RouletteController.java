@@ -42,14 +42,17 @@ public class RouletteController {
 
                         if (playerBet.contains(roulette)) {
                             if (playerBet.size() == 1) {
-                                betLabel.setText("The number was " + roulette + "! You get 35x your money!");
-                                GlobalCasinoState.changeMoneyBalance((int)(35 * bet * GlobalCasinoPerks.getRouletteTableMoneyMultiplier() * GlobalCasinoPerks.getGlobalMoneyMultiplier()));
+                                betLabel.setText("The number was " + roulette + "! You get $" + (int)(35 * bet + 34 * bet * GlobalCasinoPerks.getRouletteTableMoneyMultiplier() + 34 * bet * GlobalCasinoPerks.getGlobalMoneyMultiplier()) + "!");
+                                GlobalCasinoState.changeMoneyBalance((int)(35 * bet + 35 * bet * GlobalCasinoPerks.getRouletteTableMoneyMultiplier() + 35 * bet * GlobalCasinoPerks.getGlobalMoneyMultiplier()));
+                                GlobalCasinoState.changePhrogMoneyBalance(GlobalCasinoState.calculatePhrogCoins((int)(34 * bet + 34 * bet * GlobalCasinoPerks.getRouletteTablePhrogMoneyMultiplier() + 34 * bet * GlobalCasinoPerks.getGlobalPhrogMoneyMultiplier())));
                             } else if (playerBet.size() == 12) {
-                                betLabel.setText("The number was " + roulette + "! You triple your money!");
-                                GlobalCasinoState.changeMoneyBalance((int)(3 * bet * GlobalCasinoPerks.getRouletteTableMoneyMultiplier() * GlobalCasinoPerks.getGlobalMoneyMultiplier()));
+                                betLabel.setText("The number was " + roulette + "! You get $" + (int)(3 * bet + 2 * bet * GlobalCasinoPerks.getRouletteTableMoneyMultiplier() + 2 * bet * GlobalCasinoPerks.getGlobalMoneyMultiplier()) + "!");
+                                GlobalCasinoState.changeMoneyBalance((int)(3 * bet + 3 * bet * GlobalCasinoPerks.getRouletteTableMoneyMultiplier() + 3 * bet * GlobalCasinoPerks.getGlobalMoneyMultiplier()));
+                                GlobalCasinoState.changePhrogMoneyBalance(GlobalCasinoState.calculatePhrogCoins((int)(2 * bet + 2 * bet * GlobalCasinoPerks.getRouletteTablePhrogMoneyMultiplier() + 2 * bet * GlobalCasinoPerks.getGlobalPhrogMoneyMultiplier())));
                             } else if (playerBet.size() == 18) {
                                 betLabel.setText("The number was " + roulette + "! You double your money!");
-                                GlobalCasinoState.changeMoneyBalance((int)(2 * bet * GlobalCasinoPerks.getRouletteTableMoneyMultiplier() * GlobalCasinoPerks.getGlobalMoneyMultiplier()));
+                                GlobalCasinoState.changeMoneyBalance((int)(2 * bet + bet * GlobalCasinoPerks.getRouletteTableMoneyMultiplier() + bet * GlobalCasinoPerks.getGlobalMoneyMultiplier()));
+                                GlobalCasinoState.changePhrogMoneyBalance(GlobalCasinoState.calculatePhrogCoins((int)(bet + bet * GlobalCasinoPerks.getRouletteTablePhrogMoneyMultiplier() + bet * GlobalCasinoPerks.getGlobalPhrogMoneyMultiplier())));
                             }
                         } else {
                             betLabel.setText("You have lost, the number was " + roulette);

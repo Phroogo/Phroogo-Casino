@@ -264,44 +264,54 @@ public class SlotMachineController {
     public void jackpot() {
     switch (slotChar1){
         case '-':
-            slotResultLabel.setText("Small JackPot, you get $200!");
-            GlobalCasinoState.changeMoneyBalance((int)(200 * GlobalCasinoPerks.getSlotMachineMoneyMultiplier() * GlobalCasinoPerks.getGlobalMoneyMultiplier()));
+            slotResultLabel.setText("Small JackPot, you get $" + (int)(200 + 200 * GlobalCasinoPerks.getSlotMachineMoneyMultiplier() + 200 * GlobalCasinoPerks.getGlobalMoneyMultiplier()) + "!");
+            GlobalCasinoState.changeMoneyBalance((int)(200 + 200 * GlobalCasinoPerks.getSlotMachineMoneyMultiplier() + 200 * GlobalCasinoPerks.getGlobalMoneyMultiplier()));
+            GlobalCasinoState.changePhrogMoneyBalance(GlobalCasinoState.calculatePhrogCoins((int)(200 + 200 * GlobalCasinoPerks.getSlotMachinePhrogMoneyMultiplier() + 200 * GlobalCasinoPerks.getGlobalPhrogMoneyMultiplier())));
             break;
         case '+':
-            slotResultLabel.setText("Small JackPot, you get $250!");
-            GlobalCasinoState.changeMoneyBalance((int)(250 * GlobalCasinoPerks.getSlotMachineMoneyMultiplier() * GlobalCasinoPerks.getGlobalMoneyMultiplier()));
+            slotResultLabel.setText("Small JackPot, you get $" + (int)(250 + 250 * GlobalCasinoPerks.getSlotMachineMoneyMultiplier() + 250 * GlobalCasinoPerks.getGlobalMoneyMultiplier()) + "!");
+            GlobalCasinoState.changeMoneyBalance((int)(250 + 250 * GlobalCasinoPerks.getSlotMachineMoneyMultiplier() + 250 * GlobalCasinoPerks.getGlobalMoneyMultiplier()));
+            GlobalCasinoState.changePhrogMoneyBalance(GlobalCasinoState.calculatePhrogCoins((int)(250 + 250 * GlobalCasinoPerks.getSlotMachinePhrogMoneyMultiplier() + 250 * GlobalCasinoPerks.getGlobalPhrogMoneyMultiplier())));
             break;
         case '=':
-            slotResultLabel.setText("Medium JackPot, you get $400!");
-            GlobalCasinoState.changeMoneyBalance((int)(400 * GlobalCasinoPerks.getSlotMachineMoneyMultiplier() * GlobalCasinoPerks.getGlobalMoneyMultiplier()));
+            slotResultLabel.setText("Medium JackPot, you get $" + (int)(400 + 400 * GlobalCasinoPerks.getSlotMachineMoneyMultiplier() + 400 * GlobalCasinoPerks.getGlobalMoneyMultiplier()) + "!");
+            GlobalCasinoState.changeMoneyBalance((int)(400 + 400 * GlobalCasinoPerks.getSlotMachineMoneyMultiplier() + 400 * GlobalCasinoPerks.getGlobalMoneyMultiplier()));
+            GlobalCasinoState.changePhrogMoneyBalance(GlobalCasinoState.calculatePhrogCoins((int)(400 + 400 * GlobalCasinoPerks.getSlotMachinePhrogMoneyMultiplier() + 400 * GlobalCasinoPerks.getGlobalPhrogMoneyMultiplier())));
             break;
         case '^':
-            slotResultLabel.setText("Medium JackPot, you get $600!");
-            GlobalCasinoState.changeMoneyBalance((int)(600 * GlobalCasinoPerks.getSlotMachineMoneyMultiplier() * GlobalCasinoPerks.getGlobalMoneyMultiplier()));
+            slotResultLabel.setText("Medium JackPot, you get $" + (int)(600 + 600 * GlobalCasinoPerks.getSlotMachineMoneyMultiplier() + 600 * GlobalCasinoPerks.getGlobalMoneyMultiplier()) + "!");
+            GlobalCasinoState.changeMoneyBalance((int)(600 + 600 * GlobalCasinoPerks.getSlotMachineMoneyMultiplier() + 600 * GlobalCasinoPerks.getGlobalMoneyMultiplier()));
+            GlobalCasinoState.changePhrogMoneyBalance(GlobalCasinoState.calculatePhrogCoins((int)(600 + 600 * GlobalCasinoPerks.getSlotMachinePhrogMoneyMultiplier() + 600 * GlobalCasinoPerks.getGlobalPhrogMoneyMultiplier())));
             break;
         case '!':
-            slotResultLabel.setText("Big JackPot, you get $1000!");
-            GlobalCasinoState.changeMoneyBalance((int)(1000 * GlobalCasinoPerks.getSlotMachineMoneyMultiplier() * GlobalCasinoPerks.getGlobalMoneyMultiplier()));
+            slotResultLabel.setText("Big JackPot, you get $" + (int)(1000 + 1000 * GlobalCasinoPerks.getSlotMachineMoneyMultiplier() + 1000 * GlobalCasinoPerks.getGlobalMoneyMultiplier()) + "!");
+            GlobalCasinoState.changeMoneyBalance((int)(1000 + 1000 * GlobalCasinoPerks.getSlotMachineMoneyMultiplier() + 1000 * GlobalCasinoPerks.getGlobalMoneyMultiplier()));
+            GlobalCasinoState.changePhrogMoneyBalance(GlobalCasinoState.calculatePhrogCoins((int)(1000 + 1000 * GlobalCasinoPerks.getSlotMachinePhrogMoneyMultiplier() + 1000 * GlobalCasinoPerks.getGlobalPhrogMoneyMultiplier())));
             break;
         case '%':
-            slotResultLabel.setText("Big JackPot, you get $1600!");
-            GlobalCasinoState.changeMoneyBalance((int)(1600 * GlobalCasinoPerks.getSlotMachineMoneyMultiplier() * GlobalCasinoPerks.getGlobalMoneyMultiplier()));
+            slotResultLabel.setText("Big JackPot, you get $" + (int)(1600 + 1600 * GlobalCasinoPerks.getSlotMachineMoneyMultiplierLevel() + 1600 * GlobalCasinoPerks.getGlobalMoneyMultiplier()) + "!");
+            GlobalCasinoState.changeMoneyBalance((int)(1600 + 1600 * GlobalCasinoPerks.getSlotMachineMoneyMultiplier() + 1600 * GlobalCasinoPerks.getGlobalMoneyMultiplier()));
+            GlobalCasinoState.changePhrogMoneyBalance(GlobalCasinoState.calculatePhrogCoins((int)(1600 + 1600 * GlobalCasinoPerks.getSlotMachinePhrogMoneyMultiplier() + 1600 * GlobalCasinoPerks.getGlobalPhrogMoneyMultiplier())));
             break;
         case '&':
-            slotResultLabel.setText("WHITE PHROOGO JACKPOT. You get $2500!");
-            GlobalCasinoState.changeMoneyBalance((int)(2500 * GlobalCasinoPerks.getSlotMachineMoneyMultiplier() * GlobalCasinoPerks.getGlobalMoneyMultiplier()));
+            slotResultLabel.setText("WHITE PHROOGO JACKPOT. You get $" + (int)(2500 + 2500 * GlobalCasinoPerks.getSlotMachineMoneyMultiplier() + 2500 * GlobalCasinoPerks.getGlobalMoneyMultiplier()) + "!");
+            GlobalCasinoState.changeMoneyBalance((int)(2500 + 2500 * GlobalCasinoPerks.getSlotMachineMoneyMultiplier() + 2500 * GlobalCasinoPerks.getGlobalMoneyMultiplier()));
+            GlobalCasinoState.changePhrogMoneyBalance(GlobalCasinoState.calculatePhrogCoins((int)(2500 + 2500 * GlobalCasinoPerks.getSlotMachinePhrogMoneyMultiplier() + 2500 * GlobalCasinoPerks.getGlobalPhrogMoneyMultiplier())));
             break;
         case '@':
-            slotResultLabel.setText("GREEN PHROOGO JACKPOT!! You get $4000!");
-            GlobalCasinoState.changeMoneyBalance((int)(4000 * GlobalCasinoPerks.getSlotMachineMoneyMultiplier() * GlobalCasinoPerks.getGlobalMoneyMultiplier()));
+            slotResultLabel.setText("GREEN PHROOGO JACKPOT!! You get " + (int)(4000 + 4000 * GlobalCasinoPerks.getSlotMachineMoneyMultiplier() + 4000 * GlobalCasinoPerks.getGlobalMoneyMultiplier()) + "!");
+            GlobalCasinoState.changeMoneyBalance((int)(4000 + 4000 * GlobalCasinoPerks.getSlotMachineMoneyMultiplier() + 4000 * GlobalCasinoPerks.getGlobalMoneyMultiplier()));
+            GlobalCasinoState.changePhrogMoneyBalance(GlobalCasinoState.calculatePhrogCoins((int)(4000 + 4000 * GlobalCasinoPerks.getSlotMachinePhrogMoneyMultiplier() + 4000 * GlobalCasinoPerks.getGlobalPhrogMoneyMultiplier())));
             break;
         case '#':
-            slotResultLabel.setText("PURPLE PHROOGO JACKPOT!!! You get $6000!");
-            GlobalCasinoState.changeMoneyBalance((int)(6000 * GlobalCasinoPerks.getSlotMachineMoneyMultiplier() * GlobalCasinoPerks.getGlobalMoneyMultiplier()));
+            slotResultLabel.setText("PURPLE PHROOGO JACKPOT!!! You get $" + (int)(6000 + 6000 * GlobalCasinoPerks.getSlotMachineMoneyMultiplier() + 6000 * GlobalCasinoPerks.getGlobalMoneyMultiplier()) + "!");
+            GlobalCasinoState.changeMoneyBalance((int)(6000 + 6000 * GlobalCasinoPerks.getSlotMachineMoneyMultiplier() + 6000 * GlobalCasinoPerks.getGlobalMoneyMultiplier()));
+            GlobalCasinoState.changePhrogMoneyBalance(GlobalCasinoState.calculatePhrogCoins((int)(6000 + 6000 * GlobalCasinoPerks.getSlotMachinePhrogMoneyMultiplier() + 6000 * GlobalCasinoPerks.getGlobalPhrogMoneyMultiplier())));
             break;
         case '$':
-            slotResultLabel.setText("PHROOGO JACKPOT!!!! You get $10000!");
-            GlobalCasinoState.changeMoneyBalance((int)(10000 * GlobalCasinoPerks.getSlotMachineMoneyMultiplier() * GlobalCasinoPerks.getGlobalMoneyMultiplier()));
+            slotResultLabel.setText("PHROOGO JACKPOT!!!! You get $" + (int)(10000 + 10000 * GlobalCasinoPerks.getSlotMachineMoneyMultiplier() + 10000 * GlobalCasinoPerks.getGlobalMoneyMultiplier()) + "!");
+            GlobalCasinoState.changeMoneyBalance((int)(10000 + 10000 * GlobalCasinoPerks.getSlotMachineMoneyMultiplier() + 10000 * GlobalCasinoPerks.getGlobalMoneyMultiplier()));
+            GlobalCasinoState.changePhrogMoneyBalance(GlobalCasinoState.calculatePhrogCoins((int)(10000 + 10000 * GlobalCasinoPerks.getSlotMachinePhrogMoneyMultiplier() + 10000 * GlobalCasinoPerks.getGlobalPhrogMoneyMultiplier())));
             break;
     }
     }
@@ -316,20 +326,24 @@ public class SlotMachineController {
 
         switch (temp) {
             case '-', '+', '=':
-                slotResultLabel.setText("Small pair, you get $20!");
-                GlobalCasinoState.changeMoneyBalance((int)(20 * GlobalCasinoPerks.getSlotMachineMoneyMultiplier() * GlobalCasinoPerks.getGlobalMoneyMultiplier()));
+                slotResultLabel.setText("Small pair, you get $" + (int)(20 + 20 * GlobalCasinoPerks.getSlotMachineMoneyMultiplier() + 20 * GlobalCasinoPerks.getGlobalMoneyMultiplier()) + "!");
+                GlobalCasinoState.changeMoneyBalance((int)(20 + 20 * GlobalCasinoPerks.getSlotMachineMoneyMultiplier() + 20 * GlobalCasinoPerks.getGlobalMoneyMultiplier()));
+                GlobalCasinoState.changePhrogMoneyBalance(GlobalCasinoState.calculatePhrogCoins((int)(20 + 20 * GlobalCasinoPerks.getSlotMachinePhrogMoneyMultiplier() + 20 * GlobalCasinoPerks.getGlobalPhrogMoneyMultiplier())));
                 break;
             case '^', '!', '%':
-                slotResultLabel.setText("Medium pair, you get $40!");
-                GlobalCasinoState.changeMoneyBalance((int)(40 * GlobalCasinoPerks.getSlotMachineMoneyMultiplier() * GlobalCasinoPerks.getGlobalMoneyMultiplier()));
+                slotResultLabel.setText("Medium pair, you get $" + (int)(40 + 40 * GlobalCasinoPerks.getSlotMachineMoneyMultiplier() + 40 * GlobalCasinoPerks.getGlobalMoneyMultiplier()) + "!");
+                GlobalCasinoState.changeMoneyBalance((int)(40 + 40 * GlobalCasinoPerks.getSlotMachineMoneyMultiplier() + 40 * GlobalCasinoPerks.getGlobalMoneyMultiplier()));
+                GlobalCasinoState.changePhrogMoneyBalance(GlobalCasinoState.calculatePhrogCoins((int)(40 + 40 * GlobalCasinoPerks.getSlotMachinePhrogMoneyMultiplier() + 40 * GlobalCasinoPerks.getGlobalPhrogMoneyMultiplier())));
                 break;
             case '&', '@', '#':
-                slotResultLabel.setText("Phroogo pair, you get $100!");
-                GlobalCasinoState.changeMoneyBalance((int)(100 * GlobalCasinoPerks.getSlotMachineMoneyMultiplier() * GlobalCasinoPerks.getGlobalMoneyMultiplier()));
+                slotResultLabel.setText("Phroogo pair, you get $" + (int)(100 + 100 * GlobalCasinoPerks.getSlotMachineMoneyMultiplier() + 100 * GlobalCasinoPerks.getGlobalMoneyMultiplier()) + "!");
+                GlobalCasinoState.changeMoneyBalance((int)(100 + 100 * GlobalCasinoPerks.getSlotMachineMoneyMultiplier() + 100 * GlobalCasinoPerks.getGlobalMoneyMultiplier()));
+                GlobalCasinoState.changePhrogMoneyBalance(GlobalCasinoState.calculatePhrogCoins((int)(100 + 100 * GlobalCasinoPerks.getSlotMachinePhrogMoneyMultiplier() + 100 * GlobalCasinoPerks.getGlobalPhrogMoneyMultiplier())));
                 break;
             case '$':
-                slotResultLabel.setText("Best Phroogo pair! you get $500!");
-                GlobalCasinoState.changeMoneyBalance((int)(500 * GlobalCasinoPerks.getSlotMachineMoneyMultiplier() * GlobalCasinoPerks.getGlobalMoneyMultiplier()));
+                slotResultLabel.setText("Best Phroogo pair! you get $" + (int)(500 + 500 * GlobalCasinoPerks.getSlotMachineMoneyMultiplier() + 500 * GlobalCasinoPerks.getGlobalMoneyMultiplier()) + "!");
+                GlobalCasinoState.changeMoneyBalance((int)(500 + 500 * GlobalCasinoPerks.getSlotMachineMoneyMultiplier() + 500 * GlobalCasinoPerks.getGlobalMoneyMultiplier()));
+                GlobalCasinoState.changePhrogMoneyBalance(GlobalCasinoState.calculatePhrogCoins((int)(500 + 500 * GlobalCasinoPerks.getSlotMachinePhrogMoneyMultiplier() + 500 * GlobalCasinoPerks.getGlobalPhrogMoneyMultiplier())));
                 break;
         }
     }

@@ -40,8 +40,6 @@ public class CasinoMenuController{
                 if(shopRoot == null) {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("Shop.fxml"));
                     shopRoot = loader.load();
-                    ShopController shopController = loader.getController();
-                    shopController.setCasinoMenuController(this);
                 }
                 shopPane.setContent(shopRoot);
                 shopPane.setVisible(true);
