@@ -11,6 +11,12 @@ public class GlobalCasinoPerks {
     private static int blackjackPhrogMoneyMultiplierLevel = 0;
     private static int texasPokerPhrogMoneyMultiplierLevel = 0;
     private static int globalPhrogMoneyMultiplierLevel = 0;
+    private static int greenPhrogSlotChanceLevel = 0;
+    private static int purplePhrogSlotChanceLevel = 0;
+    private static int phroogoSlotChanceLevel = 0;
+    private static int rouletteTableRerollLevel = 0;
+    private static int blackJackBustLimitLevel = 0;
+    private static int texasPokerHandEvaluationIncreaseLevel = 0;
 
     public static int getSlotMachineMoneyMultiplierLevel() {
         return slotMachineMoneyMultiplierLevel;
@@ -130,5 +136,53 @@ public class GlobalCasinoPerks {
 
     public static double getGlobalPhrogMoneyMultiplier() {
         return ((double)globalPhrogMoneyMultiplierLevel / 25);
+    }
+
+    public static int getGreenPhrogSlotChanceLevel() {
+        return greenPhrogSlotChanceLevel;
+    }
+
+    public static void setGreenPhrogSlotChanceLevel(int greenPhrogSlotChanceLevel) {
+        GlobalCasinoPerks.greenPhrogSlotChanceLevel = greenPhrogSlotChanceLevel;
+    }
+
+    public static int getPurplePhrogSlotChanceLevel() {
+        return purplePhrogSlotChanceLevel;
+    }
+
+    public static void setPurplePhrogSlotChanceLevel(int purplePhrogSlotChanceLevel) {
+        GlobalCasinoPerks.purplePhrogSlotChanceLevel = purplePhrogSlotChanceLevel;
+    }
+
+    public static int getPhroogoSlotChanceLevel() {
+        return phroogoSlotChanceLevel;
+    }
+
+    public static void setPhroogoSlotChanceLevel(int phroogoSlotChanceLevel) {
+        GlobalCasinoPerks.phroogoSlotChanceLevel = phroogoSlotChanceLevel;
+    }
+
+    public static int getRouletteTableRerollLevel() {
+        return rouletteTableRerollLevel;
+    }
+
+    public static void setRouletteTableRerollLevel(int rouletteTableRerollLevel) {
+        GlobalCasinoPerks.rouletteTableRerollLevel = rouletteTableRerollLevel;
+    }
+
+    public static int getBlackJackBustLimitLevel() {
+        return blackJackBustLimitLevel;
+    }
+
+    public static void setBlackJackBustLimitLevel(int blackJackBustLimitLevel) {
+        GlobalCasinoPerks.blackJackBustLimitLevel = blackJackBustLimitLevel;
+    }
+
+    public static int getTexasPokerHandEvaluationIncreaseLevel() {
+        return texasPokerHandEvaluationIncreaseLevel;
+    }
+
+    public static void setTexasPokerHandEvaluationIncreaseLevel(int texasPokerHandEvaluationIncreaseLevel) {
+        GlobalCasinoPerks.texasPokerHandEvaluationIncreaseLevel = texasPokerHandEvaluationIncreaseLevel;
     }
 }

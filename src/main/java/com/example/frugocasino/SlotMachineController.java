@@ -131,7 +131,7 @@ public class SlotMachineController {
 
     public char slotRandomizer() {
         char x;
-        int i = random.nextInt(1, 120);
+        int i = random.nextInt(1, 120 + GlobalCasinoPerks.getGreenPhrogSlotChanceLevel() * 3 + GlobalCasinoPerks.getPurplePhrogSlotChanceLevel() * 3 + GlobalCasinoPerks.getPhroogoSlotChanceLevel() * 3);
         if(i <= 20) {
             x = slotOptions[0];
         } else if(i <= 38) {
@@ -146,11 +146,11 @@ public class SlotMachineController {
             x = slotOptions[5];
         } else if(i <= 99) {
             x = slotOptions[6];
-        } else if(i <= 107) {
+        } else if(i <= 107 + GlobalCasinoPerks.getGreenPhrogSlotChanceLevel() * 3) {
             x = slotOptions[7];
-        } else if (i <= 114) {
+        } else if (i <= 114 + GlobalCasinoPerks.getGreenPhrogSlotChanceLevel() * 3 + GlobalCasinoPerks.getPurplePhrogSlotChanceLevel() * 3) {
             x = slotOptions[8];
-        } else if(i <= 119) {
+        } else if(i <= 119 + GlobalCasinoPerks.getGreenPhrogSlotChanceLevel() * 3 + GlobalCasinoPerks.getPurplePhrogSlotChanceLevel() * 3 + GlobalCasinoPerks.getPhroogoSlotChanceLevel() * 3) {
             x = slotOptions[9];
         } else {
             x = '-';

@@ -204,6 +204,8 @@ public class TexasHoldemController {
         playerHand.clear();
         botHandValue.clear();
         botHand.clear();
+        playerWinningHand.clear();
+        botWinningHand.clear();
         playerCard1.setImage(null);
         playerCard2.setImage(null);
         flopCard1.setImage(new Image(getClass().getResourceAsStream("/images/deck/deckBack.png")));
@@ -270,6 +272,10 @@ public class TexasHoldemController {
 
         if(hand == playerHand) {
             evaluationLabel.setText("You have a " + evaluation + "!");
+            if(GlobalCasinoPerks.getTexasPokerHandEvaluationIncreaseLevel() == 1) {
+                evaluationHierarchy++;
+                evaluationLabel.setText("You have a " + evaluation + " (+1)!");
+            }
         }
 
         return evaluationHierarchy;
@@ -442,6 +448,15 @@ public class TexasHoldemController {
             hand.add(flop.getLast());
         }
     }
+
+//    public int getStringArrayIndex(String[] stringArray, String string) {
+//        for(int i = 0; i < stringArray.length; i++) {
+//            if(stringArray[i].equals(string)) {
+//                return i;
+//            }
+//        }
+//        return 0;
+//    }
 
     public void switchToCasinoButton(ActionEvent actionEvent) throws IOException {
         GlobalCasinoState.switchToCasinoButton(actionEvent);

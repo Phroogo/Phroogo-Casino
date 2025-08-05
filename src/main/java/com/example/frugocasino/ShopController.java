@@ -57,6 +57,12 @@ public class ShopController {
         GlobalCasinoPerks.setBlackjackPhrogMoneyMultiplierLevel(0);
         GlobalCasinoPerks.setTexasPokerPhrogMoneyMultiplierLevel(0);
         GlobalCasinoPerks.setGlobalPhrogMoneyMultiplierLevel(0);
+        GlobalCasinoPerks.setGreenPhrogSlotChanceLevel(0);
+        GlobalCasinoPerks.setPurplePhrogSlotChanceLevel(0);
+        GlobalCasinoPerks.setPhroogoSlotChanceLevel(0);
+        GlobalCasinoPerks.setRouletteTableRerollLevel(0);
+        GlobalCasinoPerks.setBlackJackBustLimitLevel(0);
+        GlobalCasinoPerks.setTexasPokerHandEvaluationIncreaseLevel(0);
     }
 
     public void maxLevelReached() {
@@ -67,18 +73,22 @@ public class ShopController {
 
     public void recognizePerk(String buttonId, ActionEvent actionEvent) {
         switch(buttonId) {
-            case "a0", "a1", "a2", "a3", "a5", "a6", "a7", "a8" -> price = GlobalCasinoState.basicPerkPrice;
-            case "a4", "a9" -> price = GlobalCasinoState.intermediatePerkPrice;
+            case "a0", "a1", "a2", "a3", "a5", "a6", "a7", "a8", "a10" -> price = GlobalCasinoState.basicPerkPrice;
+            case "a11" -> price = GlobalCasinoState.intermediatePerkPrice;
+            case "a4", "a9", "a12" -> price = GlobalCasinoState.advancedPerkPrice;
+            case "a14" -> price = GlobalCasinoState.expertPerkPrice;
+            case "a13" -> price = GlobalCasinoState.opPerkPrice;
+            case "a15" -> price = GlobalCasinoState.legendaryPerkPrice;
         }
         buyPerkButton.setDisable(false);
         buyPerkButton.setVisible(true);
         maxLevelLabel.setVisible(false);
         switch(buttonId) {
             case "a0" -> {
-                if(GlobalCasinoPerks.getSlotMachineMoneyMultiplierLevel() < GlobalCasinoState.maxPerkLevel ) {
+                if(GlobalCasinoPerks.getSlotMachineMoneyMultiplierLevel() < GlobalCasinoState.maxBasicPerkLevel) {
                     if(actionEvent.getSource() == buyPerkButton) {
                         GlobalCasinoPerks.setSlotMachineMoneyMultiplierLevel(GlobalCasinoPerks.getSlotMachineMoneyMultiplierLevel() + 1);
-                        if(GlobalCasinoPerks.getSlotMachineMoneyMultiplierLevel() > GlobalCasinoState.maxPerkLevel - 1) {
+                        if(GlobalCasinoPerks.getSlotMachineMoneyMultiplierLevel() > GlobalCasinoState.maxBasicPerkLevel - 1) {
                             maxLevelReached();
                         }
                     }
@@ -92,10 +102,10 @@ public class ShopController {
                 buyPerkButton.setId(buttonId);
             }
             case "a1" -> {
-                if(GlobalCasinoPerks.getRouletteTableMoneyMultiplierLevel() < GlobalCasinoState.maxPerkLevel) {
+                if(GlobalCasinoPerks.getRouletteTableMoneyMultiplierLevel() < GlobalCasinoState.maxBasicPerkLevel) {
                     if(actionEvent.getSource() == buyPerkButton) {
                         GlobalCasinoPerks.setRouletteTableMoneyMultiplierLevel(GlobalCasinoPerks.getRouletteTableMoneyMultiplierLevel() + 1);
-                        if(GlobalCasinoPerks.getRouletteTableMoneyMultiplierLevel() > GlobalCasinoState.maxPerkLevel - 1) {
+                        if(GlobalCasinoPerks.getRouletteTableMoneyMultiplierLevel() > GlobalCasinoState.maxBasicPerkLevel - 1) {
                             maxLevelReached();
                         }
                     }
@@ -109,10 +119,10 @@ public class ShopController {
                 buyPerkButton.setId(buttonId);
             }
             case "a2" -> {
-                if(GlobalCasinoPerks.getBlackjackMoneyMultiplierLevel() < GlobalCasinoState.maxPerkLevel) {
+                if(GlobalCasinoPerks.getBlackjackMoneyMultiplierLevel() < GlobalCasinoState.maxBasicPerkLevel) {
                     if(actionEvent.getSource() == buyPerkButton) {
                         GlobalCasinoPerks.setBlackjackMoneyMultiplierLevel(GlobalCasinoPerks.getBlackjackMoneyMultiplierLevel() + 1);
-                        if(GlobalCasinoPerks.getBlackjackMoneyMultiplierLevel() > GlobalCasinoState.maxPerkLevel - 1) {
+                        if(GlobalCasinoPerks.getBlackjackMoneyMultiplierLevel() > GlobalCasinoState.maxBasicPerkLevel - 1) {
                             maxLevelReached();
                         }
                     }
@@ -126,10 +136,10 @@ public class ShopController {
                 buyPerkButton.setId(buttonId);
             }
             case "a3" -> {
-                if(GlobalCasinoPerks.getTexasPokerMoneyMultiplierLevel() < GlobalCasinoState.maxPerkLevel) {
+                if(GlobalCasinoPerks.getTexasPokerMoneyMultiplierLevel() < GlobalCasinoState.maxBasicPerkLevel) {
                     if(actionEvent.getSource() == buyPerkButton) {
                         GlobalCasinoPerks.setTexasPokerMoneyMultiplierLevel(GlobalCasinoPerks.getTexasPokerMoneyMultiplierLevel() + 1);
-                        if(GlobalCasinoPerks.getTexasPokerMoneyMultiplierLevel() > GlobalCasinoState.maxPerkLevel - 1) {
+                        if(GlobalCasinoPerks.getTexasPokerMoneyMultiplierLevel() > GlobalCasinoState.maxBasicPerkLevel - 1) {
                             maxLevelReached();
                         }
                     }
@@ -143,10 +153,10 @@ public class ShopController {
                 buyPerkButton.setId(buttonId);
             }
             case "a4" -> {
-                if(GlobalCasinoPerks.getGlobalMoneyMultiplierLevel() < GlobalCasinoState.maxPerkLevel) {
+                if(GlobalCasinoPerks.getGlobalMoneyMultiplierLevel() < GlobalCasinoState.maxAdvancedPerkLevel) {
                     if(actionEvent.getSource() == buyPerkButton) {
                         GlobalCasinoPerks.setGlobalMoneyMultiplierLevel(GlobalCasinoPerks.getGlobalMoneyMultiplierLevel() + 1);
-                        if(GlobalCasinoPerks.getGlobalMoneyMultiplierLevel() > GlobalCasinoState.maxPerkLevel - 1) {
+                        if(GlobalCasinoPerks.getGlobalMoneyMultiplierLevel() > GlobalCasinoState.maxAdvancedPerkLevel - 1) {
                             maxLevelReached();
                         }
                     }
@@ -160,10 +170,10 @@ public class ShopController {
                 buyPerkButton.setId(buttonId);
             }
             case "a5" -> {
-                if(GlobalCasinoPerks.getSlotMachinePhrogMoneyMultiplierLevel() < GlobalCasinoState.maxPerkLevel) {
+                if(GlobalCasinoPerks.getSlotMachinePhrogMoneyMultiplierLevel() < GlobalCasinoState.maxBasicPerkLevel) {
                     if(actionEvent.getSource() == buyPerkButton) {
                         GlobalCasinoPerks.setSlotMachinePhrogMoneyMultiplierLevel(GlobalCasinoPerks.getSlotMachinePhrogMoneyMultiplierLevel() + 1);
-                        if(GlobalCasinoPerks.getSlotMachinePhrogMoneyMultiplierLevel() > GlobalCasinoState.maxPerkLevel - 1) {
+                        if(GlobalCasinoPerks.getSlotMachinePhrogMoneyMultiplierLevel() > GlobalCasinoState.maxBasicPerkLevel - 1) {
                             maxLevelReached();
                         }
                     }
@@ -177,10 +187,10 @@ public class ShopController {
                 buyPerkButton.setId(buttonId);
             }
             case "a6" -> {
-                if(GlobalCasinoPerks.getRouletteTablePhrogMoneyMultiplierLevel() < GlobalCasinoState.maxPerkLevel) {
+                if(GlobalCasinoPerks.getRouletteTablePhrogMoneyMultiplierLevel() < GlobalCasinoState.maxBasicPerkLevel) {
                     if(actionEvent.getSource() == buyPerkButton) {
                         GlobalCasinoPerks.setRouletteTablePhrogMoneyMultiplierLevel(GlobalCasinoPerks.getRouletteTablePhrogMoneyMultiplierLevel() + 1);
-                        if(GlobalCasinoPerks.getRouletteTablePhrogMoneyMultiplierLevel() > GlobalCasinoState.maxPerkLevel - 1) {
+                        if(GlobalCasinoPerks.getRouletteTablePhrogMoneyMultiplierLevel() > GlobalCasinoState.maxBasicPerkLevel - 1) {
                             maxLevelReached();
                         }
                     }
@@ -194,10 +204,10 @@ public class ShopController {
                 buyPerkButton.setId(buttonId);
             }
             case "a7" -> {
-                if(GlobalCasinoPerks.getBlackjackPhrogMoneyMultiplierLevel() < GlobalCasinoState.maxPerkLevel) {
+                if(GlobalCasinoPerks.getBlackjackPhrogMoneyMultiplierLevel() < GlobalCasinoState.maxBasicPerkLevel) {
                     if(actionEvent.getSource() == buyPerkButton) {
                         GlobalCasinoPerks.setBlackjackPhrogMoneyMultiplierLevel(GlobalCasinoPerks.getBlackjackPhrogMoneyMultiplierLevel() + 1);
-                        if(GlobalCasinoPerks.getBlackjackPhrogMoneyMultiplierLevel() > GlobalCasinoState.maxPerkLevel - 1) {
+                        if(GlobalCasinoPerks.getBlackjackPhrogMoneyMultiplierLevel() > GlobalCasinoState.maxBasicPerkLevel - 1) {
                             maxLevelReached();
                         }
                     }
@@ -211,10 +221,10 @@ public class ShopController {
                 buyPerkButton.setId(buttonId);
             }
             case "a8" -> {
-                if(GlobalCasinoPerks.getTexasPokerPhrogMoneyMultiplierLevel() < GlobalCasinoState.maxPerkLevel) {
+                if(GlobalCasinoPerks.getTexasPokerPhrogMoneyMultiplierLevel() < GlobalCasinoState.maxBasicPerkLevel) {
                     if(actionEvent.getSource() == buyPerkButton) {
                         GlobalCasinoPerks.setTexasPokerPhrogMoneyMultiplierLevel(GlobalCasinoPerks.getTexasPokerPhrogMoneyMultiplierLevel() + 1);
-                        if(GlobalCasinoPerks.getTexasPokerPhrogMoneyMultiplierLevel() > GlobalCasinoState.maxPerkLevel - 1) {
+                        if(GlobalCasinoPerks.getTexasPokerPhrogMoneyMultiplierLevel() > GlobalCasinoState.maxBasicPerkLevel - 1) {
                             maxLevelReached();
                         }
                     }
@@ -228,10 +238,10 @@ public class ShopController {
                 buyPerkButton.setId(buttonId);
             }
             case "a9" -> {
-                if(GlobalCasinoPerks.getGlobalPhrogMoneyMultiplierLevel() < GlobalCasinoState.maxPerkLevel) {
+                if(GlobalCasinoPerks.getGlobalPhrogMoneyMultiplierLevel() < GlobalCasinoState.maxAdvancedPerkLevel) {
                     if(actionEvent.getSource() == buyPerkButton) {
                         GlobalCasinoPerks.setGlobalPhrogMoneyMultiplierLevel(GlobalCasinoPerks.getGlobalPhrogMoneyMultiplierLevel() + 1);
-                        if(GlobalCasinoPerks.getGlobalPhrogMoneyMultiplierLevel() > GlobalCasinoState.maxPerkLevel - 1) {
+                        if(GlobalCasinoPerks.getGlobalPhrogMoneyMultiplierLevel() > GlobalCasinoState.maxAdvancedPerkLevel - 1) {
                             maxLevelReached();
                         }
                     }
@@ -244,6 +254,108 @@ public class ShopController {
                 double rounded = (double) Math.round(GlobalCasinoPerks.getGlobalPhrogMoneyMultiplier() * 100) / 100;
                 String formatted = String.format("%.2f", rounded).replaceFirst("0", "1"); //floating point issues
                 perkDescription.setText("Increases all phrog coins payouts by 4% per level (currently x" + formatted + ", multiplicative).");
+                buyPerkButton.setId(buttonId);
+            }
+            case "a10" -> {
+                if(GlobalCasinoPerks.getGreenPhrogSlotChanceLevel() < GlobalCasinoState.maxAdvancedPerkLevel) {
+                    if(actionEvent.getSource() == buyPerkButton) {
+                        GlobalCasinoPerks.setGreenPhrogSlotChanceLevel(GlobalCasinoPerks.getGreenPhrogSlotChanceLevel() + 1);
+                        if(GlobalCasinoPerks.getGreenPhrogSlotChanceLevel() > GlobalCasinoState.maxAdvancedPerkLevel - 1) {
+                            maxLevelReached();
+                        }
+                    }
+                } else {
+                    maxLevelReached();
+                }
+                price *= (GlobalCasinoPerks.getGreenPhrogSlotChanceLevel() + 1);
+                buyPerkButton.setText("P$" + price);
+                perkName.setText("Zeeper Luck");
+                perkDescription.setText("Increases the chance of getting green phrogs in slots (idk by how much, math is hard).");
+                buyPerkButton.setId(buttonId);
+            }
+            case "a11" -> {
+                if(GlobalCasinoPerks.getPurplePhrogSlotChanceLevel() < GlobalCasinoState.maxAdvancedPerkLevel) {
+                    if(actionEvent.getSource() == buyPerkButton) {
+                        GlobalCasinoPerks.setPurplePhrogSlotChanceLevel(GlobalCasinoPerks.getPurplePhrogSlotChanceLevel() + 1);
+                        if(GlobalCasinoPerks.getPurplePhrogSlotChanceLevel() > GlobalCasinoState.maxAdvancedPerkLevel - 1) {
+                            maxLevelReached();
+                        }
+                    }
+                } else {
+                    maxLevelReached();
+                }
+                price *= (GlobalCasinoPerks.getPurplePhrogSlotChanceLevel() + 1);
+                buyPerkButton.setText("P$" + price);
+                perkName.setText("Gia Luck");
+                perkDescription.setText("Increases the chance of getting purple phrogs in slots (idk by how much, math is hard).");
+                buyPerkButton.setId(buttonId);
+            }
+            case "a12" -> {
+                if(GlobalCasinoPerks.getPhroogoSlotChanceLevel() < GlobalCasinoState.maxAdvancedPerkLevel) {
+                    if(actionEvent.getSource() == buyPerkButton) {
+                        GlobalCasinoPerks.setPhroogoSlotChanceLevel(GlobalCasinoPerks.getPhroogoSlotChanceLevel() + 1);
+                        if(GlobalCasinoPerks.getPhroogoSlotChanceLevel() > GlobalCasinoState.maxAdvancedPerkLevel - 1) {
+                            maxLevelReached();
+                        }
+                    }
+                } else {
+                    maxLevelReached();
+                }
+                price *= (GlobalCasinoPerks.getPhroogoSlotChanceLevel() + 1);
+                buyPerkButton.setText("P$" + price);
+                perkName.setText("Phroogo Luck");
+                perkDescription.setText("Increases the chance of getting blue phrogs in slots (idk by how much, math is hard).");
+                buyPerkButton.setId(buttonId);
+            }
+            case "a13" -> {
+                if(GlobalCasinoPerks.getRouletteTableRerollLevel() < GlobalCasinoState.maxAdvancedPerkLevel) {
+                    if(actionEvent.getSource() == buyPerkButton) {
+                        GlobalCasinoPerks.setRouletteTableRerollLevel(GlobalCasinoPerks.getRouletteTableRerollLevel() + 1);
+                        if(GlobalCasinoPerks.getRouletteTableRerollLevel() > GlobalCasinoState.maxAdvancedPerkLevel - 1) {
+                            maxLevelReached();
+                        }
+                    }
+                } else {
+                    maxLevelReached();
+                }
+                price *= (GlobalCasinoPerks.getRouletteTableRerollLevel() + 1);
+                buyPerkButton.setText("P$" + price);
+                perkName.setText("Reroll Table");
+                perkDescription.setText("Increases the chance of reroll if your didn't win in roulette by 5% per level (currently "  + GlobalCasinoPerks.getRouletteTableRerollLevel() * 5 + "%)");
+                buyPerkButton.setId(buttonId);
+            }
+            case "a14" -> {
+                if(GlobalCasinoPerks.getBlackJackBustLimitLevel() < GlobalCasinoState.maxOpPerkLevel) {
+                    if(actionEvent.getSource() == buyPerkButton) {
+                        GlobalCasinoPerks.setBlackJackBustLimitLevel(GlobalCasinoPerks.getBlackJackBustLimitLevel() + 1);
+                        if(GlobalCasinoPerks.getBlackJackBustLimitLevel() > GlobalCasinoState.maxOpPerkLevel - 1) {
+                            maxLevelReached();
+                        }
+                    }
+                } else {
+                    maxLevelReached();
+                }
+                price *= (GlobalCasinoPerks.getBlackJackBustLimitLevel() + 1);
+                buyPerkButton.setText("P$" + price);
+                perkName.setText("No Bustin'");
+                perkDescription.setText("Increases the amount of points you can go over 21 in blackjack (currently:  "  + GlobalCasinoPerks.getBlackJackBustLimitLevel() + "), the game is still about who's closer to 21");
+                buyPerkButton.setId(buttonId);
+            }
+            case "a15" -> {
+                if(GlobalCasinoPerks.getTexasPokerHandEvaluationIncreaseLevel() < GlobalCasinoState.maxLegendaryPerkLevel) {
+                    if(actionEvent.getSource() == buyPerkButton) {
+                        GlobalCasinoPerks.setTexasPokerHandEvaluationIncreaseLevel(GlobalCasinoPerks.getTexasPokerHandEvaluationIncreaseLevel() + 1);
+                        if(GlobalCasinoPerks.getTexasPokerHandEvaluationIncreaseLevel() > GlobalCasinoState.maxLegendaryPerkLevel - 1) {
+                            maxLevelReached();
+                        }
+                    }
+                } else {
+                    maxLevelReached();
+                }
+                price *= (GlobalCasinoPerks.getTexasPokerHandEvaluationIncreaseLevel() + 1);
+                buyPerkButton.setText("P$" + price);
+                perkName.setText("Simply Better");
+                perkDescription.setText("Increases the estimation of your poker hand by one (eg. high card -> pair)");
                 buyPerkButton.setId(buttonId);
             }
         }

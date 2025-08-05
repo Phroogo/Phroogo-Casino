@@ -116,10 +116,7 @@ public class BlackjackController {
         displayPlayerCard(playerHand);
         playerTotal = getTotal(playerHandValue);
         playerTotalLabel.setText("Your total is: " + playerTotal);
-//        if (playerTotal > 21 && playerHandValue.contains(11)) {
-//            playerTotal = getTotal(playerHandValue) - 10;
-//        }
-        if (playerTotal > 21) {
+        if (playerTotal > 21 + GlobalCasinoPerks.getBlackJackBustLimitLevel()) {
             insuranceLabel.setVisible(true);
             insuranceLabel.setText("Your total is " +  getTotal(playerHandValue) + "! You have busted.");
             endGame();
@@ -143,7 +140,7 @@ public class BlackjackController {
             displayPlayerCard(playerHand);
             playerTotal = getTotal(playerHandValue);
             playerTotalLabel.setText("Your total is: " + playerTotal);
-            if (playerTotal <= 21) {
+            if (playerTotal <= 21 + GlobalCasinoPerks.getBlackJackBustLimitLevel()) {
                 dealerTurn();
             } else {
                 insuranceLabel.setVisible(true);
@@ -177,24 +174,34 @@ public class BlackjackController {
         dealerTotalLabel.setText("Dealer total is: " + dealerTotal);
         while(dealerTotal < 17) {
             draw(tempDeckValues, tempDeck, dealerHandValue, dealerHand);
+
+            int tempTotal = getTotal(new ArrayList<>(dealerHandValue));
+            List<String> tempHand = new ArrayList<>(dealerHand);
+
             dealerActions.add(() -> {
-                displayDealerCard(dealerHand);
-                dealerTotalLabel.setText("Dealer total is: " + dealerTotal);
+                displayDealerCard(tempHand);
+                dealerTotalLabel.setText("Dealer total is: " + tempTotal);
             });
+
+//            dealerActions.add(() -> {
+//                displayDealerCard(dealerHand);
+//                dealerTotalLabel.setText("Dealer total is: " + dealerTotal);
+//            });
             dealerActionsDelay.add(1.0);
             dealerTotal = getTotal(dealerHandValue);
         }
         dealerActions.add(() -> {
             playerTotal = getTotal(playerHandValue);
             insuranceLabel.setVisible(true);
+
             if(dealerTotal > 21) {
                 insuranceLabel.setText("Dealer has busted!");
                 GlobalCasinoState.changeMoneyBalance((int)(2 * bet + bet * GlobalCasinoPerks.getRouletteTableMoneyMultiplier() + bet * GlobalCasinoPerks.getGlobalMoneyMultiplier()));
                 GlobalCasinoState.changePhrogMoneyBalance(GlobalCasinoState.calculatePhrogCoins((int)(bet + bet * GlobalCasinoPerks.getBlackjackPhrogMoneyMultiplier() + bet * GlobalCasinoPerks.getGlobalPhrogMoneyMultiplier())));
                 moneyLabel.setText("$" + GlobalCasinoState.getMoneyBalance());
-            } else if(dealerTotal > playerTotal) {
+            } else if(21 - dealerTotal < Math.abs(21 - playerTotal)) {
                 insuranceLabel.setText("Dealer has won.");
-            } else if(dealerTotal == playerTotal) {
+            } else if(21 - dealerTotal == Math.abs(21 - playerTotal)) {
                 insuranceLabel.setText("It's a tie!");
                 GlobalCasinoState.changeMoneyBalance(bet);
                 moneyLabel.setText("$" + GlobalCasinoState.getMoneyBalance());
@@ -234,11 +241,11 @@ public class BlackjackController {
 
     public void displayDealerCard(List<String> hand) {
         switch (hand.size()) {
-            case 3 -> dealerCard3.setImage(new Image(getClass().getResourceAsStream("/images/deck/" +  dealerHand.getLast() + ".png")));
-            case 4 -> dealerCard4.setImage(new Image(getClass().getResourceAsStream("/images/deck/" +  dealerHand.getLast() + ".png")));
-            case 5 -> dealerCard5.setImage(new Image(getClass().getResourceAsStream("/images/deck/" +  dealerHand.getLast() + ".png")));
-            case 6 -> dealerCard6.setImage(new Image(getClass().getResourceAsStream("/images/deck/" +  dealerHand.getLast() + ".png")));
-            case 7 -> dealerCard7.setImage(new Image(getClass().getResourceAsStream("/images/deck/" +  dealerHand.getLast() + ".png")));
+            case 3 -> dealerCard3.setImage(new Image(getClass().getResourceAsStream("/images/deck/" +  dealerHand.get(2) + ".png")));
+            case 4 -> dealerCard4.setImage(new Image(getClass().getResourceAsStream("/images/deck/" +  dealerHand.get(3) + ".png")));
+            case 5 -> dealerCard5.setImage(new Image(getClass().getResourceAsStream("/images/deck/" +  dealerHand.get(4) + ".png")));
+            case 6 -> dealerCard6.setImage(new Image(getClass().getResourceAsStream("/images/deck/" +  dealerHand.get(5) + ".png")));
+            case 7 -> dealerCard7.setImage(new Image(getClass().getResourceAsStream("/images/deck/" +  dealerHand.get(6) + ".png")));
         }
     }
 
@@ -257,7 +264,7 @@ public class BlackjackController {
         for (Integer card : handValue) {
             total += card;
         }
-        while(total > 21 && handValue.contains(11)) {
+        while(total > 21 + GlobalCasinoPerks.getBlackJackBustLimitLevel() && handValue.contains(11)) {
             handValue.set(handValue.indexOf(11), 1);
             total -= 10;
         }

@@ -41,6 +41,8 @@ public class CasinoMenuController{
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("Shop.fxml"));
                     shopRoot = loader.load();
                 }
+                moneyLabel.setVisible(false);
+                phrogMoneyLabel.setVisible(false);
                 shopPane.setContent(shopRoot);
                 shopPane.setVisible(true);
                 grayOverlay.setVisible(true);
@@ -53,6 +55,9 @@ public class CasinoMenuController{
             grayOverlay.setVisible(false);
             closeShopButton.setVisible(false);
             shopPane.setContent(null);
+            moneyLabel.setVisible(true);
+            phrogMoneyLabel.setVisible(true);
+            phrogMoneyLabel.setText("P$" + GlobalCasinoState.getPhrogMoneyBalance());
         }
     }
 

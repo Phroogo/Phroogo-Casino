@@ -13,11 +13,18 @@ public class GlobalCasinoState {
     private static Stage stage;
     private static Scene scene;
     private static Parent root;
-    public final static int maxPerkLevel = 20;
+    public final static int maxBasicPerkLevel = 20;
+    public final static int maxAdvancedPerkLevel = 10;
+    public final static int maxOpPerkLevel = 5;
+    public final static int maxLegendaryPerkLevel = 1;
     public final static int basicPerkPrice = 100;
-    public final static int intermediatePerkPrice = 300;
+    public final static int intermediatePerkPrice = 200;
+    public final static int advancedPerkPrice = 300;
+    public final static int expertPerkPrice = 500;
+    public final static int opPerkPrice = 1000;
+    public final static int legendaryPerkPrice = 10000;
     private static int moneyBalance = 10000;
-    private static int phrogMoneyBalance = 1000000;
+    private static int phrogMoneyBalance = 1000;
     private static int totalPhrogMoneySpent = 0;
 
     public static int getMoneyBalance() {

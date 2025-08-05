@@ -1,5 +1,6 @@
 package com.example.frugocasino;
 
+import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -8,6 +9,7 @@ import javafx.scene.control.ToggleGroup;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class RouletteController {
@@ -18,15 +20,22 @@ public class RouletteController {
     public Label moneyLabel, phrogMoneyLabel;
     public ToggleGroup rouletteBet;
     public RadioButton bet0, bet1, bet2, bet3, bet4, bet5, bet6, bet7, bet8, bet9, bet10, bet11, bet12, bet13, bet14, bet15, bet16, bet17, bet18, bet19, bet20, bet21, bet22, bet23, bet24, bet25, bet26, bet27, bet28, bet29, bet30, bet31, bet32, bet33, bet34, bet35, bet36, betColumn1, betColumn2, betColumn3, bet12one, bet12two, bet12three, bet18one, bet18two, betEven, betOdd, betRed, betBlack;
-    public ArrayList<Integer> playerBet = new ArrayList<>();
+    public List<Integer> playerBet = new ArrayList<>();
+    public List<Integer> rerollList = new ArrayList<>();
     public Label betLabel;
     public TextField betAmount;
     private Random random = new Random();
     private boolean betPlaced = false;
+    private boolean rerollAvailable = true;
 
     public void initialize() {
         moneyLabel.setText("$" + GlobalCasinoState.getMoneyBalance());
         phrogMoneyLabel.setText("P$" + GlobalCasinoState.getPhrogMoneyBalance());
+        int temp = GlobalCasinoPerks.getRouletteTableRerollLevel();
+        while(temp > 0) {
+            rerollList.add(temp);
+            temp--;
+        }
     }
 
     public void rouletteSpin(ActionEvent actionEvent) {
@@ -35,7 +44,9 @@ public class RouletteController {
                 int bet = Integer.parseInt(betAmount.getText());
                 if(bet > 0 && !(bet > GlobalCasinoState.getMoneyBalance())) {
                     if (betPlaced) {
-                        GlobalCasinoState.setMoneyBalance(GlobalCasinoState.getMoneyBalance() - bet);
+                        if(rerollAvailable) {
+                            GlobalCasinoState.setMoneyBalance(GlobalCasinoState.getMoneyBalance() - bet);
+                        }
                         int roulette = random.nextInt(0, 37);
 
                         //●
@@ -54,10 +65,20 @@ public class RouletteController {
                                 GlobalCasinoState.changeMoneyBalance((int)(2 * bet + bet * GlobalCasinoPerks.getRouletteTableMoneyMultiplier() + bet * GlobalCasinoPerks.getGlobalMoneyMultiplier()));
                                 GlobalCasinoState.changePhrogMoneyBalance(GlobalCasinoState.calculatePhrogCoins((int)(bet + bet * GlobalCasinoPerks.getRouletteTablePhrogMoneyMultiplier() + bet * GlobalCasinoPerks.getGlobalPhrogMoneyMultiplier())));
                             }
+                        } else if(GlobalCasinoPerks.getRouletteTableRerollLevel() > 0 && rerollAvailable) {
+                            rerollAvailable = false;
+                            int reroll = random.nextInt(1, 21);
+                            if(rerollList.contains(reroll)) {
+                                rouletteSpin(actionEvent);
+                            }
                         } else {
                             betLabel.setText("You have lost, the number was " + roulette);
                         }
                         moneyLabel.setText("$" + GlobalCasinoState.getMoneyBalance());
+                        if(!rerollAvailable) {
+                            betLabel.setText(betLabel.getText() + " (rerolled)");
+                            rerollAvailable = true;
+                        }
                     } else {
                         betLabel.setText("You have to place a bet first");
                     }
