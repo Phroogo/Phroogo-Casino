@@ -5,10 +5,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+
 
 public class CasinoController {
     public Label moneyLabel, phrogMoneyLabel;
@@ -19,6 +21,12 @@ public class CasinoController {
     public void initialize() {
         moneyLabel.setText("$" + GlobalCasinoState.getMoneyBalance());
         phrogMoneyLabel.setText("P$" + GlobalCasinoState.getPhrogMoneyBalance());
+    }
+
+    public void switchToSceneButton(ActionEvent actionEvent) throws IOException {
+        String scene;
+        scene = ((Button) actionEvent.getSource()).getId();
+        GlobalCasinoState.switchToSceneButton(actionEvent, scene);
     }
 
     public void switchToBlackjackButton(ActionEvent actionEvent) throws IOException {
@@ -47,6 +55,14 @@ public class CasinoController {
 
     public void switchToTexasPokerButton(ActionEvent actionEvent) throws IOException {
         root = FXMLLoader.load(getClass().getResource("texasHoldem.fxml"));
+        stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void switchToCaseOpenerButton(ActionEvent actionEvent) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("caseOpener.fxml"));
         stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

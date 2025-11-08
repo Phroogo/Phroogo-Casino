@@ -410,6 +410,6 @@ public class SlotMachineController {
     }
 
     public void switchToCasinoButton(ActionEvent actionEvent) throws IOException {
-        GlobalCasinoState.switchToCasinoButton(actionEvent);
+        GlobalCasinoState.switchToSceneButton(actionEvent);
     }
 }

@@ -6,7 +6,6 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 
@@ -31,7 +30,7 @@ public class CasinoMenuController{
     }
 
     public void switchToCasino(ActionEvent actionEvent) throws IOException {
-        GlobalCasinoState.switchToCasinoButton(actionEvent);
+        GlobalCasinoState.switchToSceneButton(actionEvent);
     }
 
     public void toggleShop() {

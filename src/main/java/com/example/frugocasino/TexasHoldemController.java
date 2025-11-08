@@ -59,7 +59,7 @@ public class TexasHoldemController {
             bet = 50;
             GlobalCasinoState.changeMoneyBalance(-50);
             moneyLabel.setText("$" + GlobalCasinoState.getMoneyBalance());
-            betLabel.setText("Bet: $" + bet);
+            betLabel.setText("Pot: $" + bet);
             playButton.setDisable(true);
             playButton.setVisible(false);
             playerCard1.setDisable(false);
@@ -74,7 +74,7 @@ public class TexasHoldemController {
             draw(tempDeckValues, tempDeck, playerHandValue, playerHand);
             playerCard1.setImage(new Image(getClass().getResourceAsStream("/images/deck/" + playerHand.getFirst() + ".png")));
             playerCard2.setImage(new Image(getClass().getResourceAsStream("/images/deck/" + playerHand.get(1) + ".png")));
-            playerEvaluation = evaluateHand(playerHandValue, playerHand, playerWinningHand);
+            evaluateHand(playerHandValue, playerHand, playerWinningHand);
             draw(tempDeckValues, tempDeck, botHandValue, botHand);
             draw(tempDeckValues, tempDeck, botHandValue, botHand);
             raiseButton.setDisable(false);
@@ -160,19 +160,19 @@ public class TexasHoldemController {
             flopCard1.setImage(new Image(getClass().getResourceAsStream("/images/deck/" +  flop.getFirst() + ".png")));
             flopCard2.setImage(new Image(getClass().getResourceAsStream("/images/deck/" +  flop.get(1) + ".png")));
             flopCard3.setImage(new Image(getClass().getResourceAsStream("/images/deck/" +  flop.get(2) + ".png")));
-            playerEvaluation = evaluateHand(playerHandValue, playerHand, playerWinningHand);
+            evaluateHand(playerHandValue, playerHand, playerWinningHand);
         } else if(flop.size() == 3) {
             draw(tempDeckValues, tempDeck, flopValue, flop);
             addFlopToHand(flopValue, flop, playerHandValue, playerHand);
             addFlopToHand(flopValue, flop, botHandValue, botHand);
             flopCard4.setImage(new Image(getClass().getResourceAsStream("/images/deck/" +  flop.get(3) + ".png")));
-            playerEvaluation = evaluateHand(playerHandValue, playerHand, playerWinningHand);
+            evaluateHand(playerHandValue, playerHand, playerWinningHand);
         } else if(flop.size() == 4) {
             draw(tempDeckValues, tempDeck, flopValue, flop);
             addFlopToHand(flopValue, flop, playerHandValue, playerHand);
             addFlopToHand(flopValue, flop, botHandValue, botHand);
             flopCard5.setImage(new Image(getClass().getResourceAsStream("/images/deck/" +  flop.get(4) + ".png")));
-            playerEvaluation = evaluateHand(playerHandValue, playerHand, playerWinningHand);
+            evaluateHand(playerHandValue, playerHand, playerWinningHand);
 
         } else if(flop.size() == 5) {
             raiseButton.setDisable(true);
@@ -186,7 +186,9 @@ public class TexasHoldemController {
             backButton.setDisable(false);
             botCard1.setImage(new Image(getClass().getResourceAsStream("/images/deck/" +  botHand.getFirst() + ".png")));
             botCard2.setImage(new Image(getClass().getResourceAsStream("/images/deck/" +  botHand.get(1) + ".png")));
+            playerEvaluation = evaluateHand(playerHandValue, playerHand, playerWinningHand);
             botEvaluation = evaluateHand(botHandValue, botHand, botWinningHand);
+            System.out.println(botEvaluation + " " + playerEvaluation);
             evaluateWinner(playerEvaluation, botEvaluation);
         }
     }
@@ -251,7 +253,7 @@ public class TexasHoldemController {
         } else if(hasFullHouse(tempHandValue, winningHand)) {
             evaluation = handEvaluation[3];
             evaluationHierarchy = 6;
-        } else if(hasFlush(tempHandValue, tempHand, winningHand)) {
+        } else if(hasFlush(tempHand, winningHand)) {
             evaluation = handEvaluation[4];
             evaluationHierarchy = 5;
         } else if(hasStraight(tempHandValue, winningHand)) {
@@ -283,15 +285,21 @@ public class TexasHoldemController {
 
     public boolean hasRoyalFlush(List<Integer> handValue, List<String> hand, List<Integer> winningHand) {
         winningHand.clear();
-        if(hasFlush(handValue, hand, winningHand) && hasStraight(handValue, winningHand) && handValue.contains(14) && handValue.contains(13) && handValue.contains(12)) {
-            return true;
+        if(hasFlush(hand, winningHand)){
+            winningHand.sort(null);
+            if(hasStraight(winningHand, winningHand) && handValue.contains(14) && handValue.contains(13) && handValue.contains(12)) {
+                return true;
+            }
         }
         return false;
     }
     public boolean hasStraightFlush(List<Integer> handValue, List<String> hand, List<Integer> winningHand) {
         winningHand.clear();
-        if(hasFlush(handValue, hand, winningHand) && hasStraight(handValue, winningHand)) {
-            return true;
+        if(hasFlush(hand, winningHand)) {
+            winningHand.sort(null);
+            if(hasStraight(winningHand, winningHand)) {
+                return true;
+            }
         }
         return false;
     }
@@ -336,7 +344,7 @@ public class TexasHoldemController {
         }
         return false;
     }
-    public boolean hasFlush(List<Integer> handValue, List<String> hand, List<Integer> winningHand) {
+    public boolean hasFlush(List<String> hand, List<Integer> winningHand) {
         winningHand.clear();
         int h = 0;
         int d = 0;
@@ -354,6 +362,31 @@ public class TexasHoldemController {
             }
         }
         if(h > 4 || d > 4 || c > 4 || s > 4) {
+            if(h > 4) {
+                for(int i = 0; i < hand.size(); i++) {
+                    if(hand.get(i).equals("h")) {
+                        winningHand.add(cardToValue(hand.get(i)));
+                    }
+                }
+            } else if(d > 4) {
+                for(int i = 0; i < hand.size(); i++) {
+                    if(hand.get(i).equals("d")) {
+                        winningHand.add(cardToValue(hand.get(i)));
+                    }
+                }
+            } else if(c > 4) {
+                for(int i = 0; i < hand.size(); i++) {
+                    if(hand.get(i).equals("c")) {
+                        winningHand.add(cardToValue(hand.get(i)));
+                    }
+                }
+            } else if(s > 4) {
+                for(int i = 0; i < hand.size(); i++) {
+                    if(hand.get(i).equals("s")) {
+                        winningHand.add(cardToValue(hand.get(i)));
+                    }
+                }
+            }
             return true;
         }
 
@@ -419,7 +452,7 @@ public class TexasHoldemController {
                 playerWin();
             } else if(botWinningHand.getLast() > playerWinningHand.getLast()) {
                 botWin();
-            } else if(botWinningHand.getLast().equals(playerWinningHand.getLast()) || hasFlush(playerHandValue, playerHand, playerWinningHand)) {
+            } else if(botWinningHand.getLast().equals(playerWinningHand.getLast()) || hasFlush(playerHand, playerWinningHand)) {
                 evaluationLabel.setText("It's a tie. You get your money back");
                 GlobalCasinoState.setMoneyBalance(originalBalance);
                 moneyLabel.setText("$" + GlobalCasinoState.getMoneyBalance());
@@ -458,8 +491,22 @@ public class TexasHoldemController {
 //        return 0;
 //    }
 
+    public int cardToValue(String card) {
+        int cardValue;
+        String cardNumber = card.substring(1);
+        switch (cardNumber) {
+            case "2", "3", "4", "5", "6", "7", "8", "9", "10" -> cardValue = Integer.parseInt(cardNumber);
+            case "Jack" -> cardValue = 11;
+            case "Queen" -> cardValue = 12;
+            case "King" -> cardValue = 13;
+            case "Ace" -> cardValue = 14;
+            default -> cardValue = 1;
+        }
+        return cardValue;
+    }
+
     public void switchToCasinoButton(ActionEvent actionEvent) throws IOException {
-        GlobalCasinoState.switchToCasinoButton(actionEvent);
+        GlobalCasinoState.switchToSceneButton(actionEvent);
     }
 
     private void playDelayedSteps(List<Runnable> steps, List<Double> delaysInSeconds) {

@@ -22,11 +22,6 @@
             <Font name="Comic Sans MS Bold" size="37.0" />
          </font>
       </Button>
-      <Button layoutX="14.0" layoutY="1027.0" mnemonicParsing="false" onAction="#switchToCasinoButton" prefHeight="33.0" prefWidth="69.0" text="Back">
-         <font>
-            <Font name="Comic Sans MS Bold" size="19.0" />
-         </font>
-      </Button>
       <Label fx:id="moneyLabel" alignment="CENTER_RIGHT" layoutX="1555.0" layoutY="14.0" prefHeight="39.0" prefWidth="351.0">
          <font>
             <Font name="Comic Sans MS Bold" size="40.0" />
@@ -295,6 +290,11 @@
             <Font name="Comic Sans MS Bold" size="40.0" />
          </font>
       </Label>
+      <Button layoutX="14.0" layoutY="1027.0" mnemonicParsing="false" onAction="#switchToCasinoButton" prefHeight="33.0" prefWidth="69.0" text="Back">
+         <font>
+            <Font name="Comic Sans MS Bold" size="19.0" />
+         </font>
+      </Button>
       <TextField fx:id="betAmount" layoutX="878.0" layoutY="825.0" prefHeight="39.0" prefWidth="181.0" promptText="Enter the amount to bet">
          <font>
             <Font size="15.0" />

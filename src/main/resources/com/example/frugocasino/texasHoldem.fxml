@@ -25,11 +25,6 @@
                 <Font name="Comic Sans MS Bold" size="31.0" />
             </font>
         </Label>
-        <Button fx:id="backButton" layoutX="14.0" layoutY="1027.0" mnemonicParsing="false" onAction="#switchToCasinoButton" prefHeight="33.0" prefWidth="69.0" text="Back">
-            <font>
-                <Font name="Comic Sans MS Bold" size="19.0" />
-            </font>
-        </Button>
         <Button fx:id="playButton" layoutX="822.0" layoutY="810.0" mnemonicParsing="false" onAction="#playPoker" prefHeight="88.0" prefWidth="301.0" text="PLAY ($50)">
             <font>
                 <Font name="Comic Sans MS Bold" size="42.0" />
@@ -118,5 +113,10 @@
             <Font name="Comic Sans MS Bold" size="29.0" />
          </font>
       </Label>
+        <Button fx:id="backButton" layoutX="14.0" layoutY="1027.0" mnemonicParsing="false" onAction="#switchToCasinoButton" prefHeight="33.0" prefWidth="69.0" text="Back">
+            <font>
+                <Font name="Comic Sans MS Bold" size="19.0" />
+            </font>
+        </Button>
    </children>
 </AnchorPane>

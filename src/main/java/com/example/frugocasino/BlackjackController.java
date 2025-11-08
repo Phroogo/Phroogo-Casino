@@ -272,7 +272,7 @@ public class BlackjackController {
     }
 
     public void switchToCasinoButton(ActionEvent actionEvent) throws IOException {
-        GlobalCasinoState.switchToCasinoButton(actionEvent);
+        GlobalCasinoState.switchToSceneButton(actionEvent);
     }
 
     public void insuranceButton(ActionEvent actionEvent) {

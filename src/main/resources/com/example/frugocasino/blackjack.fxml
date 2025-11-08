@@ -27,9 +27,9 @@
             <Font name="Comic Sans MS Bold" size="31.0" />
          </font>
       </Label>
-      <Button fx:id="backButton" layoutX="14.0" layoutY="1027.0" mnemonicParsing="false" onAction="#switchToCasinoButton" prefHeight="33.0" prefWidth="69.0" text="Back">
+      <Button fx:id="playButton" layoutX="818.0" layoutY="662.0" mnemonicParsing="false" onAction="#playBlackjack" prefHeight="83.0" prefWidth="285.0" text="PLAY">
          <font>
-            <Font name="Comic Sans MS Bold" size="19.0" />
+            <Font name="Comic Sans MS Bold" size="42.0" />
          </font>
       </Button>
       <ImageView fx:id="dealerCard1" fitHeight="263.0" fitWidth="184.0" layoutX="761.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true">
@@ -44,11 +44,6 @@
       </ImageView>
       <ImageView fx:id="dealerCard4" fitHeight="263.0" fitWidth="184.0" layoutX="562.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="dealerCard3" fitHeight="263.0" fitWidth="184.0" layoutX="1174.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="playButton" layoutX="818.0" layoutY="662.0" mnemonicParsing="false" onAction="#playBlackjack" prefHeight="83.0" prefWidth="285.0" text="PLAY">
-         <font>
-            <Font name="Comic Sans MS Bold" size="42.0" />
-         </font>
-      </Button>
       <ImageView fx:id="deckBack" fitHeight="263.0" fitWidth="184.0" layoutX="1722.0" layoutY="805.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../images/deck/deckBack.png" />
@@ -122,5 +117,10 @@
             <Font name="Comic Sans MS Bold" size="30.0" />
          </font>
       </Label>
+      <Button fx:id="backButton" layoutX="14.0" layoutY="1027.0" mnemonicParsing="false" onAction="#switchToCasinoButton" prefHeight="33.0" prefWidth="69.0" text="Back">
+         <font>
+            <Font name="Comic Sans MS Bold" size="19.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

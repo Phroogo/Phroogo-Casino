@@ -1,24 +1,40 @@
 package com.example.frugocasino;
 
 import javafx.event.ActionEvent;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+
+import java.util.Objects;
 
 public class ShopController {
 
     public AnchorPane perkInfoPane;
+    public GridPane perkPane;
     public Label perkName, perkDescription, phrogMoneyLabel, maxLevelLabel;
     public Button buyPerkButton;
     private int price;
+    private String openedPerkId;
 
     public void initialize() {
         phrogMoneyLabel.setText("P$" + GlobalCasinoState.getPhrogMoneyBalance());
     }
 
     public void perkDisplay(ActionEvent actionEvent) {
+
+        if(perkInfoPane.isVisible() && Objects.equals(((Button) actionEvent.getSource()).getId(), openedPerkId)) {
+            perkInfoPane.setVisible(false);
+            perkPane.setPadding(new Insets(140, 20, 20, 20));
+            perkPane.setPrefHeight(1200);
+            return;
+        }
         perkInfoPane.setVisible(true);
+        perkPane.setPadding(new Insets(140, 20, 200, 20));
+        perkPane.setPrefHeight(1380);
         String buttonId = ((Button) actionEvent.getSource()).getId();
+        openedPerkId = buttonId;
         recognizePerk(buttonId, actionEvent);
     }
 

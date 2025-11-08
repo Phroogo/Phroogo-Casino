@@ -1,6 +1,5 @@
 package com.example.frugocasino;
 
-import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -96,10 +95,6 @@ public class RouletteController {
         } else {
             betLabel.setText("You have run out of money");
         }
-    }
-
-    public void switchToCasinoButton(ActionEvent actionEvent) throws IOException {
-        GlobalCasinoState.switchToCasinoButton(actionEvent);
     }
 
     public boolean chooseBet(ActionEvent actionEvent) {
@@ -253,5 +248,10 @@ public class RouletteController {
             betLabel.setText("You bet on " + playerBet.getFirst());
         }
         return betPlaced = true;
+    }
+
+
+    public void switchToCasinoButton(ActionEvent actionEvent) throws IOException {
+        GlobalCasinoState.switchToSceneButton(actionEvent);
     }
 }

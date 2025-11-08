@@ -24,7 +24,7 @@ public class GlobalCasinoState {
     public final static int opPerkPrice = 1000;
     public final static int legendaryPerkPrice = 10000;
     private static int moneyBalance = 10000;
-    private static int phrogMoneyBalance = 1000;
+    private static int phrogMoneyBalance = 100000;
     private static int totalPhrogMoneySpent = 0;
 
     public static int getMoneyBalance() {
@@ -63,8 +63,16 @@ public class GlobalCasinoState {
         totalPhrogMoneySpent += amount;
     }
 
-    public static void switchToCasinoButton(ActionEvent actionEvent) throws IOException {
+    public static void switchToSceneButton(ActionEvent actionEvent) throws IOException {
         root = FXMLLoader.load(CasinoApplication.class.getResource("casino.fxml"));
+        stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public static void switchToSceneButton(ActionEvent actionEvent, String newScene) throws IOException {
+        root = FXMLLoader.load(CasinoApplication.class.getResource(newScene + ".fxml"));
         stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
