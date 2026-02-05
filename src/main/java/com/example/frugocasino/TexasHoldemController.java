@@ -22,27 +22,27 @@ public class TexasHoldemController {
     private final String[] club = {"c2", "c3", "c4", "c5", "c6", "c7", "c8", "c9", "c10", "cJack", "cQueen", "cKing", "cAce"};
     private final String[] spade = {"s2", "s3", "s4", "s5", "s6", "s7", "s8", "s9", "s10", "sJack", "sQueen", "sKing", "sAce"};
     private final int[] deckValues = {2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 8, 9, 9, 9, 9, 10, 10, 10, 10, 11, 11, 11, 11, 12, 12, 12, 12, 13, 13, 13, 13, 14, 14, 14, 14};
-    private final String[] handEvaluation = {"royal flush", "straight flush", "four of a kind", "full house", "flush", "straight", "three of a kind", "two pair", "pair", "high card"};
+    private final String[] handEvaluation = {"high card", "pair", "two pair", "three of a kind", "straight", "flush", "full house", "four of a kind", "straight flush", "royal flush"};
     public ImageView playerCard1, playerCard2, botCard1, botCard2, flopCard1, flopCard2, flopCard3, flopCard4, flopCard5, deckBack;
     public Button playButton, raiseButton, checkButton, foldButton, playAgainButton, backButton;
     public Label moneyLabel, phrogMoneyLabel, evaluationLabel, betLabel;
     public TextField raiseAmount;
-    Random random = new Random();
-    List<String> playerHand = new ArrayList<>();
-    List<Integer> playerHandValue = new ArrayList<>();
-    List<String> botHand = new ArrayList<>();
-    List<Integer> botHandValue = new ArrayList<>();
-    List<String> flop = new ArrayList<>();
-    List<Integer> flopValue = new ArrayList<>();
-    List<String> tempDeck = new ArrayList<>();
-    List<Integer> tempDeckValues = new ArrayList<>();
-    int originalBalance;
-    int bet;
-    double betMultiplier;
-    int playerEvaluation;
-    int botEvaluation;
-    List<Integer> playerWinningHand = new ArrayList<>();
-    List<Integer> botWinningHand = new ArrayList<>();
+    private Random random = new Random();
+    private List<String> playerHand = new ArrayList<>();
+    private List<Integer> playerHandValue = new ArrayList<>();
+    private List<String> botHand = new ArrayList<>();
+    private List<Integer> botHandValue = new ArrayList<>();
+    private List<String> flop = new ArrayList<>();
+    private List<Integer> flopValue = new ArrayList<>();
+    private List<String> tempDeck = new ArrayList<>();
+    private List<Integer> tempDeckValues = new ArrayList<>();
+    private int originalBalance;
+    private int bet;
+    private double betMultiplier;
+    private int playerEvaluation;
+    private int botEvaluation;
+    private List<Integer> playerWinningHand = new ArrayList<>();
+    private List<Integer> botWinningHand = new ArrayList<>();
 
     public void initialize() {
         moneyLabel.setText("$" + GlobalCasinoState.getMoneyBalance());
@@ -145,6 +145,7 @@ public class TexasHoldemController {
         raiseAmount.setVisible(false);
         playAgainButton.setDisable(false);
         playAgainButton.setVisible(true);
+        backButton.setDisable(false);
         botCard1.setImage(new Image(getClass().getResourceAsStream("/images/deck/" +  botHand.getFirst() + ".png")));
         botCard2.setImage(new Image(getClass().getResourceAsStream("/images/deck/" +  botHand.get(1) + ".png")));
         botWin();
@@ -188,7 +189,6 @@ public class TexasHoldemController {
             botCard2.setImage(new Image(getClass().getResourceAsStream("/images/deck/" +  botHand.get(1) + ".png")));
             playerEvaluation = evaluateHand(playerHandValue, playerHand, playerWinningHand);
             botEvaluation = evaluateHand(botHandValue, botHand, botWinningHand);
-            System.out.println(botEvaluation + " " + playerEvaluation);
             evaluateWinner(playerEvaluation, botEvaluation);
         }
     }
@@ -235,38 +235,38 @@ public class TexasHoldemController {
     }
 
     public int evaluateHand(List<Integer> handValue, List<String> hand, List<Integer> winningHand) {
-        String evaluation = handEvaluation[9];
+        String evaluation = handEvaluation[0];
         List<Integer> tempHandValue = new ArrayList<>(handValue);
         List<String> tempHand = new ArrayList<>(hand);
         int evaluationHierarchy = 0;
-        handValue.sort(null);
-        hand.sort(null);
+        tempHandValue.sort(null);
+        tempHand.sort(null);
         if(hasRoyalFlush(tempHandValue, tempHand, winningHand)) {
-            evaluation = handEvaluation[0];
+            evaluation = handEvaluation[9];
             evaluationHierarchy = 9;
         } else if(hasStraightFlush(tempHandValue, tempHand, winningHand)) {
-            evaluation = handEvaluation[1];
+            evaluation = handEvaluation[8];
             evaluationHierarchy = 8;
         } else if(hasFourOfAKind(tempHandValue, winningHand)) {
-            evaluation = handEvaluation[2];
+            evaluation = handEvaluation[7];
             evaluationHierarchy = 7;
         } else if(hasFullHouse(tempHandValue, winningHand)) {
-            evaluation = handEvaluation[3];
+            evaluation = handEvaluation[6];
             evaluationHierarchy = 6;
         } else if(hasFlush(tempHand, winningHand)) {
-            evaluation = handEvaluation[4];
+            evaluation = handEvaluation[5];
             evaluationHierarchy = 5;
         } else if(hasStraight(tempHandValue, winningHand)) {
-            evaluation = handEvaluation[5];
+            evaluation = handEvaluation[4];
             evaluationHierarchy = 4;
         } else if(hasThreeOfAKind(tempHandValue, winningHand)) {
-            evaluation = handEvaluation[6];
+            evaluation = handEvaluation[3];
             evaluationHierarchy = 3;
         } else if(hasTwoPair(tempHandValue, winningHand)) {
-            evaluation = handEvaluation[7];
+            evaluation = handEvaluation[2];
             evaluationHierarchy = 2;
         } else if(hasPair(tempHandValue, winningHand)) {
-            evaluation = handEvaluation[8];
+            evaluation = handEvaluation[1];
             evaluationHierarchy = 1;
         } else {
             winningHand.add(handValue.getLast());
@@ -276,7 +276,7 @@ public class TexasHoldemController {
             evaluationLabel.setText("You have a " + evaluation + "!");
             if(GlobalCasinoPerks.getTexasPokerHandEvaluationIncreaseLevel() == 1) {
                 evaluationHierarchy++;
-                evaluationLabel.setText("You have a " + evaluation + " (+1)!");
+                evaluationLabel.setText("You have a " + evaluation + " (" + handEvaluation[evaluationHierarchy] + ")!");
             }
         }
 

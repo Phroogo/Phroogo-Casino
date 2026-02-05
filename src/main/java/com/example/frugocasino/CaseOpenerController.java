@@ -1,13 +1,14 @@
 package com.example.frugocasino;
 
-import javafx.animation.PauseTransition;
-import javafx.animation.TranslateTransition;
+import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.util.Duration;
+import javafx.scene.shape.Line;
+import javafx.scene.text.Font;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,144 +17,242 @@ import java.util.Random;
 
 public class CaseOpenerController {
 
-    public Button backButton, openCaseButton;
-    public Label moneyLabel, phrogMoneyLabel;
+    public Button backButton, openCaseButton1, openCaseButton10, openCaseButtonCustom;
+    public TextField openCaseButtonTF;
+    public Label moneyLabel, phrogMoneyLabel, dropLabel, floatLabel;
     public ImageView caseImage, slot1, slot2, slot3, slot4, slot5;
+    public Line theLine;
     private List<String> spinList = new ArrayList<>();
-    List<Runnable> spinAnimation = new ArrayList<>();
-    List<Double> spinAnimationDelay = new ArrayList<>();
+    private int bet;
     private Random random = new Random();
+    final private double SPACING = 460;
+    final private double WRAP = 1860;
+    final private double CUTOFF = 1460;
+    private int counter = 0;
+    private double lastSlot1X;
+    private double lastSlot2X;
+    private double lastSlot3X;
+    private double lastSlot4X;
+    private double lastSlot5X;
+    AnimationTimer timer = new AnimationTimer() {
+        private long lastTime = 0;
+        private double elapsed = 0;
 
-    public void openCase(ActionEvent actionEvent) {
-        caseImage.setVisible(false);
+        @Override
+        public void handle(long now) {
+            if (lastTime == 0) {
+                lastTime = now;
+                return;
+            }
 
-        for(int i = 0; i < random.nextInt(99, 119); i++) {
-            int result = random.nextInt(1, 10001);
-            if(result < 7993) {
-                spinList.add( "blue");
-            } else if(result < 9591) {
-                spinList.add( "purple");
-            } else if(result < 9911) {
-                spinList.add( "pink");
-            } else if(result < 9975) {
-                spinList.add( "red");
-            } else {
-                spinList.add( "gold");
+            double delta = (now - lastTime) / 1_000_000_000.0;
+            lastTime = now;
+
+            elapsed += delta;
+
+            updateSlot(elapsed);
+
+            if (elapsed >= 5.0) {
+                elapsed = 0;
+                lastTime = 0;
+                counter = 0;
+                backButton.setDisable(false);
+                openCaseButton1.setDisable(false);
+                openCaseButton10.setDisable(false);
+                openCaseButtonCustom.setDisable(false);
+                openCaseButtonTF.setDisable(false);
+                proceedWin();
+                timer.stop();
             }
         }
-        slot1.setVisible(true);
-        slot2.setVisible(true);
-        slot3.setVisible(true);
-        slot4.setVisible(true);
-        slot5.setVisible(true);
-        TranslateTransition transition1 = new TranslateTransition();
-        TranslateTransition transition2 = new TranslateTransition();
-        TranslateTransition transition3 = new TranslateTransition();
-        TranslateTransition transition4 = new TranslateTransition();
-        TranslateTransition transition5 = new TranslateTransition();
-        transition1.setNode(slot1);
-        transition1.setToX(-400);
-        transition1.setCycleCount(spinList.size() / 5);
-        transition1.setDuration(Duration.millis(1000));
-        transition2.setNode(slot2);
-        transition2.setToX(-400);
-        transition2.setCycleCount(spinList.size() / 5);
-        transition2.setDuration(Duration.millis(1000));
-        transition3.setNode(slot3);
-        transition3.setToX(-400);
-        transition3.setCycleCount(spinList.size() / 5);
-        transition3.setDuration(Duration.millis(1000));
-        transition4.setNode(slot4);
-        transition4.setToX(-400);
-        transition4.setCycleCount(spinList.size() / 5);
-        transition4.setDuration(Duration.millis(1000));
-        transition5.setNode(slot5);
-        transition5.setToX(-2720);
-        transition5.setCycleCount(spinList.size() / 5);
-        transition5.setDuration(Duration.millis(1000));
-        transition1.play();
-        spinAnimation.add(transition2::play);
-        spinAnimation.add(transition3::play);
-        spinAnimation.add(transition4::play);
-        spinAnimation.add(transition5::play);
-        spinAnimationDelay.add(250.0);
-        spinAnimationDelay.add(250.0);
-        spinAnimationDelay.add(250.0);
-        spinAnimationDelay.add(250.0);
-        for(int i = 0; i < spinList.size(); i++) {
-            int temp = i;
-            double delay = 80 + 1.25 * i + 0.007 * (i * i);
-            spinAnimation.add(() -> {
-               colorToImage(spinList.get(temp), 1);
-                colorToImage(spinList.get(temp + 1), 2);
-                colorToImage(spinList.get(temp + 2), 3);
-                colorToImage(spinList.get(temp + 3), 4);
-                colorToImage(spinList.get(temp + 4), 5);
-            });
-            spinAnimationDelay.add(1000.0);
+    };
 
-//            spinAnimation.add(() -> {
-//                ImageView slot = null;
-//                switch(temp % 5) {
-//                    case 0 -> slot = slot1;
-//                    case 1 -> slot = slot2;
-//                    case 2 -> slot = slot3;
-//                    case 3 -> slot = slot4;
-//                    case 4 -> slot = slot5;
-//                }
-//
-//                if(!slot.isVisible()) slot.setVisible(true);
-//
-//                //slot.setX(-400);
-//
-//                colorToImage(spinList.get(temp), temp % 5 + 1);
-//
-//                TranslateTransition translate = new TranslateTransition(Duration.millis(delay * 5), slot);
-//                translate.setByX(2720);
-//                translate.play();
-//            });
-//
-//            spinAnimationDelay.add(delay);
-        }
-        playDelayedSteps(spinAnimation, spinAnimationDelay);
+    public void initialize() {
+        moneyLabel.setText("$" + GlobalCasinoState.getMoneyBalance());
+        phrogMoneyLabel.setText("P$" + GlobalCasinoState.getPhrogMoneyBalance());
     }
 
-    private String numberToColor(int number) {
-        String color;
-        switch(number) {
-            case 1 -> color = "purple";
-            case 2 -> color = "pink";
-            case 3 -> color = "red";
-            case 4 -> color = "gold";
-            default -> color = "blue";
+    public void amount(ActionEvent actionEvent) {
+        if(openCaseButtonTF.isVisible()) {
+            try {
+                bet = Integer.parseInt(openCaseButtonTF.getText()) * 50;
+                if(bet > 0 && !(bet > GlobalCasinoState.getMoneyBalance())) {
+                    openCase(actionEvent);
+                } else {
+                    openCaseButtonTF.setPromptText("You can't bet that!");
+                    openCaseButtonTF.clear();
+                }
+            } catch (NumberFormatException e) {
+                openCaseButtonTF.setPromptText("Invalid input");
+                openCaseButtonTF.clear();
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        } else {
+            openCaseButtonTF.setVisible(true);
         }
-        return color;
+    }
+
+    public void openCase(ActionEvent actionEvent) {
+        if (actionEvent.getSource().equals(openCaseButton1)) {
+            bet = 50;
+        } else if (actionEvent.getSource().equals(openCaseButton10)) {
+            bet = 500;
+        }
+        if(bet > 0 && !(bet > GlobalCasinoState.getMoneyBalance())) {
+            theLine.setVisible(true);
+            caseImage.setVisible(false);
+            openCaseButton1.setDisable(true);
+            openCaseButton10.setDisable(true);
+            openCaseButtonCustom.setDisable(true);
+            openCaseButtonTF.setDisable(true);
+            backButton.setDisable(true);
+            floatLabel.setVisible(false);
+            dropLabel.setVisible(false);
+            spinList.clear();
+            GlobalCasinoState.changeMoneyBalance(-bet);
+            moneyLabel.setText("$" + GlobalCasinoState.getMoneyBalance());
+            for (int i = 0; i < 47; i++) {
+                int result = random.nextInt(1, 10001);
+                if (result < 7993) {
+                    spinList.add("blue");
+                } else if (result < 9591) {
+                    spinList.add("purple");
+                } else if (result < 9911) {
+                    spinList.add("pink");
+                } else if (result < 9975) {
+                    spinList.add("red");
+                } else {
+                    spinList.add("gold");
+                }
+            }
+            slot1.setVisible(true);
+            slot2.setVisible(true);
+            slot3.setVisible(true);
+            slot4.setVisible(true);
+            slot5.setVisible(true);
+            timer.start();
+        } else {
+            dropLabel.setText("No mone");
+            dropLabel.setFont(new Font(dropLabel.getFont().getName(), 50));
+        }
+    }
+
+    private void updateSlot(double iteration) {
+        lastSlot1X = slot1.getLayoutX();
+        lastSlot2X = slot2.getLayoutX();
+        lastSlot3X = slot3.getLayoutX();
+        lastSlot4X = slot4.getLayoutX();
+        lastSlot5X = slot5.getLayoutX();
+
+        double speed = Math.max(1, 51 - iteration * 10) - 20;
+        slot1.setLayoutX(slot1.getLayoutX() - speed);
+        slot2.setLayoutX(slot2.getLayoutX() - speed);
+        slot3.setLayoutX(slot3.getLayoutX() - speed);
+        slot4.setLayoutX(slot4.getLayoutX() - speed);
+        slot5.setLayoutX(slot5.getLayoutX() - speed);
+
+        if(slot1.getLayoutX() < CUTOFF) slot2.setLayoutX(slot1.getLayoutX() + SPACING);
+        else slot2.setLayoutX(slot1.getLayoutX() - WRAP);
+        if(slot2.getLayoutX() < CUTOFF) slot3.setLayoutX(slot2.getLayoutX() + SPACING);
+        else slot3.setLayoutX(slot2.getLayoutX() - WRAP);
+        if(slot3.getLayoutX() < CUTOFF) slot4.setLayoutX(slot3.getLayoutX() + SPACING);
+        else slot4.setLayoutX(slot3.getLayoutX() - WRAP);
+        if(slot4.getLayoutX() < CUTOFF) slot5.setLayoutX(slot4.getLayoutX() + SPACING);
+        else slot5.setLayoutX(slot4.getLayoutX() - WRAP);
+        if(slot5.getLayoutX() < CUTOFF) slot1.setLayoutX(slot5.getLayoutX() + SPACING);
+        else slot1.setLayoutX(slot5.getLayoutX() - WRAP);
+
+        if (slot1.getLayoutX() - lastSlot1X > 1000) {
+            colorToImage(spinList.get(counter), 1);
+            counter++;
+        } else if (slot2.getLayoutX() - lastSlot2X > 1000) {
+            colorToImage(spinList.get(counter), 2);
+            counter++;
+        } else if (slot3.getLayoutX() - lastSlot3X > 1000) {
+            colorToImage(spinList.get(counter), 3);
+            counter++;
+        } else if (slot4.getLayoutX() - lastSlot4X > 1000) {
+            colorToImage(spinList.get(counter), 4);
+            counter++;
+        } else if (slot5.getLayoutX() - lastSlot5X > 1000) {
+            colorToImage(spinList.get(counter), 5);
+            counter++;
+        }
     }
 
     private void colorToImage(String color, int slot) {
         switch(slot) {
-            case 1 -> slot1.setImage(new Image(getClass().getResourceAsStream("/images/caseOpener/" +  color + ".png")));
-            case 2 -> slot2.setImage(new Image(getClass().getResourceAsStream("/images/caseOpener/" +  color + ".png")));
-            case 3 -> slot3.setImage(new Image(getClass().getResourceAsStream("/images/caseOpener/" +  color + ".png")));
-            case 4 -> slot4.setImage(new Image(getClass().getResourceAsStream("/images/caseOpener/" +  color + ".png")));
-            case 5 -> slot5.setImage(new Image(getClass().getResourceAsStream("/images/caseOpener/" +  color + ".png")));
+            case 1 -> {
+                slot1.setImage(new Image(getClass().getResourceAsStream("/images/caseOpener/" +  color + ".png")));
+                slot1.setId(color);
+            }
+            case 2 -> {
+                slot2.setImage(new Image(getClass().getResourceAsStream("/images/caseOpener/" +  color + ".png")));
+                slot2.setId(color);
+            }
+            case 3 -> {
+                slot3.setImage(new Image(getClass().getResourceAsStream("/images/caseOpener/" +  color + ".png")));
+                slot3.setId(color);
+            }
+            case 4 -> {
+                slot4.setImage(new Image(getClass().getResourceAsStream("/images/caseOpener/" +  color + ".png")));
+                slot4.setId(color);
+            }
+            case 5 -> {
+                slot5.setImage(new Image(getClass().getResourceAsStream("/images/caseOpener/" +  color + ".png")));
+                slot5.setId(color);
+            }
         }
     }
 
-
-    private void playDelayedSteps(List<Runnable> steps, List<Double> delaysInMilliseconds) {
-        if (steps.isEmpty() || delaysInMilliseconds.isEmpty()) return;
-
-        Runnable currentStep = steps.remove(0);
-        double currentDelay = delaysInMilliseconds.remove(0);
-
-        currentStep.run();
-
-        if (!steps.isEmpty()) {
-            PauseTransition pause = new PauseTransition(Duration.millis(currentDelay));
-            pause.setOnFinished(e -> playDelayedSteps(steps, delaysInMilliseconds));
-            pause.play();
+    private void proceedWin() {
+        float flot = random.nextFloat(0, 1);
+        String flotS = "Battle-Scarred";
+        int stattrak = random.nextInt(0, 10);
+        int winAmount = 0;
+        String stattrakS = "";
+        double mult = 0;
+        String color = "blue";
+        if (flot < .07) {
+            mult = 1.2;
+            flotS = "Factory New";
+        } else if (flot < .15) {
+            mult = 0.9;
+            flotS = "Minimal Wear";
+        } else if (flot < .37) {
+            mult = 0.5;
+            flotS = "Field-Tested";
+        } else if (flot < .44) {
+            mult = 0.7;
+            flotS = "Well-Worn";
+        } else if (flot < 1) {
+            mult = 0.4;
+            flotS = "Battle-Scarred";
         }
+        if (stattrak == 0) {
+            mult *= 1.5;
+            stattrakS = "StatTrak™ ";
+        }
+        if (slot1.getLayoutX() >= 530 && slot1.getLayoutX() <= 990) color = slot1.getId();
+        else if (slot2.getLayoutX() >= 530 && slot2.getLayoutX() <= 990) color = slot2.getId();
+        else if (slot3.getLayoutX() >= 530 && slot3.getLayoutX() <= 990) color = slot3.getId();
+        else if (slot4.getLayoutX() >= 530 && slot4.getLayoutX() <= 990) color = slot4.getId();
+        else if (slot5.getLayoutX() >= 530 && slot5.getLayoutX() <= 990) color = slot5.getId();
+        switch (color) {
+            case "blue" -> winAmount = (int)(60 * mult * ((double) bet / 50));
+            case "purple" -> winAmount = (int)(200 * mult * ((double) bet / 50));
+            case "pink" -> winAmount = (int)(1000 * mult * ((double) bet / 50));
+            case "red" -> winAmount = (int)(5000 * mult * ((double) bet / 50));
+            case "gold" -> winAmount = (int)(20000 * mult * ((double) bet / 50));
+        }
+        GlobalCasinoState.changeMoneyBalance(winAmount);
+        dropLabel.setVisible(true);
+        floatLabel.setVisible(true);
+        if (bet/50 != 1) dropLabel.setText(stattrakS + color + " x" + bet/50 + " ($" + winAmount + ")");
+        else dropLabel.setText(stattrakS + color + " (+$" + winAmount + ")");
+        floatLabel.setText("Float: " + flot + " (" + flotS + ")");
+        moneyLabel.setText("$" + GlobalCasinoState.getMoneyBalance());
     }
 
     public void switchToCasinoButton(ActionEvent actionEvent) throws IOException {
