@@ -18,171 +18,171 @@ public class GlobalCasinoPerks {
     private static int blackJackBustLimitLevel = 0;
     private static int texasPokerHandEvaluationIncreaseLevel = 0;
 
-    public static int getSlotMachineMoneyMultiplierLevel() {
+    public int getSlotMachineMoneyMultiplierLevel() {
         return slotMachineMoneyMultiplierLevel;
     }
 
-    public static void setSlotMachineMoneyMultiplierLevel(int slotMachineMoneyMultiplierLevel) {
+    public void setSlotMachineMoneyMultiplierLevel(int slotMachineMoneyMultiplierLevel) {
         GlobalCasinoPerks.slotMachineMoneyMultiplierLevel = slotMachineMoneyMultiplierLevel;
     }
 
-    public static int getRouletteTableMoneyMultiplierLevel() {
+    public int getRouletteTableMoneyMultiplierLevel() {
         return rouletteTableMoneyMultiplierLevel;
     }
 
-    public static void setRouletteTableMoneyMultiplierLevel(int rouletteTableMoneyMultiplierLevel) {
+    public void setRouletteTableMoneyMultiplierLevel(int rouletteTableMoneyMultiplierLevel) {
         GlobalCasinoPerks.rouletteTableMoneyMultiplierLevel = rouletteTableMoneyMultiplierLevel;
     }
 
-    public static int getBlackjackMoneyMultiplierLevel() {
+    public int getBlackjackMoneyMultiplierLevel() {
         return blackjackMoneyMultiplierLevel;
     }
 
-    public static void setBlackjackMoneyMultiplierLevel(int blackjackMoneyMultiplierLevel) {
+    public void setBlackjackMoneyMultiplierLevel(int blackjackMoneyMultiplierLevel) {
         GlobalCasinoPerks.blackjackMoneyMultiplierLevel = blackjackMoneyMultiplierLevel;
     }
 
-    public static int getTexasPokerMoneyMultiplierLevel() {
+    public int getTexasPokerMoneyMultiplierLevel() {
         return texasPokerMoneyMultiplierLevel;
     }
 
-    public static void setTexasPokerMoneyMultiplierLevel(int texasPokerMoneyMultiplierLevel) {
+    public void setTexasPokerMoneyMultiplierLevel(int texasPokerMoneyMultiplierLevel) {
         GlobalCasinoPerks.texasPokerMoneyMultiplierLevel = texasPokerMoneyMultiplierLevel;
     }
 
-    public static int getGlobalMoneyMultiplierLevel() {
+    public int getGlobalMoneyMultiplierLevel() {
         return globalMoneyMultiplierLevel;
     }
 
-    public static void setGlobalMoneyMultiplierLevel(int globalMoneyMultiplierLevel) {
+    public void setGlobalMoneyMultiplierLevel(int globalMoneyMultiplierLevel) {
         GlobalCasinoPerks.globalMoneyMultiplierLevel = globalMoneyMultiplierLevel;
     }
 
-    public static double getSlotMachineMoneyMultiplier() {
+    public double getSlotMachineMoneyMultiplier() {
         return ((double)slotMachineMoneyMultiplierLevel / 10) + 1;
     }
 
-    public static double getRouletteTableMoneyMultiplier() {
+    public double getRouletteTableMoneyMultiplier() {
         return ((double)rouletteTableMoneyMultiplierLevel / 10) + 1;
     }
 
-    public static double getBlackjackMoneyMultiplier() {
+    public double getBlackjackMoneyMultiplier() {
         return ((double)blackjackMoneyMultiplierLevel / 10) + 1;
     }
 
-    public static double getTexasPokerMoneyMultiplier() {
+    public double getTexasPokerMoneyMultiplier() {
         return ((double)texasPokerMoneyMultiplierLevel / 10) + 1;
     }
 
-    public static double getGlobalMoneyMultiplier() {
+    public double getGlobalMoneyMultiplier() {
         return ((double)globalMoneyMultiplierLevel / 20) + 1;
     }
 
-    public static int getSlotMachinePhrogMoneyMultiplierLevel() {
+    public int getSlotMachinePhrogMoneyMultiplierLevel() {
         return slotMachinePhrogMoneyMultiplierLevel;
     }
 
-    public static void setSlotMachinePhrogMoneyMultiplierLevel(int slotMachinePhrogMoneyMultiplierLevel) {
+    public void setSlotMachinePhrogMoneyMultiplierLevel(int slotMachinePhrogMoneyMultiplierLevel) {
         GlobalCasinoPerks.slotMachinePhrogMoneyMultiplierLevel = slotMachinePhrogMoneyMultiplierLevel;
     }
 
-    public static int getRouletteTablePhrogMoneyMultiplierLevel() {
+    public int getRouletteTablePhrogMoneyMultiplierLevel() {
         return rouletteTablePhrogMoneyMultiplierLevel;
     }
 
-    public static void setRouletteTablePhrogMoneyMultiplierLevel(int rouletteTablePhrogMoneyMultiplierLevel) {
+    public void setRouletteTablePhrogMoneyMultiplierLevel(int rouletteTablePhrogMoneyMultiplierLevel) {
         GlobalCasinoPerks.rouletteTablePhrogMoneyMultiplierLevel = rouletteTablePhrogMoneyMultiplierLevel;
     }
 
-    public static int getBlackjackPhrogMoneyMultiplierLevel() {
+    public int getBlackjackPhrogMoneyMultiplierLevel() {
         return blackjackPhrogMoneyMultiplierLevel;
     }
 
-    public static void setBlackjackPhrogMoneyMultiplierLevel(int blackjackPhrogMoneyMultiplierLevel) {
+    public void setBlackjackPhrogMoneyMultiplierLevel(int blackjackPhrogMoneyMultiplierLevel) {
         GlobalCasinoPerks.blackjackPhrogMoneyMultiplierLevel = blackjackPhrogMoneyMultiplierLevel;
     }
 
-    public static int getTexasPokerPhrogMoneyMultiplierLevel() {
+    public int getTexasPokerPhrogMoneyMultiplierLevel() {
         return texasPokerPhrogMoneyMultiplierLevel;
     }
 
-    public static void setTexasPokerPhrogMoneyMultiplierLevel(int texasPokerPhrogMoneyMultiplierLevel) {
+    public void setTexasPokerPhrogMoneyMultiplierLevel(int texasPokerPhrogMoneyMultiplierLevel) {
         GlobalCasinoPerks.texasPokerPhrogMoneyMultiplierLevel = texasPokerPhrogMoneyMultiplierLevel;
     }
 
-    public static int getGlobalPhrogMoneyMultiplierLevel() {
+    public int getGlobalPhrogMoneyMultiplierLevel() {
         return globalPhrogMoneyMultiplierLevel;
     }
 
-    public static void setGlobalPhrogMoneyMultiplierLevel(int globalPhrogMoneyMultiplierLevel) {
+    public void setGlobalPhrogMoneyMultiplierLevel(int globalPhrogMoneyMultiplierLevel) {
         GlobalCasinoPerks.globalPhrogMoneyMultiplierLevel = globalPhrogMoneyMultiplierLevel;
     }
 
-    public static double getSlotMachinePhrogMoneyMultiplier() {
+    public double getSlotMachinePhrogMoneyMultiplier() {
         return ((double)slotMachinePhrogMoneyMultiplierLevel / 20);
     }
 
-    public static double getRouletteTablePhrogMoneyMultiplier() {
+    public double getRouletteTablePhrogMoneyMultiplier() {
         return ((double)rouletteTablePhrogMoneyMultiplierLevel / 20);
     }
 
-    public static double getBlackjackPhrogMoneyMultiplier() {
+    public double getBlackjackPhrogMoneyMultiplier() {
         return ((double)blackjackPhrogMoneyMultiplierLevel / 20);
     }
 
-    public static double getTexasPokerPhrogMoneyMultiplier() {
+    public double getTexasPokerPhrogMoneyMultiplier() {
         return ((double)texasPokerPhrogMoneyMultiplierLevel / 20);
     }
 
-    public static double getGlobalPhrogMoneyMultiplier() {
+    public double getGlobalPhrogMoneyMultiplier() {
         return ((double)globalPhrogMoneyMultiplierLevel / 25);
     }
 
-    public static int getGreenPhrogSlotChanceLevel() {
+    public int getGreenPhrogSlotChanceLevel() {
         return greenPhrogSlotChanceLevel;
     }
 
-    public static void setGreenPhrogSlotChanceLevel(int greenPhrogSlotChanceLevel) {
+    public void setGreenPhrogSlotChanceLevel(int greenPhrogSlotChanceLevel) {
         GlobalCasinoPerks.greenPhrogSlotChanceLevel = greenPhrogSlotChanceLevel;
     }
 
-    public static int getPurplePhrogSlotChanceLevel() {
+    public int getPurplePhrogSlotChanceLevel() {
         return purplePhrogSlotChanceLevel;
     }
 
-    public static void setPurplePhrogSlotChanceLevel(int purplePhrogSlotChanceLevel) {
+    public void setPurplePhrogSlotChanceLevel(int purplePhrogSlotChanceLevel) {
         GlobalCasinoPerks.purplePhrogSlotChanceLevel = purplePhrogSlotChanceLevel;
     }
 
-    public static int getPhroogoSlotChanceLevel() {
+    public int getPhroogoSlotChanceLevel() {
         return phroogoSlotChanceLevel;
     }
 
-    public static void setPhroogoSlotChanceLevel(int phroogoSlotChanceLevel) {
+    public void setPhroogoSlotChanceLevel(int phroogoSlotChanceLevel) {
         GlobalCasinoPerks.phroogoSlotChanceLevel = phroogoSlotChanceLevel;
     }
 
-    public static int getRouletteTableRerollLevel() {
+    public int getRouletteTableRerollLevel() {
         return rouletteTableRerollLevel;
     }
 
-    public static void setRouletteTableRerollLevel(int rouletteTableRerollLevel) {
+    public void setRouletteTableRerollLevel(int rouletteTableRerollLevel) {
         GlobalCasinoPerks.rouletteTableRerollLevel = rouletteTableRerollLevel;
     }
 
-    public static int getBlackJackBustLimitLevel() {
+    public int getBlackJackBustLimitLevel() {
         return blackJackBustLimitLevel;
     }
 
-    public static void setBlackJackBustLimitLevel(int blackJackBustLimitLevel) {
+    public void setBlackJackBustLimitLevel(int blackJackBustLimitLevel) {
         GlobalCasinoPerks.blackJackBustLimitLevel = blackJackBustLimitLevel;
     }
 
-    public static int getTexasPokerHandEvaluationIncreaseLevel() {
+    public int getTexasPokerHandEvaluationIncreaseLevel() {
         return texasPokerHandEvaluationIncreaseLevel;
     }
 
-    public static void setTexasPokerHandEvaluationIncreaseLevel(int texasPokerHandEvaluationIncreaseLevel) {
+    public void setTexasPokerHandEvaluationIncreaseLevel(int texasPokerHandEvaluationIncreaseLevel) {
         GlobalCasinoPerks.texasPokerHandEvaluationIncreaseLevel = texasPokerHandEvaluationIncreaseLevel;
     }
 }

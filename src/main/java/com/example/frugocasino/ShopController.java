@@ -17,9 +17,11 @@ public class ShopController {
     public Button buyPerkButton;
     private int price;
     private String openedPerkId;
+    private final GlobalCasinoPerks perks = new GlobalCasinoPerks();
+    private final GlobalCasinoState state = new GlobalCasinoState();
 
     public void initialize() {
-        phrogMoneyLabel.setText("P$" + GlobalCasinoState.getPhrogMoneyBalance());
+        phrogMoneyLabel.setText("P$" + state.getPhrogMoneyBalance());
     }
 
     public void perkDisplay(ActionEvent actionEvent) {
@@ -47,10 +49,10 @@ public class ShopController {
     }
 
     public boolean buyProcess(int price) {
-        if(GlobalCasinoState.getPhrogMoneyBalance() >= price) {
-            GlobalCasinoState.changePhrogMoneyBalance(-price);
-            GlobalCasinoState.changeTotalPhrogMoneySpent(price);
-            phrogMoneyLabel.setText("$" + GlobalCasinoState.getPhrogMoneyBalance());
+        if(state.getPhrogMoneyBalance() >= price) {
+            state.changePhrogMoneyBalance(-price);
+            state.changeTotalPhrogMoneySpent(price);
+            phrogMoneyLabel.setText("$" + state.getPhrogMoneyBalance());
             return true;
         } else {
             buyPerkButton.setText("Broke");
@@ -59,26 +61,26 @@ public class ShopController {
     }
 
     public void refundPerks(ActionEvent actionEvent) {
-        GlobalCasinoState.changePhrogMoneyBalance(GlobalCasinoState.getTotalPhrogMoneySpent());
-        phrogMoneyLabel.setText("P$" + GlobalCasinoState.getPhrogMoneyBalance());
+        state.changePhrogMoneyBalance(state.getTotalPhrogMoneySpent());
+        phrogMoneyLabel.setText("P$" + state.getPhrogMoneyBalance());
         perkInfoPane.setVisible(false);
-        GlobalCasinoState.setTotalPhrogMoneySpent(0);
-        GlobalCasinoPerks.setSlotMachineMoneyMultiplierLevel(0);
-        GlobalCasinoPerks.setRouletteTableMoneyMultiplierLevel(0);
-        GlobalCasinoPerks.setBlackjackMoneyMultiplierLevel(0);
-        GlobalCasinoPerks.setTexasPokerMoneyMultiplierLevel(0);
-        GlobalCasinoPerks.setGlobalMoneyMultiplierLevel(0);
-        GlobalCasinoPerks.setSlotMachinePhrogMoneyMultiplierLevel(0);
-        GlobalCasinoPerks.setRouletteTablePhrogMoneyMultiplierLevel(0);
-        GlobalCasinoPerks.setBlackjackPhrogMoneyMultiplierLevel(0);
-        GlobalCasinoPerks.setTexasPokerPhrogMoneyMultiplierLevel(0);
-        GlobalCasinoPerks.setGlobalPhrogMoneyMultiplierLevel(0);
-        GlobalCasinoPerks.setGreenPhrogSlotChanceLevel(0);
-        GlobalCasinoPerks.setPurplePhrogSlotChanceLevel(0);
-        GlobalCasinoPerks.setPhroogoSlotChanceLevel(0);
-        GlobalCasinoPerks.setRouletteTableRerollLevel(0);
-        GlobalCasinoPerks.setBlackJackBustLimitLevel(0);
-        GlobalCasinoPerks.setTexasPokerHandEvaluationIncreaseLevel(0);
+        state.setTotalPhrogMoneySpent(0);
+        perks.setSlotMachineMoneyMultiplierLevel(0);
+        perks.setRouletteTableMoneyMultiplierLevel(0);
+        perks.setBlackjackMoneyMultiplierLevel(0);
+        perks.setTexasPokerMoneyMultiplierLevel(0);
+        perks.setGlobalMoneyMultiplierLevel(0);
+        perks.setSlotMachinePhrogMoneyMultiplierLevel(0);
+        perks.setRouletteTablePhrogMoneyMultiplierLevel(0);
+        perks.setBlackjackPhrogMoneyMultiplierLevel(0);
+        perks.setTexasPokerPhrogMoneyMultiplierLevel(0);
+        perks.setGlobalPhrogMoneyMultiplierLevel(0);
+        perks.setGreenPhrogSlotChanceLevel(0);
+        perks.setPurplePhrogSlotChanceLevel(0);
+        perks.setPhroogoSlotChanceLevel(0);
+        perks.setRouletteTableRerollLevel(0);
+        perks.setBlackJackBustLimitLevel(0);
+        perks.setTexasPokerHandEvaluationIncreaseLevel(0);
     }
 
     public void maxLevelReached() {
@@ -89,286 +91,286 @@ public class ShopController {
 
     public void recognizePerk(String buttonId, ActionEvent actionEvent) {
         switch(buttonId) {
-            case "a0", "a1", "a2", "a3", "a5", "a6", "a7", "a8", "a10" -> price = GlobalCasinoState.basicPerkPrice;
-            case "a11" -> price = GlobalCasinoState.intermediatePerkPrice;
-            case "a4", "a9", "a12" -> price = GlobalCasinoState.advancedPerkPrice;
-            case "a14" -> price = GlobalCasinoState.expertPerkPrice;
-            case "a13" -> price = GlobalCasinoState.opPerkPrice;
-            case "a15" -> price = GlobalCasinoState.legendaryPerkPrice;
+            case "a0", "a1", "a2", "a3", "a5", "a6", "a7", "a8", "a10" -> price = state.basicPerkPrice;
+            case "a11" -> price = state.intermediatePerkPrice;
+            case "a4", "a9", "a12" -> price = state.advancedPerkPrice;
+            case "a14" -> price = state.expertPerkPrice;
+            case "a13" -> price = state.opPerkPrice;
+            case "a15" -> price = state.legendaryPerkPrice;
         }
         buyPerkButton.setDisable(false);
         buyPerkButton.setVisible(true);
         maxLevelLabel.setVisible(false);
         switch(buttonId) {
             case "a0" -> {
-                if(GlobalCasinoPerks.getSlotMachineMoneyMultiplierLevel() < GlobalCasinoState.maxBasicPerkLevel) {
+                if(perks.getSlotMachineMoneyMultiplierLevel() < state.maxBasicPerkLevel) {
                     if(actionEvent.getSource() == buyPerkButton) {
-                        GlobalCasinoPerks.setSlotMachineMoneyMultiplierLevel(GlobalCasinoPerks.getSlotMachineMoneyMultiplierLevel() + 1);
-                        if(GlobalCasinoPerks.getSlotMachineMoneyMultiplierLevel() > GlobalCasinoState.maxBasicPerkLevel - 1) {
+                        perks.setSlotMachineMoneyMultiplierLevel(perks.getSlotMachineMoneyMultiplierLevel() + 1);
+                        if(perks.getSlotMachineMoneyMultiplierLevel() > state.maxBasicPerkLevel - 1) {
                             maxLevelReached();
                         }
                     }
                 } else {
                     maxLevelReached();
                 }
-                price *= (GlobalCasinoPerks.getSlotMachineMoneyMultiplierLevel() + 1);
+                price *= (perks.getSlotMachineMoneyMultiplierLevel() + 1);
                 buyPerkButton.setText("P$" + price);
                 perkName.setText("Slut Machine");
-                perkDescription.setText("Increases the payout from slot machine wins by 10% per level (currently x" + (1 + (double) Math.round(GlobalCasinoPerks.getSlotMachineMoneyMultiplier() * 10) / 10) + ").");
+                perkDescription.setText("Increases the payout from slot machine wins by 10% per level (currently x" + (1 + (double) Math.round(perks.getSlotMachineMoneyMultiplier() * 10) / 10) + ").");
                 buyPerkButton.setId(buttonId);
             }
             case "a1" -> {
-                if(GlobalCasinoPerks.getRouletteTableMoneyMultiplierLevel() < GlobalCasinoState.maxBasicPerkLevel) {
+                if(perks.getRouletteTableMoneyMultiplierLevel() < state.maxBasicPerkLevel) {
                     if(actionEvent.getSource() == buyPerkButton) {
-                        GlobalCasinoPerks.setRouletteTableMoneyMultiplierLevel(GlobalCasinoPerks.getRouletteTableMoneyMultiplierLevel() + 1);
-                        if(GlobalCasinoPerks.getRouletteTableMoneyMultiplierLevel() > GlobalCasinoState.maxBasicPerkLevel - 1) {
+                        perks.setRouletteTableMoneyMultiplierLevel(perks.getRouletteTableMoneyMultiplierLevel() + 1);
+                        if(perks.getRouletteTableMoneyMultiplierLevel() > state.maxBasicPerkLevel - 1) {
                             maxLevelReached();
                         }
                     }
                 } else {
                     maxLevelReached();
                 }
-                price *= (GlobalCasinoPerks.getRouletteTableMoneyMultiplierLevel() + 1);
+                price *= (perks.getRouletteTableMoneyMultiplierLevel() + 1);
                 buyPerkButton.setText("P$" + price);
                 perkName.setText("All on Red");
-                perkDescription.setText("Increases the payout from roulette table wins by 10% per level (currently x" + (1 + (double) Math.round(GlobalCasinoPerks.getRouletteTableMoneyMultiplier() * 10) / 10) + ").");
+                perkDescription.setText("Increases the payout from roulette table wins by 10% per level (currently x" + (1 + (double) Math.round(perks.getRouletteTableMoneyMultiplier() * 10) / 10) + ").");
                 buyPerkButton.setId(buttonId);
             }
             case "a2" -> {
-                if(GlobalCasinoPerks.getBlackjackMoneyMultiplierLevel() < GlobalCasinoState.maxBasicPerkLevel) {
+                if(perks.getBlackjackMoneyMultiplierLevel() < state.maxBasicPerkLevel) {
                     if(actionEvent.getSource() == buyPerkButton) {
-                        GlobalCasinoPerks.setBlackjackMoneyMultiplierLevel(GlobalCasinoPerks.getBlackjackMoneyMultiplierLevel() + 1);
-                        if(GlobalCasinoPerks.getBlackjackMoneyMultiplierLevel() > GlobalCasinoState.maxBasicPerkLevel - 1) {
+                        perks.setBlackjackMoneyMultiplierLevel(perks.getBlackjackMoneyMultiplierLevel() + 1);
+                        if(perks.getBlackjackMoneyMultiplierLevel() > state.maxBasicPerkLevel - 1) {
                             maxLevelReached();
                         }
                     }
                 } else {
                     maxLevelReached();
                 }
-                price *= (GlobalCasinoPerks.getBlackjackMoneyMultiplierLevel() + 1);
+                price *= (perks.getBlackjackMoneyMultiplierLevel() + 1);
                 buyPerkButton.setText("P$" + price);
                 perkName.setText("BlackerJack");
-                perkDescription.setText("Increases the payout from blackjack wins by 10% per level (currently x" + (1 + (double) Math.round(GlobalCasinoPerks.getBlackjackMoneyMultiplier() * 10) / 10) + ").");
+                perkDescription.setText("Increases the payout from blackjack wins by 10% per level (currently x" + (1 + (double) Math.round(perks.getBlackjackMoneyMultiplier() * 10) / 10) + ").");
                 buyPerkButton.setId(buttonId);
             }
             case "a3" -> {
-                if(GlobalCasinoPerks.getTexasPokerMoneyMultiplierLevel() < GlobalCasinoState.maxBasicPerkLevel) {
+                if(perks.getTexasPokerMoneyMultiplierLevel() < state.maxBasicPerkLevel) {
                     if(actionEvent.getSource() == buyPerkButton) {
-                        GlobalCasinoPerks.setTexasPokerMoneyMultiplierLevel(GlobalCasinoPerks.getTexasPokerMoneyMultiplierLevel() + 1);
-                        if(GlobalCasinoPerks.getTexasPokerMoneyMultiplierLevel() > GlobalCasinoState.maxBasicPerkLevel - 1) {
+                        perks.setTexasPokerMoneyMultiplierLevel(perks.getTexasPokerMoneyMultiplierLevel() + 1);
+                        if(perks.getTexasPokerMoneyMultiplierLevel() > state.maxBasicPerkLevel - 1) {
                             maxLevelReached();
                         }
                     }
                 } else {
                     maxLevelReached();
                 }
-                price *= (GlobalCasinoPerks.getTexasPokerMoneyMultiplierLevel() + 1);
+                price *= (perks.getTexasPokerMoneyMultiplierLevel() + 1);
                 buyPerkButton.setText("P$" + price);
                 perkName.setText("Poker Face");
-                perkDescription.setText("Increases the payout from texas poker wins by 10% per level (currently x" + (1 + (double) Math.round(GlobalCasinoPerks.getTexasPokerMoneyMultiplier() * 10) / 10) + ").");
+                perkDescription.setText("Increases the payout from texas poker wins by 10% per level (currently x" + (1 + (double) Math.round(perks.getTexasPokerMoneyMultiplier() * 10) / 10) + ").");
                 buyPerkButton.setId(buttonId);
             }
             case "a4" -> {
-                if(GlobalCasinoPerks.getGlobalMoneyMultiplierLevel() < GlobalCasinoState.maxAdvancedPerkLevel) {
+                if(perks.getGlobalMoneyMultiplierLevel() < state.maxAdvancedPerkLevel) {
                     if(actionEvent.getSource() == buyPerkButton) {
-                        GlobalCasinoPerks.setGlobalMoneyMultiplierLevel(GlobalCasinoPerks.getGlobalMoneyMultiplierLevel() + 1);
-                        if(GlobalCasinoPerks.getGlobalMoneyMultiplierLevel() > GlobalCasinoState.maxAdvancedPerkLevel - 1) {
+                        perks.setGlobalMoneyMultiplierLevel(perks.getGlobalMoneyMultiplierLevel() + 1);
+                        if(perks.getGlobalMoneyMultiplierLevel() > state.maxAdvancedPerkLevel - 1) {
                             maxLevelReached();
                         }
                     }
                 } else {
                     maxLevelReached();
                 }
-                price *= (GlobalCasinoPerks.getGlobalMoneyMultiplierLevel() + 1);
+                price *= (perks.getGlobalMoneyMultiplierLevel() + 1);
                 buyPerkButton.setText("P$" + price);
                 perkName.setText("Winner Mentality");
-                perkDescription.setText("Increases all payouts by 5% per level (currently x" + (1 + (double) Math.round(GlobalCasinoPerks.getGlobalMoneyMultiplier() * 100) / 100) + ", multiplicative).");
+                perkDescription.setText("Increases all payouts by 5% per level (currently x" + (1 + (double) Math.round(perks.getGlobalMoneyMultiplier() * 100) / 100) + ", multiplicative).");
                 buyPerkButton.setId(buttonId);
             }
             case "a5" -> {
-                if(GlobalCasinoPerks.getSlotMachinePhrogMoneyMultiplierLevel() < GlobalCasinoState.maxBasicPerkLevel) {
+                if(perks.getSlotMachinePhrogMoneyMultiplierLevel() < state.maxBasicPerkLevel) {
                     if(actionEvent.getSource() == buyPerkButton) {
-                        GlobalCasinoPerks.setSlotMachinePhrogMoneyMultiplierLevel(GlobalCasinoPerks.getSlotMachinePhrogMoneyMultiplierLevel() + 1);
-                        if(GlobalCasinoPerks.getSlotMachinePhrogMoneyMultiplierLevel() > GlobalCasinoState.maxBasicPerkLevel - 1) {
+                        perks.setSlotMachinePhrogMoneyMultiplierLevel(perks.getSlotMachinePhrogMoneyMultiplierLevel() + 1);
+                        if(perks.getSlotMachinePhrogMoneyMultiplierLevel() > state.maxBasicPerkLevel - 1) {
                             maxLevelReached();
                         }
                     }
                 } else {
                     maxLevelReached();
                 }
-                price *= (GlobalCasinoPerks.getSlotMachinePhrogMoneyMultiplierLevel() + 1);
+                price *= (perks.getSlotMachinePhrogMoneyMultiplierLevel() + 1);
                 buyPerkButton.setText("P$" + price);
                 perkName.setText("Phrog Machine");
-                perkDescription.setText("Increases the phrog coins payout from slot machine wins by 5% per level (currently x" + (1 + (double) Math.round(GlobalCasinoPerks.getSlotMachinePhrogMoneyMultiplier() * 100) / 100) + ").");
+                perkDescription.setText("Increases the phrog coins payout from slot machine wins by 5% per level (currently x" + (1 + (double) Math.round(perks.getSlotMachinePhrogMoneyMultiplier() * 100) / 100) + ").");
                 buyPerkButton.setId(buttonId);
             }
             case "a6" -> {
-                if(GlobalCasinoPerks.getRouletteTablePhrogMoneyMultiplierLevel() < GlobalCasinoState.maxBasicPerkLevel) {
+                if(perks.getRouletteTablePhrogMoneyMultiplierLevel() < state.maxBasicPerkLevel) {
                     if(actionEvent.getSource() == buyPerkButton) {
-                        GlobalCasinoPerks.setRouletteTablePhrogMoneyMultiplierLevel(GlobalCasinoPerks.getRouletteTablePhrogMoneyMultiplierLevel() + 1);
-                        if(GlobalCasinoPerks.getRouletteTablePhrogMoneyMultiplierLevel() > GlobalCasinoState.maxBasicPerkLevel - 1) {
+                        perks.setRouletteTablePhrogMoneyMultiplierLevel(perks.getRouletteTablePhrogMoneyMultiplierLevel() + 1);
+                        if(perks.getRouletteTablePhrogMoneyMultiplierLevel() > state.maxBasicPerkLevel - 1) {
                             maxLevelReached();
                         }
                     }
                 } else {
                     maxLevelReached();
                 }
-                price *= (GlobalCasinoPerks.getRouletteTablePhrogMoneyMultiplierLevel() + 1);
+                price *= (perks.getRouletteTablePhrogMoneyMultiplierLevel() + 1);
                 buyPerkButton.setText("P$" + price);
                 perkName.setText("Phrog on Red");
-                perkDescription.setText("Increases the phrog coins payout from roulette table wins by 5% per level (currently x" + (1 + (double) Math.round(GlobalCasinoPerks.getRouletteTablePhrogMoneyMultiplier() * 100) / 100) + ").");
+                perkDescription.setText("Increases the phrog coins payout from roulette table wins by 5% per level (currently x" + (1 + (double) Math.round(perks.getRouletteTablePhrogMoneyMultiplier() * 100) / 100) + ").");
                 buyPerkButton.setId(buttonId);
             }
             case "a7" -> {
-                if(GlobalCasinoPerks.getBlackjackPhrogMoneyMultiplierLevel() < GlobalCasinoState.maxBasicPerkLevel) {
+                if(perks.getBlackjackPhrogMoneyMultiplierLevel() < state.maxBasicPerkLevel) {
                     if(actionEvent.getSource() == buyPerkButton) {
-                        GlobalCasinoPerks.setBlackjackPhrogMoneyMultiplierLevel(GlobalCasinoPerks.getBlackjackPhrogMoneyMultiplierLevel() + 1);
-                        if(GlobalCasinoPerks.getBlackjackPhrogMoneyMultiplierLevel() > GlobalCasinoState.maxBasicPerkLevel - 1) {
+                        perks.setBlackjackPhrogMoneyMultiplierLevel(perks.getBlackjackPhrogMoneyMultiplierLevel() + 1);
+                        if(perks.getBlackjackPhrogMoneyMultiplierLevel() > state.maxBasicPerkLevel - 1) {
                             maxLevelReached();
                         }
                     }
                 } else {
                     maxLevelReached();
                 }
-                price *= (GlobalCasinoPerks.getBlackjackPhrogMoneyMultiplierLevel() + 1);
+                price *= (perks.getBlackjackPhrogMoneyMultiplierLevel() + 1);
                 buyPerkButton.setText("P$" + price);
                 perkName.setText("PhrogJack");
-                perkDescription.setText("Increases the phrog coins payout from blackjack wins by 5% per level (currently x" + (1 + (double) Math.round(GlobalCasinoPerks.getBlackjackPhrogMoneyMultiplier() * 100) / 100) + ").");
+                perkDescription.setText("Increases the phrog coins payout from blackjack wins by 5% per level (currently x" + (1 + (double) Math.round(perks.getBlackjackPhrogMoneyMultiplier() * 100) / 100) + ").");
                 buyPerkButton.setId(buttonId);
             }
             case "a8" -> {
-                if(GlobalCasinoPerks.getTexasPokerPhrogMoneyMultiplierLevel() < GlobalCasinoState.maxBasicPerkLevel) {
+                if(perks.getTexasPokerPhrogMoneyMultiplierLevel() < state.maxBasicPerkLevel) {
                     if(actionEvent.getSource() == buyPerkButton) {
-                        GlobalCasinoPerks.setTexasPokerPhrogMoneyMultiplierLevel(GlobalCasinoPerks.getTexasPokerPhrogMoneyMultiplierLevel() + 1);
-                        if(GlobalCasinoPerks.getTexasPokerPhrogMoneyMultiplierLevel() > GlobalCasinoState.maxBasicPerkLevel - 1) {
+                        perks.setTexasPokerPhrogMoneyMultiplierLevel(perks.getTexasPokerPhrogMoneyMultiplierLevel() + 1);
+                        if(perks.getTexasPokerPhrogMoneyMultiplierLevel() > state.maxBasicPerkLevel - 1) {
                             maxLevelReached();
                         }
                     }
                 } else {
                     maxLevelReached();
                 }
-                price *= (GlobalCasinoPerks.getTexasPokerPhrogMoneyMultiplierLevel() + 1);
+                price *= (perks.getTexasPokerPhrogMoneyMultiplierLevel() + 1);
                 buyPerkButton.setText("P$" + price);
                 perkName.setText("Phrog Face");
-                perkDescription.setText("Increases the phrog coins payout from texas poker wins by 5% per level (currently x" + (1 + (double) Math.round(GlobalCasinoPerks.getTexasPokerPhrogMoneyMultiplier() * 100) / 100) + ").");
+                perkDescription.setText("Increases the phrog coins payout from texas poker wins by 5% per level (currently x" + (1 + (double) Math.round(perks.getTexasPokerPhrogMoneyMultiplier() * 100) / 100) + ").");
                 buyPerkButton.setId(buttonId);
             }
             case "a9" -> {
-                if(GlobalCasinoPerks.getGlobalPhrogMoneyMultiplierLevel() < GlobalCasinoState.maxAdvancedPerkLevel) {
+                if(perks.getGlobalPhrogMoneyMultiplierLevel() < state.maxAdvancedPerkLevel) {
                     if(actionEvent.getSource() == buyPerkButton) {
-                        GlobalCasinoPerks.setGlobalPhrogMoneyMultiplierLevel(GlobalCasinoPerks.getGlobalPhrogMoneyMultiplierLevel() + 1);
-                        if(GlobalCasinoPerks.getGlobalPhrogMoneyMultiplierLevel() > GlobalCasinoState.maxAdvancedPerkLevel - 1) {
+                        perks.setGlobalPhrogMoneyMultiplierLevel(perks.getGlobalPhrogMoneyMultiplierLevel() + 1);
+                        if(perks.getGlobalPhrogMoneyMultiplierLevel() > state.maxAdvancedPerkLevel - 1) {
                             maxLevelReached();
                         }
                     }
                 } else {
                     maxLevelReached();
                 }
-                price *= (GlobalCasinoPerks.getGlobalPhrogMoneyMultiplierLevel() + 1);
+                price *= (perks.getGlobalPhrogMoneyMultiplierLevel() + 1);
                 buyPerkButton.setText("P$" + price);
                 perkName.setText("Phrog Mentality");
-                double rounded = (double) Math.round(GlobalCasinoPerks.getGlobalPhrogMoneyMultiplier() * 100) / 100;
+                double rounded = (double) Math.round(perks.getGlobalPhrogMoneyMultiplier() * 100) / 100;
                 String formatted = String.format("%.2f", rounded).replaceFirst("0", "1"); //floating point issues
                 perkDescription.setText("Increases all phrog coins payouts by 4% per level (currently x" + formatted + ", multiplicative).");
                 buyPerkButton.setId(buttonId);
             }
             case "a10" -> {
-                if(GlobalCasinoPerks.getGreenPhrogSlotChanceLevel() < GlobalCasinoState.maxAdvancedPerkLevel) {
+                if(perks.getGreenPhrogSlotChanceLevel() < state.maxAdvancedPerkLevel) {
                     if(actionEvent.getSource() == buyPerkButton) {
-                        GlobalCasinoPerks.setGreenPhrogSlotChanceLevel(GlobalCasinoPerks.getGreenPhrogSlotChanceLevel() + 1);
-                        if(GlobalCasinoPerks.getGreenPhrogSlotChanceLevel() > GlobalCasinoState.maxAdvancedPerkLevel - 1) {
+                        perks.setGreenPhrogSlotChanceLevel(perks.getGreenPhrogSlotChanceLevel() + 1);
+                        if(perks.getGreenPhrogSlotChanceLevel() > state.maxAdvancedPerkLevel - 1) {
                             maxLevelReached();
                         }
                     }
                 } else {
                     maxLevelReached();
                 }
-                price *= (GlobalCasinoPerks.getGreenPhrogSlotChanceLevel() + 1);
+                price *= (perks.getGreenPhrogSlotChanceLevel() + 1);
                 buyPerkButton.setText("P$" + price);
                 perkName.setText("Zeeper Luck");
                 perkDescription.setText("Increases the chance of getting green phrogs in slots (idk by how much, math is hard).");
                 buyPerkButton.setId(buttonId);
             }
             case "a11" -> {
-                if(GlobalCasinoPerks.getPurplePhrogSlotChanceLevel() < GlobalCasinoState.maxAdvancedPerkLevel) {
+                if(perks.getPurplePhrogSlotChanceLevel() < state.maxAdvancedPerkLevel) {
                     if(actionEvent.getSource() == buyPerkButton) {
-                        GlobalCasinoPerks.setPurplePhrogSlotChanceLevel(GlobalCasinoPerks.getPurplePhrogSlotChanceLevel() + 1);
-                        if(GlobalCasinoPerks.getPurplePhrogSlotChanceLevel() > GlobalCasinoState.maxAdvancedPerkLevel - 1) {
+                        perks.setPurplePhrogSlotChanceLevel(perks.getPurplePhrogSlotChanceLevel() + 1);
+                        if(perks.getPurplePhrogSlotChanceLevel() > state.maxAdvancedPerkLevel - 1) {
                             maxLevelReached();
                         }
                     }
                 } else {
                     maxLevelReached();
                 }
-                price *= (GlobalCasinoPerks.getPurplePhrogSlotChanceLevel() + 1);
+                price *= (perks.getPurplePhrogSlotChanceLevel() + 1);
                 buyPerkButton.setText("P$" + price);
                 perkName.setText("Gia Luck");
                 perkDescription.setText("Increases the chance of getting purple phrogs in slots (idk by how much, math is hard).");
                 buyPerkButton.setId(buttonId);
             }
             case "a12" -> {
-                if(GlobalCasinoPerks.getPhroogoSlotChanceLevel() < GlobalCasinoState.maxAdvancedPerkLevel) {
+                if(perks.getPhroogoSlotChanceLevel() < state.maxAdvancedPerkLevel) {
                     if(actionEvent.getSource() == buyPerkButton) {
-                        GlobalCasinoPerks.setPhroogoSlotChanceLevel(GlobalCasinoPerks.getPhroogoSlotChanceLevel() + 1);
-                        if(GlobalCasinoPerks.getPhroogoSlotChanceLevel() > GlobalCasinoState.maxAdvancedPerkLevel - 1) {
+                        perks.setPhroogoSlotChanceLevel(perks.getPhroogoSlotChanceLevel() + 1);
+                        if(perks.getPhroogoSlotChanceLevel() > state.maxAdvancedPerkLevel - 1) {
                             maxLevelReached();
                         }
                     }
                 } else {
                     maxLevelReached();
                 }
-                price *= (GlobalCasinoPerks.getPhroogoSlotChanceLevel() + 1);
+                price *= (perks.getPhroogoSlotChanceLevel() + 1);
                 buyPerkButton.setText("P$" + price);
                 perkName.setText("Phroogo Luck");
                 perkDescription.setText("Increases the chance of getting blue phrogs in slots (idk by how much, math is hard).");
                 buyPerkButton.setId(buttonId);
             }
             case "a13" -> {
-                if(GlobalCasinoPerks.getRouletteTableRerollLevel() < GlobalCasinoState.maxAdvancedPerkLevel) {
+                if(perks.getRouletteTableRerollLevel() < state.maxAdvancedPerkLevel) {
                     if(actionEvent.getSource() == buyPerkButton) {
-                        GlobalCasinoPerks.setRouletteTableRerollLevel(GlobalCasinoPerks.getRouletteTableRerollLevel() + 1);
-                        if(GlobalCasinoPerks.getRouletteTableRerollLevel() > GlobalCasinoState.maxAdvancedPerkLevel - 1) {
+                        perks.setRouletteTableRerollLevel(perks.getRouletteTableRerollLevel() + 1);
+                        if(perks.getRouletteTableRerollLevel() > state.maxAdvancedPerkLevel - 1) {
                             maxLevelReached();
                         }
                     }
                 } else {
                     maxLevelReached();
                 }
-                price *= (GlobalCasinoPerks.getRouletteTableRerollLevel() + 1);
+                price *= (perks.getRouletteTableRerollLevel() + 1);
                 buyPerkButton.setText("P$" + price);
                 perkName.setText("Reroll Table");
-                perkDescription.setText("Increases the chance of reroll if your didn't win in roulette by 5% per level (currently "  + GlobalCasinoPerks.getRouletteTableRerollLevel() * 5 + "%)");
+                perkDescription.setText("Increases the chance of reroll if your didn't win in roulette by 5% per level (currently "  + perks.getRouletteTableRerollLevel() * 5 + "%)");
                 buyPerkButton.setId(buttonId);
             }
             case "a14" -> {
-                if(GlobalCasinoPerks.getBlackJackBustLimitLevel() < GlobalCasinoState.maxOpPerkLevel) {
+                if(perks.getBlackJackBustLimitLevel() < state.maxOpPerkLevel) {
                     if(actionEvent.getSource() == buyPerkButton) {
-                        GlobalCasinoPerks.setBlackJackBustLimitLevel(GlobalCasinoPerks.getBlackJackBustLimitLevel() + 1);
-                        if(GlobalCasinoPerks.getBlackJackBustLimitLevel() > GlobalCasinoState.maxOpPerkLevel - 1) {
+                        perks.setBlackJackBustLimitLevel(perks.getBlackJackBustLimitLevel() + 1);
+                        if(perks.getBlackJackBustLimitLevel() > state.maxOpPerkLevel - 1) {
                             maxLevelReached();
                         }
                     }
                 } else {
                     maxLevelReached();
                 }
-                price *= (GlobalCasinoPerks.getBlackJackBustLimitLevel() + 1);
+                price *= (perks.getBlackJackBustLimitLevel() + 1);
                 buyPerkButton.setText("P$" + price);
                 perkName.setText("No Bustin'");
-                perkDescription.setText("Increases the amount of points you can go over 21 in blackjack (currently:  "  + GlobalCasinoPerks.getBlackJackBustLimitLevel() + "), the game is still about who's closer to 21");
+                perkDescription.setText("Increases the amount of points you can go over 21 in blackjack (currently:  "  + perks.getBlackJackBustLimitLevel() + "), the game is still about who's closer to 21");
                 buyPerkButton.setId(buttonId);
             }
             case "a15" -> {
-                if(GlobalCasinoPerks.getTexasPokerHandEvaluationIncreaseLevel() < GlobalCasinoState.maxLegendaryPerkLevel) {
+                if(perks.getTexasPokerHandEvaluationIncreaseLevel() < state.maxLegendaryPerkLevel) {
                     if(actionEvent.getSource() == buyPerkButton) {
-                        GlobalCasinoPerks.setTexasPokerHandEvaluationIncreaseLevel(GlobalCasinoPerks.getTexasPokerHandEvaluationIncreaseLevel() + 1);
-                        if(GlobalCasinoPerks.getTexasPokerHandEvaluationIncreaseLevel() > GlobalCasinoState.maxLegendaryPerkLevel - 1) {
+                        perks.setTexasPokerHandEvaluationIncreaseLevel(perks.getTexasPokerHandEvaluationIncreaseLevel() + 1);
+                        if(perks.getTexasPokerHandEvaluationIncreaseLevel() > state.maxLegendaryPerkLevel - 1) {
                             maxLevelReached();
                         }
                     }
                 } else {
                     maxLevelReached();
                 }
-                price *= (GlobalCasinoPerks.getTexasPokerHandEvaluationIncreaseLevel() + 1);
+                price *= (perks.getTexasPokerHandEvaluationIncreaseLevel() + 1);
                 buyPerkButton.setText("P$" + price);
                 perkName.setText("Simply Better");
                 perkDescription.setText("Increases the estimation of your poker hand by one (eg. high card -> pair)");

@@ -29,18 +29,20 @@ public class TexasHoldemController {
     private final List<Card> playerWinningHand = new ArrayList<>();
     private final List<Card> botWinningHand = new ArrayList<>();
     private final Deck deck = new Deck();
+    private final GlobalCasinoPerks perks = new GlobalCasinoPerks();
+    private final GlobalCasinoState state = new GlobalCasinoState();
 
     public void initialize() {
-        GlobalCasinoState.displayInfo(moneyLabel, roundLabel, actionLabel, quotaLabel);
+        state.displayInfo(moneyLabel, roundLabel, actionLabel, quotaLabel);
     }
 
     public void playPoker(ActionEvent actionEvent) {
-        originalBalance = GlobalCasinoState.getMoneyBalance();
-        if(GlobalCasinoState.getMoneyBalance() >= 50 && GlobalCasinoState.getActionsLeft() > 0) {
+        originalBalance = state.getMoneyBalance();
+        if(state.getMoneyBalance() >= 50 && state.getActionsLeft() > 0) {
             bet = 50;
-            GlobalCasinoState.changeMoneyBalance(-bet);
-            GlobalCasinoState.actionDecrement();
-            GlobalCasinoState.displayInfo(moneyLabel, roundLabel, actionLabel, quotaLabel);
+            state.changeMoneyBalance(-bet);
+            state.actionDecrement();
+            state.displayInfo(moneyLabel, roundLabel, actionLabel, quotaLabel);
             betLabel.setText("Pot: $" + bet);
             playButton.setDisable(true);
             playButton.setVisible(false);
@@ -68,7 +70,7 @@ public class TexasHoldemController {
             foldButton.setVisible(true);
             evaluationLabel.setVisible(true);
             backButton.setDisable(true);
-        } else if (GlobalCasinoState.getMoneyBalance() >= 50) {
+        } else if (state.getMoneyBalance() >= 50) {
             evaluationLabel.setText("No actions left.");
             backButton.setDisable(false);
         } else {
@@ -89,15 +91,15 @@ public class TexasHoldemController {
                 } else if (flop.size() == 5) {
                     betMultiplier = 1.1;
                 }
-                if (raiseAmount.getText().isEmpty() && GlobalCasinoState.getMoneyBalance() > 0) {
-                    raiseAmount.setText("" + GlobalCasinoState.getMoneyBalance());
+                if (raiseAmount.getText().isEmpty() && state.getMoneyBalance() > 0) {
+                    raiseAmount.setText("" + state.getMoneyBalance());
                     return;
                 }
                 int raise = Integer.parseInt(raiseAmount.getText());
                 bet += (int) (raise * betMultiplier);
-                if (bet > 0 && !(raise > GlobalCasinoState.getMoneyBalance())) {
-                    GlobalCasinoState.changeMoneyBalance(-Integer.parseInt(raiseAmount.getText()));
-                    GlobalCasinoState.displayInfo(moneyLabel, roundLabel, actionLabel, quotaLabel);
+                if (bet > 0 && !(raise > state.getMoneyBalance())) {
+                    state.changeMoneyBalance(-Integer.parseInt(raiseAmount.getText()));
+                    state.displayInfo(moneyLabel, roundLabel, actionLabel, quotaLabel);
                     betLabel.setText("Pot: $" + bet);
                     raiseAmount.setDisable(true);
                     raiseAmount.setVisible(false);
@@ -247,7 +249,7 @@ public class TexasHoldemController {
 
         if(hand == playerHand) {
             evaluationLabel.setText("You have a " + evaluation + "!");
-            if(GlobalCasinoPerks.getTexasPokerHandEvaluationIncreaseLevel() == 1) {
+            if(perks.getTexasPokerHandEvaluationIncreaseLevel() == 1) {
                 evaluationHierarchy++;
                 evaluationLabel.setText("You have a " + evaluation + " (" + handEvaluation[evaluationHierarchy] + ")!");
             }
@@ -425,18 +427,18 @@ public class TexasHoldemController {
                 botWin();
             } else if(botWinningHand.getLast().getValue() == playerWinningHand.getLast().getValue() || hasFlush(playerHand, playerWinningHand)) {
                 evaluationLabel.setText("It's a tie. You get your money back");
-                GlobalCasinoState.setMoneyBalance(originalBalance);
-                GlobalCasinoState.displayInfo(moneyLabel, roundLabel, actionLabel, quotaLabel);
+                state.setMoneyBalance(originalBalance);
+                state.displayInfo(moneyLabel, roundLabel, actionLabel, quotaLabel);
             }
         }
     }
 
     public void playerWin() {
-        int winAmount = (int)(bet * GlobalCasinoPerks.getTexasPokerMoneyMultiplier() * GlobalCasinoPerks.getGlobalMoneyMultiplier());
+        int winAmount = (int)(bet * perks.getTexasPokerMoneyMultiplier() * perks.getGlobalMoneyMultiplier());
         evaluationLabel.setText("You have won! You get $" + winAmount + "!");
-        GlobalCasinoState.changeMoneyBalance(winAmount);
-        GlobalCasinoState.changeRoundMoneyMade(winAmount);
-        GlobalCasinoState.displayInfo(moneyLabel, roundLabel, actionLabel, quotaLabel);
+        state.changeMoneyBalance(winAmount);
+        state.changeRoundMoneyMade(winAmount);
+        state.displayInfo(moneyLabel, roundLabel, actionLabel, quotaLabel);
     }
 
     public void botWin() {
@@ -456,6 +458,6 @@ public class TexasHoldemController {
     }
 
     public void switchToCasinoButton(ActionEvent actionEvent) throws IOException {
-        GlobalCasinoState.switchToSceneButton(actionEvent);
+        state.switchToSceneButton(actionEvent);
     }
 }

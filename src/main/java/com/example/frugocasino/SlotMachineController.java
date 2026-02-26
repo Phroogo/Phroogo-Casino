@@ -24,9 +24,11 @@ public class SlotMachineController {
     private char slotChar1, slotChar2, slotChar3, preSlotChar1, preSlotChar2, preSlotChar3, postSlotChar1, postSlotChar2, postSlotChar3;
     private int bet, winAmount;
     private double multiplier;
+    private final GlobalCasinoState state = new GlobalCasinoState();
+    private final GlobalCasinoPerks perks = new GlobalCasinoPerks();
 
     public void initialize() {
-        GlobalCasinoState.displayInfo(moneyLabel, roundLabel, actionLabel, quotaLabel);
+        state.displayInfo(moneyLabel, roundLabel, actionLabel, quotaLabel);
     }
 
     public void playSlots(ActionEvent actionEvent) {
@@ -39,16 +41,16 @@ public class SlotMachineController {
     }
 
     public void slotSpin(ActionEvent actionEvent) {
-        if (betAmount.getText().isEmpty() && GlobalCasinoState.getMoneyBalance() > 0 && GlobalCasinoState.getActionsLeft() > 0) {
-            betAmount.setText("" + GlobalCasinoState.getMoneyBalance());
+        if (betAmount.getText().isEmpty() && state.getMoneyBalance() > 0 && state.getActionsLeft() > 0) {
+            betAmount.setText("" + state.getMoneyBalance());
             return;
         }
         try {
             bet = Integer.parseInt(betAmount.getText());
-            if(bet > 0 && !(bet > GlobalCasinoState.getMoneyBalance()) && GlobalCasinoState.getActionsLeft() > 0) {
-                GlobalCasinoState.changeMoneyBalance(-bet);
-                GlobalCasinoState.actionDecrement();
-                GlobalCasinoState.displayInfo(moneyLabel, roundLabel, actionLabel, quotaLabel);
+            if(bet > 0 && !(bet > state.getMoneyBalance()) && state.getActionsLeft() > 0) {
+                state.changeMoneyBalance(-bet);
+                state.actionDecrement();
+                state.displayInfo(moneyLabel, roundLabel, actionLabel, quotaLabel);
                 spinButton.setDisable(true);
                 spinButton.setVisible(false);
                 betAmount.setDisable(true);
@@ -121,7 +123,7 @@ public class SlotMachineController {
                 playDelayedSteps(slot1Spin, slot1Delays);
                 playDelayedSteps(slot2Spin, slot2Delays);
                 playDelayedSteps(slot3Spin, slot3Delays);
-            } else if (bet > 0 && !(bet > GlobalCasinoState.getMoneyBalance())) {
+            } else if (bet > 0 && !(bet > state.getMoneyBalance())) {
                 betAmount.setPromptText("No actions left.");
                 betAmount.clear();
             } else {
@@ -138,7 +140,7 @@ public class SlotMachineController {
 
     public char slotRandomizer() {
         char x;
-        int i = random.nextInt(1, 120 + GlobalCasinoPerks.getGreenPhrogSlotChanceLevel() * 3 + GlobalCasinoPerks.getPurplePhrogSlotChanceLevel() * 3 + GlobalCasinoPerks.getPhroogoSlotChanceLevel() * 3);
+        int i = random.nextInt(1, 120 + perks.getGreenPhrogSlotChanceLevel() * 3 + perks.getPurplePhrogSlotChanceLevel() * 3 + perks.getPhroogoSlotChanceLevel() * 3);
         if(i <= 20) {
             x = slotOptions[0];
         } else if(i <= 38) {
@@ -153,11 +155,11 @@ public class SlotMachineController {
             x = slotOptions[5];
         } else if(i <= 99) {
             x = slotOptions[6];
-        } else if(i <= 107 + GlobalCasinoPerks.getGreenPhrogSlotChanceLevel() * 3) {
+        } else if(i <= 107 + perks.getGreenPhrogSlotChanceLevel() * 3) {
             x = slotOptions[7];
-        } else if (i <= 114 + GlobalCasinoPerks.getGreenPhrogSlotChanceLevel() * 3 + GlobalCasinoPerks.getPurplePhrogSlotChanceLevel() * 3) {
+        } else if (i <= 114 + perks.getGreenPhrogSlotChanceLevel() * 3 + perks.getPurplePhrogSlotChanceLevel() * 3) {
             x = slotOptions[8];
-        } else if(i <= 119 + GlobalCasinoPerks.getGreenPhrogSlotChanceLevel() * 3 + GlobalCasinoPerks.getPurplePhrogSlotChanceLevel() * 3 + GlobalCasinoPerks.getPhroogoSlotChanceLevel() * 3) {
+        } else if(i <= 119 + perks.getGreenPhrogSlotChanceLevel() * 3 + perks.getPurplePhrogSlotChanceLevel() * 3 + perks.getPhroogoSlotChanceLevel() * 3) {
             x = slotOptions[9];
         } else {
             x = '-';
@@ -292,64 +294,64 @@ public class SlotMachineController {
             slotResultLabel.setText("You got nothing. Better luck next time!");
         }
         slotResultLabel.setVisible(true);
-        GlobalCasinoState.displayInfo(moneyLabel, roundLabel, actionLabel, quotaLabel);
+        state.displayInfo(moneyLabel, roundLabel, actionLabel, quotaLabel);
     }
 
     public void jackpot() {
         switch (slotChar1){
             case '-':
                 multiplier = 3;
-                winAmount = (int)(bet * multiplier * GlobalCasinoPerks.getSlotMachineMoneyMultiplier() * GlobalCasinoPerks.getGlobalMoneyMultiplier()) + bet;
+                winAmount = (int)(bet * multiplier * perks.getSlotMachineMoneyMultiplier() * perks.getGlobalMoneyMultiplier()) + bet;
                 slotResultLabel.setText("Small JackPot, you get $" + winAmount + "!");
                 break;
             case '+':
                 multiplier = 5;
-                winAmount = (int)(bet * multiplier * GlobalCasinoPerks.getSlotMachineMoneyMultiplier() * GlobalCasinoPerks.getGlobalMoneyMultiplier()) + bet;
+                winAmount = (int)(bet * multiplier * perks.getSlotMachineMoneyMultiplier() * perks.getGlobalMoneyMultiplier()) + bet;
                 slotResultLabel.setText("Small JackPot, you get $" + winAmount + "!");
                 break;
             case '=':
                 multiplier = 7;
-                winAmount = (int)(bet * multiplier * GlobalCasinoPerks.getSlotMachineMoneyMultiplier() * GlobalCasinoPerks.getGlobalMoneyMultiplier()) + bet;
+                winAmount = (int)(bet * multiplier * perks.getSlotMachineMoneyMultiplier() * perks.getGlobalMoneyMultiplier()) + bet;
                 slotResultLabel.setText("Medium JackPot, you get $" + winAmount + "!");
                 break;
             case '^':
                 multiplier = 11;
-                winAmount = (int)(bet * multiplier * GlobalCasinoPerks.getSlotMachineMoneyMultiplier() * GlobalCasinoPerks.getGlobalMoneyMultiplier()) + bet;
+                winAmount = (int)(bet * multiplier * perks.getSlotMachineMoneyMultiplier() * perks.getGlobalMoneyMultiplier()) + bet;
                 slotResultLabel.setText("Medium JackPot, you get $" + winAmount + "!");
                 break;
             case '!':
                 multiplier = 19;
-                winAmount = (int)(bet * multiplier * GlobalCasinoPerks.getSlotMachineMoneyMultiplier() * GlobalCasinoPerks.getGlobalMoneyMultiplier()) + bet;
+                winAmount = (int)(bet * multiplier * perks.getSlotMachineMoneyMultiplier() * perks.getGlobalMoneyMultiplier()) + bet;
                 slotResultLabel.setText("Big JackPot, you get $" + winAmount + "!");
                 break;
             case '%':
                 multiplier = 31;
-                winAmount = (int)(bet * multiplier * GlobalCasinoPerks.getSlotMachineMoneyMultiplier() * GlobalCasinoPerks.getGlobalMoneyMultiplier()) + bet;
+                winAmount = (int)(bet * multiplier * perks.getSlotMachineMoneyMultiplier() * perks.getGlobalMoneyMultiplier()) + bet;
                 slotResultLabel.setText("Big JackPot, you get $" + winAmount + "!");
                 break;
             case '&':
                 multiplier = 49;
-                winAmount = (int)(bet * multiplier * GlobalCasinoPerks.getSlotMachineMoneyMultiplier() * GlobalCasinoPerks.getGlobalMoneyMultiplier()) + bet;
+                winAmount = (int)(bet * multiplier * perks.getSlotMachineMoneyMultiplier() * perks.getGlobalMoneyMultiplier()) + bet;
                 slotResultLabel.setText("WHITE PHROOGO JACKPOT. You get $" + winAmount + "!");
                 break;
             case '@':
                 multiplier = 79;
-                winAmount = (int)(bet * multiplier * GlobalCasinoPerks.getSlotMachineMoneyMultiplier() * GlobalCasinoPerks.getGlobalMoneyMultiplier()) + bet;
+                winAmount = (int)(bet * multiplier * perks.getSlotMachineMoneyMultiplier() * perks.getGlobalMoneyMultiplier()) + bet;
                 slotResultLabel.setText("GREEN PHROOGO JACKPOT!! You get " + winAmount + "!");
                 break;
             case '#':
                 multiplier = 119;
-                winAmount = (int)(bet * multiplier * GlobalCasinoPerks.getSlotMachineMoneyMultiplier() * GlobalCasinoPerks.getGlobalMoneyMultiplier()) + bet;
+                winAmount = (int)(bet * multiplier * perks.getSlotMachineMoneyMultiplier() * perks.getGlobalMoneyMultiplier()) + bet;
                 slotResultLabel.setText("PURPLE PHROOGO JACKPOT!!! You get $" + winAmount + "!");
                 break;
             case '$':
                 multiplier = 199;
-                winAmount = (int)(bet * multiplier * GlobalCasinoPerks.getSlotMachineMoneyMultiplier() * GlobalCasinoPerks.getGlobalMoneyMultiplier()) + bet;
+                winAmount = (int)(bet * multiplier * perks.getSlotMachineMoneyMultiplier() * perks.getGlobalMoneyMultiplier()) + bet;
                 slotResultLabel.setText("PHROOGO JACKPOT!!!! You get $" + winAmount + "!");
                 break;
         }
-        GlobalCasinoState.changeMoneyBalance(winAmount);
-        GlobalCasinoState.changeRoundMoneyMade(winAmount - bet);
+        state.changeMoneyBalance(winAmount);
+        state.changeRoundMoneyMade(winAmount - bet);
     }
 
     public void pair() {
@@ -363,27 +365,27 @@ public class SlotMachineController {
         switch (temp) {
             case '-', '+', '=':
                 multiplier = 0.4;
-                winAmount = (int)(bet * multiplier * GlobalCasinoPerks.getSlotMachineMoneyMultiplier() * GlobalCasinoPerks.getGlobalMoneyMultiplier()) + bet;
+                winAmount = (int)(bet * multiplier * perks.getSlotMachineMoneyMultiplier() * perks.getGlobalMoneyMultiplier()) + bet;
                 slotResultLabel.setText("Small pair, you get $" + winAmount + "!");
                 break;
             case '^', '!', '%':
                 multiplier = 0.8;
-                winAmount = (int)(bet * multiplier * GlobalCasinoPerks.getSlotMachineMoneyMultiplier() * GlobalCasinoPerks.getGlobalMoneyMultiplier()) + bet;
+                winAmount = (int)(bet * multiplier * perks.getSlotMachineMoneyMultiplier() * perks.getGlobalMoneyMultiplier()) + bet;
                 slotResultLabel.setText("Medium pair, you get $" + winAmount + "!");
                 break;
             case '&', '@', '#':
                 multiplier = 1;
-                winAmount = (int)(bet * multiplier * GlobalCasinoPerks.getSlotMachineMoneyMultiplier() * GlobalCasinoPerks.getGlobalMoneyMultiplier()) + bet;
+                winAmount = (int)(bet * multiplier * perks.getSlotMachineMoneyMultiplier() * perks.getGlobalMoneyMultiplier()) + bet;
                 slotResultLabel.setText("Phroogo pair, you get $" + winAmount + "!");
                 break;
             case '$':
                 multiplier = 9;
-                winAmount = (int)(bet * multiplier * GlobalCasinoPerks.getSlotMachineMoneyMultiplier() * GlobalCasinoPerks.getGlobalMoneyMultiplier()) + bet;
+                winAmount = (int)(bet * multiplier * perks.getSlotMachineMoneyMultiplier() * perks.getGlobalMoneyMultiplier()) + bet;
                 slotResultLabel.setText("Best Phroogo pair! you get $" + winAmount + "!");
                 break;
         }
-        GlobalCasinoState.changeMoneyBalance(winAmount);
-        GlobalCasinoState.changeRoundMoneyMade(winAmount - bet);
+        state.changeMoneyBalance(winAmount);
+        state.changeRoundMoneyMade(winAmount - bet);
     }
 
     private void playDelayedSteps(List<Runnable> steps, List<Double> delaysInSeconds) {
@@ -402,6 +404,6 @@ public class SlotMachineController {
     }
 
     public void switchToCasinoButton(ActionEvent actionEvent) throws IOException {
-        GlobalCasinoState.switchToSceneButton(actionEvent);
+        state.switchToSceneButton(actionEvent);
     }
 }

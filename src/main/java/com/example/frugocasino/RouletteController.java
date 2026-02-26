@@ -23,10 +23,12 @@ public class RouletteController {
     private final Random random = new Random();
     private boolean betPlaced = false;
     private boolean rerollAvailable = true;
+    private final GlobalCasinoPerks perks = new GlobalCasinoPerks();
+    private final GlobalCasinoState state = new GlobalCasinoState();
 
     public void initialize() {
-        GlobalCasinoState.displayInfo(moneyLabel, roundLabel, actionLabel, quotaLabel);
-        int temp = GlobalCasinoPerks.getRouletteTableRerollLevel();
+        state.displayInfo(moneyLabel, roundLabel, actionLabel, quotaLabel);
+        int temp = perks.getRouletteTableRerollLevel();
         while(temp > 0) {
             rerollList.add(temp);
             temp--;
@@ -34,34 +36,34 @@ public class RouletteController {
     }
 
     public void rouletteSpin(ActionEvent actionEvent) {
-        if(GlobalCasinoState.getMoneyBalance() > 0) {
+        if(state.getMoneyBalance() > 0) {
             try {
-                if (betAmount.getText().isEmpty() && GlobalCasinoState.getMoneyBalance() > 0 && GlobalCasinoState.getActionsLeft() > 0) {
-                    betAmount.setText("" + GlobalCasinoState.getMoneyBalance());
+                if (betAmount.getText().isEmpty() && state.getMoneyBalance() > 0 && state.getActionsLeft() > 0) {
+                    betAmount.setText("" + state.getMoneyBalance());
                     return;
                 }
                 int bet = Integer.parseInt(betAmount.getText());
-                if(bet > 0 && !(bet > GlobalCasinoState.getMoneyBalance()) && GlobalCasinoState.getActionsLeft() > 0) {
+                if(bet > 0 && !(bet > state.getMoneyBalance()) && state.getActionsLeft() > 0) {
                     if (betPlaced) {
                         if(rerollAvailable) {
-                            GlobalCasinoState.changeMoneyBalance(-bet);
-                            GlobalCasinoState.actionDecrement();
+                            state.changeMoneyBalance(-bet);
+                            state.actionDecrement();
                         }
                         int roulette = random.nextInt(37);
 
                         if (playerBet.contains(roulette)) {
                             int winAmount = 0;
                             if (playerBet.size() == 1) {
-                                winAmount = (int)(34 * bet * GlobalCasinoPerks.getRouletteTableMoneyMultiplier() * GlobalCasinoPerks.getGlobalMoneyMultiplier()) + bet;
+                                winAmount = (int)(34 * bet * perks.getRouletteTableMoneyMultiplier() * perks.getGlobalMoneyMultiplier()) + bet;
                             } else if (playerBet.size() == 12) {
-                                winAmount = (int)(2 * bet * GlobalCasinoPerks.getRouletteTableMoneyMultiplier() * GlobalCasinoPerks.getGlobalMoneyMultiplier()) + bet;
+                                winAmount = (int)(2 * bet * perks.getRouletteTableMoneyMultiplier() * perks.getGlobalMoneyMultiplier()) + bet;
                             } else if (playerBet.size() == 18) {
-                                winAmount = (int)(bet * GlobalCasinoPerks.getRouletteTableMoneyMultiplier() * GlobalCasinoPerks.getGlobalMoneyMultiplier()) + bet;
+                                winAmount = (int)(bet * perks.getRouletteTableMoneyMultiplier() * perks.getGlobalMoneyMultiplier()) + bet;
                             }
                             betLabel.setText("The number was " + roulette + "! You get $" + winAmount + "!");
-                            GlobalCasinoState.changeMoneyBalance(winAmount);
-                            GlobalCasinoState.changeRoundMoneyMade(winAmount - bet);
-                        } else if(GlobalCasinoPerks.getRouletteTableRerollLevel() > 0 && rerollAvailable) {
+                            state.changeMoneyBalance(winAmount);
+                            state.changeRoundMoneyMade(winAmount - bet);
+                        } else if(perks.getRouletteTableRerollLevel() > 0 && rerollAvailable) {
                             rerollAvailable = false;
                             int reroll = random.nextInt(1, 21);
                             if(rerollList.contains(reroll)) {
@@ -74,7 +76,7 @@ public class RouletteController {
                             betLabel.setText("You have lost, the number was " + roulette);
                             if (!rerollAvailable) return;
                         }
-                        GlobalCasinoState.displayInfo(moneyLabel, roundLabel, actionLabel, quotaLabel);
+                        state.displayInfo(moneyLabel, roundLabel, actionLabel, quotaLabel);
                         if(!rerollAvailable) {
                             betLabel.setText(betLabel.getText() + " (rerolled)");
                             rerollAvailable = true;
@@ -82,7 +84,7 @@ public class RouletteController {
                     } else {
                         betLabel.setText("You have to place a bet first");
                     }
-                } else if (bet > 0 && !(bet > GlobalCasinoState.getMoneyBalance())) {
+                } else if (bet > 0 && !(bet > state.getMoneyBalance())) {
                     betAmount.setPromptText("No actions left.");
                     betAmount.clear();
                 } else {
@@ -182,6 +184,6 @@ public class RouletteController {
     }
 
     public void switchToCasinoButton(ActionEvent actionEvent) throws IOException {
-        GlobalCasinoState.switchToSceneButton(actionEvent);
+        state.switchToSceneButton(actionEvent);
     }
 }

@@ -34,6 +34,7 @@ public class CaseOpenerController {
     private double lastSlot3X;
     private double lastSlot4X;
     private double lastSlot5X;
+    private final GlobalCasinoState state = new GlobalCasinoState();
     AnimationTimer timer = new AnimationTimer() {
         private long lastTime = 0;
         private double elapsed = 0;
@@ -68,14 +69,14 @@ public class CaseOpenerController {
     };
 
     public void initialize() {
-        GlobalCasinoState.displayInfo(moneyLabel, roundLabel, actionLabel, quotaLabel);
+        state.displayInfo(moneyLabel, roundLabel, actionLabel, quotaLabel);
     }
 
     public void amount(ActionEvent actionEvent) {
         if(openCaseButtonTF.isVisible()) {
             try {
                 bet = Integer.parseInt(openCaseButtonTF.getText()) * 50;
-                if(bet > 0 && !(bet > GlobalCasinoState.getMoneyBalance())) {
+                if(bet > 0 && !(bet > state.getMoneyBalance())) {
                     openCase(actionEvent);
                 } else {
                     openCaseButtonTF.setPromptText("You can't bet that!");
@@ -96,12 +97,12 @@ public class CaseOpenerController {
         if (actionEvent.getSource().equals(openCaseButton1)) {
             bet = 50;
         } else if (actionEvent.getSource().equals(openCaseButtonMax)) {
-            bet = GlobalCasinoState.getMoneyBalance() - GlobalCasinoState.getMoneyBalance() % 50;
+            bet = state.getMoneyBalance() - state.getMoneyBalance() % 50;
         }
-        if(bet > 0 && !(bet > GlobalCasinoState.getMoneyBalance()) && GlobalCasinoState.getActionsLeft() > 0) {
-            GlobalCasinoState.changeMoneyBalance(-bet);
-            GlobalCasinoState.actionDecrement();
-            GlobalCasinoState.displayInfo(moneyLabel, roundLabel, actionLabel, quotaLabel);
+        if(bet > 0 && !(bet > state.getMoneyBalance()) && state.getActionsLeft() > 0) {
+            state.changeMoneyBalance(-bet);
+            state.actionDecrement();
+            state.displayInfo(moneyLabel, roundLabel, actionLabel, quotaLabel);
             theLine.setVisible(true);
             caseImage.setVisible(false);
             openCaseButton1.setDisable(true);
@@ -132,7 +133,7 @@ public class CaseOpenerController {
             slot4.setVisible(true);
             slot5.setVisible(true);
             timer.start();
-        } else if (bet > 0 && !(bet > GlobalCasinoState.getMoneyBalance())) {
+        } else if (bet > 0 && !(bet > state.getMoneyBalance())) {
             dropLabel.setText("No actions left.");
             dropLabel.setFont(new Font(dropLabel.getFont().getName(), 50));
             floatLabel.setVisible(false);
@@ -248,16 +249,16 @@ public class CaseOpenerController {
             case "red" -> winAmount = (int)(5000 * mult * ((double) bet / 50));
             case "gold" -> winAmount = (int)(20000 * mult * ((double) bet / 50));
         }
-        GlobalCasinoState.changeMoneyBalance(winAmount);
+        state.changeMoneyBalance(winAmount);
         dropLabel.setVisible(true);
         floatLabel.setVisible(true);
         if (bet/50 != 1) dropLabel.setText(stattrakS + color + " x" + bet/50 + " ($" + winAmount + ")");
         else dropLabel.setText(stattrakS + color + " (+$" + winAmount + ")");
         floatLabel.setText("Float: " + flot + " (" + flotS + ")");
-        GlobalCasinoState.displayInfo(moneyLabel, roundLabel, actionLabel, quotaLabel);
+        state.displayInfo(moneyLabel, roundLabel, actionLabel, quotaLabel);
     }
 
     public void switchToCasinoButton(ActionEvent actionEvent) throws IOException {
-        GlobalCasinoState.switchToSceneButton(actionEvent);
+        state.switchToSceneButton(actionEvent);
     }
 }

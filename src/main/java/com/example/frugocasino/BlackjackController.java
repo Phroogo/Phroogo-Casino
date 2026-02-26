@@ -6,11 +6,9 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class BlackjackController {
     public TextField betAmount;
@@ -26,9 +24,11 @@ public class BlackjackController {
     private int playerTotal = 0;
     private int dealerTotal = 0;
     private final Deck deck = new Deck();
+    private final GlobalCasinoState state = new GlobalCasinoState();
+    private final GlobalCasinoPerks perks = new GlobalCasinoPerks();
 
     public void initialize() {
-        GlobalCasinoState.displayInfo(moneyLabel, roundLabel, actionLabel, quotaLabel);
+        state.displayInfo(moneyLabel, roundLabel, actionLabel, quotaLabel);
     }
 
     public void playBlackjack(ActionEvent actionEvent) {
@@ -42,19 +42,19 @@ public class BlackjackController {
     }
 
     public void checkIfValidInputButton(ActionEvent actionEvent) {
-        if (betAmount.getText().isEmpty() && GlobalCasinoState.getMoneyBalance() > 0 && GlobalCasinoState.getActionsLeft() > 0) {
-            betAmount.setText("" + GlobalCasinoState.getMoneyBalance());
+        if (betAmount.getText().isEmpty() && state.getMoneyBalance() > 0 && state.getActionsLeft() > 0) {
+            betAmount.setText("" + state.getMoneyBalance());
             return;
         }
         try {
             bet = Integer.parseInt(betAmount.getText());
-            if(bet > 0 && !(bet > GlobalCasinoState.getMoneyBalance()) && GlobalCasinoState.getActionsLeft() > 0) {
-                GlobalCasinoState.changeMoneyBalance(-bet);
-                GlobalCasinoState.actionDecrement();
-                GlobalCasinoState.displayInfo(moneyLabel, roundLabel, actionLabel, quotaLabel);
+            if(bet > 0 && !(bet > state.getMoneyBalance()) && state.getActionsLeft() > 0) {
+                state.changeMoneyBalance(-bet);
+                state.actionDecrement();
+                state.displayInfo(moneyLabel, roundLabel, actionLabel, quotaLabel);
                 backButton.setDisable(true);
                 dealerBlackjackCheck();
-            } else if (bet > 0 && !(bet > GlobalCasinoState.getMoneyBalance())) {
+            } else if (bet > 0 && !(bet > state.getMoneyBalance())) {
                 betAmount.setPromptText("No actions left.");
                 betAmount.clear();
             } else {
@@ -113,7 +113,7 @@ public class BlackjackController {
         displayPlayerCard(playerHand);
         playerTotal = getTotal(playerHand);
         playerTotalLabel.setText("Your total is: " + playerTotal);
-        if (playerTotal > 21 + GlobalCasinoPerks.getBlackJackBustLimitLevel()) {
+        if (playerTotal > 21 + perks.getBlackJackBustLimitLevel()) {
             insuranceLabel.setVisible(true);
             insuranceLabel.setText("Your total is " +  getTotal(playerHand) + "! You have busted.");
             endGame();
@@ -128,16 +128,16 @@ public class BlackjackController {
     }
 
     public void blackjackDoubleDown(ActionEvent actionEvent) {
-        if(GlobalCasinoState.getMoneyBalance() >= bet) {
+        if(state.getMoneyBalance() >= bet) {
             insuranceLabel.setVisible(false);
-            GlobalCasinoState.changeMoneyBalance(-bet);
+            state.changeMoneyBalance(-bet);
             bet *= 2;
-            GlobalCasinoState.displayInfo(moneyLabel, roundLabel, actionLabel, quotaLabel);
+            state.displayInfo(moneyLabel, roundLabel, actionLabel, quotaLabel);
             playerHand.add(deck.draw());
             displayPlayerCard(playerHand);
             playerTotal = getTotal(playerHand);
             playerTotalLabel.setText("Your total is: " + playerTotal);
-            if (playerTotal <= 21 + GlobalCasinoPerks.getBlackJackBustLimitLevel()) {
+            if (playerTotal <= 21 + perks.getBlackJackBustLimitLevel()) {
                 dealerTurn();
             } else {
                 insuranceLabel.setVisible(true);
@@ -188,7 +188,7 @@ public class BlackjackController {
 
             if(dealerTotal > 21) {
                 insuranceLabel.setText("Dealer has busted!");
-                winAmount = (int)(bet * GlobalCasinoPerks.getBlackjackMoneyMultiplier() * GlobalCasinoPerks.getGlobalMoneyMultiplier()) + bet;
+                winAmount = (int)(bet * perks.getBlackjackMoneyMultiplier() * perks.getGlobalMoneyMultiplier()) + bet;
             } else if(21 - dealerTotal < Math.abs(21 - playerTotal)) {
                 bet = 0;
                 insuranceLabel.setText("Dealer has won.");
@@ -197,11 +197,11 @@ public class BlackjackController {
                 insuranceLabel.setText("It's a tie!");
             } else {
                 insuranceLabel.setText("You won! Congratulations");
-                winAmount = (int)(bet * GlobalCasinoPerks.getBlackjackMoneyMultiplier() * GlobalCasinoPerks.getGlobalMoneyMultiplier()) + bet;
+                winAmount = (int)(bet * perks.getBlackjackMoneyMultiplier() * perks.getGlobalMoneyMultiplier()) + bet;
             }
-            GlobalCasinoState.changeMoneyBalance(winAmount);
-            GlobalCasinoState.changeRoundMoneyMade(winAmount - bet);
-            GlobalCasinoState.displayInfo(moneyLabel, roundLabel, actionLabel, quotaLabel);
+            state.changeMoneyBalance(winAmount);
+            state.changeRoundMoneyMade(winAmount - bet);
+            state.displayInfo(moneyLabel, roundLabel, actionLabel, quotaLabel);
             endGame();
         });
         dealerActionsDelay.add(0.0);
@@ -247,7 +247,7 @@ public class BlackjackController {
         for (Card card : tempHand) {
             total += getBlackjackValue(card);
         }
-        while(total > 21 + GlobalCasinoPerks.getBlackJackBustLimitLevel() && tempHand.getLast().getValue() == 14) {
+        while(total > 21 + perks.getBlackJackBustLimitLevel() && tempHand.getLast().getValue() == 14) {
             tempHand.set(tempHand.size() - 1, new Card(1, tempHand.getLast().getSuit()));
             tempHand.sort(null);
             total -= 10;
@@ -255,18 +255,14 @@ public class BlackjackController {
         return total;
     }
 
-    public void switchToCasinoButton(ActionEvent actionEvent) throws IOException {
-        GlobalCasinoState.switchToSceneButton(actionEvent);
-    }
-
     public void insuranceButton(ActionEvent actionEvent) {
-        if(bet * 0.5 > GlobalCasinoState.getMoneyBalance()) {
+        if(bet * 0.5 > state.getMoneyBalance()) {
             yesInsurance.setDisable(true);
         }
-        if(yesInsurance.isSelected() && !(bet * 0.5 > GlobalCasinoState.getMoneyBalance())) {
+        if(yesInsurance.isSelected() && !(bet * 0.5 > state.getMoneyBalance())) {
             insuranceBought = true;
-            GlobalCasinoState.changeMoneyBalance(-((int)(0.5 * bet)));
-            GlobalCasinoState.displayInfo(moneyLabel, roundLabel, actionLabel, quotaLabel);
+            state.changeMoneyBalance(-((int)(0.5 * bet)));
+            state.displayInfo(moneyLabel, roundLabel, actionLabel, quotaLabel);
         }
         insuranceLabel.setVisible(false);
         yesInsurance.setDisable(true);
@@ -277,10 +273,10 @@ public class BlackjackController {
             insuranceLabel.setVisible(true);
             deck.displayCard(dealerHand, dealerCard2, 1);
             insuranceLabel.setText("Dealer had blackjack but you bought the insurance");
-            winAmount = (int)(2 * bet * GlobalCasinoPerks.getBlackjackMoneyMultiplier() * GlobalCasinoPerks.getGlobalMoneyMultiplier()) + bet;
-            GlobalCasinoState.changeMoneyBalance(winAmount);
-            GlobalCasinoState.changeRoundMoneyMade(winAmount - bet);
-            GlobalCasinoState.displayInfo(moneyLabel, roundLabel, actionLabel, quotaLabel);
+            winAmount = (int)(2 * bet * perks.getBlackjackMoneyMultiplier() * perks.getGlobalMoneyMultiplier()) + bet;
+            state.changeMoneyBalance(winAmount);
+            state.changeRoundMoneyMade(winAmount - bet);
+            state.displayInfo(moneyLabel, roundLabel, actionLabel, quotaLabel);
             dealerTotalLabel.setText("Dealer total is: " + getTotal(dealerHand));
             endGame();
         } else if (getBlackjackValue(dealerHand.get(1)) == 10 && !insuranceBought) {
@@ -366,4 +362,9 @@ public class BlackjackController {
             pause.play();
         }
     }
+
+    public void switchToCasinoButton(ActionEvent actionEvent) throws IOException {
+        state.switchToSceneButton(actionEvent);
+    }
+
 }

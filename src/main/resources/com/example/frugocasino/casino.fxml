@@ -62,5 +62,10 @@
                <Font name="Comic Sans MS Bold" size="25.0" />
            </font>
        </Label>
+      <Button fx:id="skipRoundButton" layoutX="1792.0" layoutY="196.0" mnemonicParsing="false" onAction="#skipRound" prefHeight="39.0" prefWidth="114.0" text="Skip" visible="false">
+         <font>
+            <Font name="Comic Sans MS Bold" size="19.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

@@ -28,13 +28,12 @@ public class CasinoApplication extends Application {
         Image icon = new Image(getClass().getResourceAsStream("/images/phroogo.png"));
 
 
-        stage.setTitle("Frugo Casino");
+        stage.setTitle("Phroogo Casino");
 
         stage.getIcons().add(icon);
         stage.setScene(casinoMenu);
         stage.setResizable(false);
         stage.show();
-        //CasinoMenuController.balanceLabel.setText(String.valueOf(CasinoMenuController.moneyBalance));
 
         stage.setOnCloseRequest(event -> {
             event.consume();

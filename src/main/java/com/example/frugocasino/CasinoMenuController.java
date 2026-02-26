@@ -19,18 +19,15 @@ public class CasinoMenuController{
     public AnchorPane anchorPane;
     public Region grayOverlay;
     public Parent shopRoot = null;
+    private final GlobalCasinoState state = new GlobalCasinoState();
 
     public void initialize() {
-        moneyLabel.setText("$" + GlobalCasinoState.getMoneyBalance());
-        phrogMoneyLabel.setText("P$" + GlobalCasinoState.getPhrogMoneyBalance());
-        if (GlobalCasinoState.getMoneyBalance() <= 0 || GlobalCasinoState.getActionsLeft() <= 0) {
+        moneyLabel.setText("$" + state.getMoneyBalance());
+        phrogMoneyLabel.setText("P$" + state.getPhrogMoneyBalance());
+        if (state.getMoneyBalance() <= 0 || state.getActionsLeft() <= 0) {
             freeMoneyButton.setVisible(true);
             freeMoneyButton.setDisable(false);
         }
-    }
-
-    public void switchToCasino(ActionEvent actionEvent) throws IOException {
-        GlobalCasinoState.switchToSceneButton(actionEvent);
     }
 
     public void toggleShop() {
@@ -56,17 +53,21 @@ public class CasinoMenuController{
             shopPane.setContent(null);
             moneyLabel.setVisible(true);
             phrogMoneyLabel.setVisible(true);
-            phrogMoneyLabel.setText("P$" + GlobalCasinoState.getPhrogMoneyBalance());
+            phrogMoneyLabel.setText("P$" + state.getPhrogMoneyBalance());
         }
     }
 
     public void freeMoney(ActionEvent actionEvent) {
-        GlobalCasinoState.setMoneyBalance(10000);
-        GlobalCasinoState.setActionsLeft(10);
-        GlobalCasinoState.setRound(1);
-        GlobalCasinoState.setRoundMoneyMade(0);
-        moneyLabel.setText("$" + GlobalCasinoState.getMoneyBalance());
+        state.setMoneyBalance(10000);
+        state.setActionsLeft(10);
+        state.setRound(1);
+        state.setRoundMoneyMade(0);
+        moneyLabel.setText("$" + state.getMoneyBalance());
         freeMoneyButton.setVisible(false);
         freeMoneyButton.setDisable(true);
+    }
+
+    public void switchToCasino(ActionEvent actionEvent) throws IOException {
+        state.switchToSceneButton(actionEvent);
     }
 }

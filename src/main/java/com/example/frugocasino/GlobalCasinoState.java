@@ -13,16 +13,16 @@ public class GlobalCasinoState {
     private static Stage stage;
     private static Scene scene;
     private static Parent root;
-    public final static int maxBasicPerkLevel = 20;
-    public final static int maxAdvancedPerkLevel = 10;
-    public final static int maxOpPerkLevel = 5;
-    public final static int maxLegendaryPerkLevel = 1;
-    public final static int basicPerkPrice = 100;
-    public final static int intermediatePerkPrice = 200;
-    public final static int advancedPerkPrice = 300;
-    public final static int expertPerkPrice = 500;
-    public final static int opPerkPrice = 1000;
-    public final static int legendaryPerkPrice = 10000;
+    public final int maxBasicPerkLevel = 20;
+    public final int maxAdvancedPerkLevel = 10;
+    public final int maxOpPerkLevel = 5;
+    public final int maxLegendaryPerkLevel = 1;
+    public final int basicPerkPrice = 100;
+    public final int intermediatePerkPrice = 200;
+    public final int advancedPerkPrice = 300;
+    public final int expertPerkPrice = 500;
+    public final int opPerkPrice = 1000;
+    public final int legendaryPerkPrice = 10000;
     private static int moneyBalance = 10000;
     private static int phrogMoneyBalance = 100000;
     private static int totalPhrogMoneySpent = 0;
@@ -30,43 +30,43 @@ public class GlobalCasinoState {
     private static int roundMoneyMade = 0;
     private static int actionsLeft = 10;
 
-    public static int getMoneyBalance() {
+    public int getMoneyBalance() {
         return moneyBalance;
     }
 
-    public static void setMoneyBalance(int amount) {
+    public void setMoneyBalance(int amount) {
         moneyBalance = amount;
     }
 
-    public static void changeMoneyBalance(int amount) {
+    public void changeMoneyBalance(int amount) {
         moneyBalance += amount;
     }
 
-    public static int getPhrogMoneyBalance() {
+    public int getPhrogMoneyBalance() {
         return phrogMoneyBalance;
     }
 
-    public static void setPhrogMoneyBalance(int phrogMoneyBalance) {
+    public void setPhrogMoneyBalance(int phrogMoneyBalance) {
         GlobalCasinoState.phrogMoneyBalance = phrogMoneyBalance;
     }
 
-    public static void changePhrogMoneyBalance(int amount) {
+    public void changePhrogMoneyBalance(int amount) {
         phrogMoneyBalance += amount;
     }
 
-    public static int getTotalPhrogMoneySpent() {
+    public int getTotalPhrogMoneySpent() {
         return totalPhrogMoneySpent;
     }
 
-    public static void setTotalPhrogMoneySpent(int totalPhrogMoneySpent) {
+    public void setTotalPhrogMoneySpent(int totalPhrogMoneySpent) {
         GlobalCasinoState.totalPhrogMoneySpent = totalPhrogMoneySpent;
     }
 
-    public static void changeTotalPhrogMoneySpent(int amount) {
+    public void changeTotalPhrogMoneySpent(int amount) {
         totalPhrogMoneySpent += amount;
     }
 
-    public static void switchToSceneButton(ActionEvent actionEvent) throws IOException {
+    public void switchToSceneButton(ActionEvent actionEvent) throws IOException {
         root = FXMLLoader.load(CasinoApplication.class.getResource("casino.fxml"));
         stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -74,7 +74,7 @@ public class GlobalCasinoState {
         stage.show();
     }
 
-    public static void switchToSceneButton(ActionEvent actionEvent, String newScene) throws IOException {
+    public void switchToSceneButton(ActionEvent actionEvent, String newScene) throws IOException {
         root = FXMLLoader.load(CasinoApplication.class.getResource(newScene + ".fxml"));
         stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -82,7 +82,7 @@ public class GlobalCasinoState {
         stage.show();
     }
 
-    public static int calculatePhrogCoins(int amount) {
+    public int calculatePhrogCoins(int amount) {
         if(amount < 1000) {
             return amount/400;
         } else if(amount < 10000) {
@@ -96,46 +96,46 @@ public class GlobalCasinoState {
         }
     }
 
-    public static int getRound() {
+    public int getRound() {
         return round;
     }
 
-    public static void setRound(int round) {
+    public void setRound(int round) {
         GlobalCasinoState.round = round;
     }
 
-    public static void displayInfo(Label moneyLabel, Label roundLabel, Label actionsLabel, Label qoutaLabel) {
+    public void displayInfo(Label moneyLabel, Label roundLabel, Label actionsLabel, Label qoutaLabel) {
         moneyLabel.setText("$" + getMoneyBalance());
         roundLabel.setText("Round " + round);
         qoutaLabel.setText("$" + roundMoneyMade + "/$" + (round * 10000));
         actionsLabel.setText("Actions: " + actionsLeft);
     }
 
-    public static int getRoundMoneyMade() {
+    public int getRoundMoneyMade() {
         return roundMoneyMade;
     }
 
-    public static void setRoundMoneyMade(int roundMoneyMade) {
+    public void setRoundMoneyMade(int roundMoneyMade) {
         GlobalCasinoState.roundMoneyMade = roundMoneyMade;
     }
 
-    public static void changeRoundMoneyMade(int amount) {
+    public void changeRoundMoneyMade(int amount) {
         roundMoneyMade += amount;
     }
 
-    public static int getActionsLeft() {
+    public int getActionsLeft() {
         return actionsLeft;
     }
 
-    public static void actionDecrement() {
+    public void actionDecrement() {
         actionsLeft -= 1;
     }
 
-    public static void actionDecrement(int x) {
+    public void actionDecrement(int x) {
         actionsLeft -= x;
     }
 
-    public static void setActionsLeft(int actionsLeft) {
+    public void setActionsLeft(int actionsLeft) {
         GlobalCasinoState.actionsLeft = actionsLeft;
     }
 }
