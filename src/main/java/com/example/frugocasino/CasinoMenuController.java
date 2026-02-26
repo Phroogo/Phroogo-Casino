@@ -23,7 +23,7 @@ public class CasinoMenuController{
     public void initialize() {
         moneyLabel.setText("$" + GlobalCasinoState.getMoneyBalance());
         phrogMoneyLabel.setText("P$" + GlobalCasinoState.getPhrogMoneyBalance());
-        if (GlobalCasinoState.getMoneyBalance() <= 0) {
+        if (GlobalCasinoState.getMoneyBalance() <= 0 || GlobalCasinoState.getActionsLeft() <= 0) {
             freeMoneyButton.setVisible(true);
             freeMoneyButton.setDisable(false);
         }
@@ -62,6 +62,9 @@ public class CasinoMenuController{
 
     public void freeMoney(ActionEvent actionEvent) {
         GlobalCasinoState.setMoneyBalance(10000);
+        GlobalCasinoState.setActionsLeft(10);
+        GlobalCasinoState.setRound(1);
+        GlobalCasinoState.setRoundMoneyMade(0);
         moneyLabel.setText("$" + GlobalCasinoState.getMoneyBalance());
         freeMoneyButton.setVisible(false);
         freeMoneyButton.setDisable(true);

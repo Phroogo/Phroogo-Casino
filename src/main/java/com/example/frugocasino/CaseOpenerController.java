@@ -17,9 +17,9 @@ import java.util.Random;
 
 public class CaseOpenerController {
 
-    public Button backButton, openCaseButton1, openCaseButton10, openCaseButtonCustom;
+    public Button backButton, openCaseButton1, openCaseButtonMax, openCaseButtonCustom;
     public TextField openCaseButtonTF;
-    public Label moneyLabel, phrogMoneyLabel, dropLabel, floatLabel;
+    public Label moneyLabel, dropLabel, floatLabel, roundLabel, actionLabel, quotaLabel;
     public ImageView caseImage, slot1, slot2, slot3, slot4, slot5;
     public Line theLine;
     private List<String> spinList = new ArrayList<>();
@@ -58,7 +58,7 @@ public class CaseOpenerController {
                 counter = 0;
                 backButton.setDisable(false);
                 openCaseButton1.setDisable(false);
-                openCaseButton10.setDisable(false);
+                openCaseButtonMax.setDisable(false);
                 openCaseButtonCustom.setDisable(false);
                 openCaseButtonTF.setDisable(false);
                 proceedWin();
@@ -68,8 +68,7 @@ public class CaseOpenerController {
     };
 
     public void initialize() {
-        moneyLabel.setText("$" + GlobalCasinoState.getMoneyBalance());
-        phrogMoneyLabel.setText("P$" + GlobalCasinoState.getPhrogMoneyBalance());
+        GlobalCasinoState.displayInfo(moneyLabel, roundLabel, actionLabel, quotaLabel);
     }
 
     public void amount(ActionEvent actionEvent) {
@@ -96,22 +95,23 @@ public class CaseOpenerController {
     public void openCase(ActionEvent actionEvent) {
         if (actionEvent.getSource().equals(openCaseButton1)) {
             bet = 50;
-        } else if (actionEvent.getSource().equals(openCaseButton10)) {
-            bet = 500;
+        } else if (actionEvent.getSource().equals(openCaseButtonMax)) {
+            bet = GlobalCasinoState.getMoneyBalance() - GlobalCasinoState.getMoneyBalance() % 50;
         }
-        if(bet > 0 && !(bet > GlobalCasinoState.getMoneyBalance())) {
+        if(bet > 0 && !(bet > GlobalCasinoState.getMoneyBalance()) && GlobalCasinoState.getActionsLeft() > 0) {
+            GlobalCasinoState.changeMoneyBalance(-bet);
+            GlobalCasinoState.actionDecrement();
+            GlobalCasinoState.displayInfo(moneyLabel, roundLabel, actionLabel, quotaLabel);
             theLine.setVisible(true);
             caseImage.setVisible(false);
             openCaseButton1.setDisable(true);
-            openCaseButton10.setDisable(true);
+            openCaseButtonMax.setDisable(true);
             openCaseButtonCustom.setDisable(true);
             openCaseButtonTF.setDisable(true);
             backButton.setDisable(true);
             floatLabel.setVisible(false);
             dropLabel.setVisible(false);
             spinList.clear();
-            GlobalCasinoState.changeMoneyBalance(-bet);
-            moneyLabel.setText("$" + GlobalCasinoState.getMoneyBalance());
             for (int i = 0; i < 47; i++) {
                 int result = random.nextInt(1, 10001);
                 if (result < 7993) {
@@ -132,9 +132,14 @@ public class CaseOpenerController {
             slot4.setVisible(true);
             slot5.setVisible(true);
             timer.start();
+        } else if (bet > 0 && !(bet > GlobalCasinoState.getMoneyBalance())) {
+            dropLabel.setText("No actions left.");
+            dropLabel.setFont(new Font(dropLabel.getFont().getName(), 50));
+            floatLabel.setVisible(false);
         } else {
             dropLabel.setText("No mone");
             dropLabel.setFont(new Font(dropLabel.getFont().getName(), 50));
+            floatLabel.setVisible(false);
         }
     }
 
@@ -212,7 +217,7 @@ public class CaseOpenerController {
         int stattrak = random.nextInt(0, 10);
         int winAmount = 0;
         String stattrakS = "";
-        double mult = 0;
+        double mult = 0.4;
         String color = "blue";
         if (flot < .07) {
             mult = 1.2;
@@ -226,9 +231,6 @@ public class CaseOpenerController {
         } else if (flot < .44) {
             mult = 0.7;
             flotS = "Well-Worn";
-        } else if (flot < 1) {
-            mult = 0.4;
-            flotS = "Battle-Scarred";
         }
         if (stattrak == 0) {
             mult *= 1.5;
@@ -252,7 +254,7 @@ public class CaseOpenerController {
         if (bet/50 != 1) dropLabel.setText(stattrakS + color + " x" + bet/50 + " ($" + winAmount + ")");
         else dropLabel.setText(stattrakS + color + " (+$" + winAmount + ")");
         floatLabel.setText("Float: " + flot + " (" + flotS + ")");
-        moneyLabel.setText("$" + GlobalCasinoState.getMoneyBalance());
+        GlobalCasinoState.displayInfo(moneyLabel, roundLabel, actionLabel, quotaLabel);
     }
 
     public void switchToCasinoButton(ActionEvent actionEvent) throws IOException {

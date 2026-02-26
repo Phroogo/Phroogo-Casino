@@ -22,11 +22,6 @@
             <Font name="Comic Sans MS Bold" size="40.0" />
          </font>
       </Label>
-      <Label fx:id="phrogMoneyLabel" alignment="CENTER_RIGHT" layoutX="1555.0" layoutY="70.0" prefHeight="39.0" prefWidth="351.0" textFill="#1989ab">
-         <font>
-            <Font name="Comic Sans MS Bold" size="31.0" />
-         </font>
-      </Label>
       <Button fx:id="playButton" layoutX="818.0" layoutY="662.0" mnemonicParsing="false" onAction="#playBlackjack" prefHeight="83.0" prefWidth="285.0" text="PLAY">
          <font>
             <Font name="Comic Sans MS Bold" size="42.0" />
@@ -122,5 +117,20 @@
             <Font name="Comic Sans MS Bold" size="19.0" />
          </font>
       </Button>
+      <Label fx:id="roundLabel" alignment="CENTER_RIGHT" layoutX="1805.0" layoutY="70.0" prefHeight="39.0" prefWidth="101.0">
+         <font>
+            <Font name="Comic Sans MS Bold" size="25.0" />
+         </font>
+      </Label>
+      <Label fx:id="actionLabel" alignment="CENTER_RIGHT" layoutX="1738.0" layoutY="109.0" prefHeight="39.0" prefWidth="168.0">
+         <font>
+            <Font name="Comic Sans MS Bold" size="25.0" />
+         </font>
+      </Label>
+      <Label fx:id="quotaLabel" alignment="CENTER_RIGHT" layoutX="1621.0" layoutY="148.0" prefHeight="39.0" prefWidth="285.0">
+         <font>
+            <Font name="Comic Sans MS Bold" size="25.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

@@ -21,7 +21,7 @@
             <Font name="Comic Sans MS Bold" size="96.0" />
          </font>
       </Label>
-      <Button fx:id="openCaseButton10" layoutX="1183.0" layoutY="807.0" mnemonicParsing="false" onAction="#openCase" prefHeight="94.0" prefWidth="315.0" text="OPEN TEN ($500)">
+      <Button fx:id="openCaseButtonMax" layoutX="1183.0" layoutY="807.0" mnemonicParsing="false" onAction="#openCase" prefHeight="94.0" prefWidth="315.0" text="OPEN MAX">
          <font>
             <Font name="Comic Sans MS Bold" size="30.0" />
          </font>
@@ -34,11 +34,6 @@
       <Label fx:id="moneyLabel" alignment="CENTER_RIGHT" layoutX="1555.0" layoutY="14.0" prefHeight="39.0" prefWidth="351.0">
          <font>
             <Font name="Comic Sans MS Bold" size="40.0" />
-         </font>
-      </Label>
-      <Label fx:id="phrogMoneyLabel" alignment="CENTER_RIGHT" layoutX="1555.0" layoutY="70.0" prefHeight="39.0" prefWidth="351.0" textFill="#1989ab">
-         <font>
-            <Font name="Comic Sans MS Bold" size="31.0" />
          </font>
       </Label>
       <ImageView fx:id="slot1" fitHeight="292.0" fitWidth="400.0" layoutX="1920.0" layoutY="444.0" pickOnBounds="true" preserveRatio="true" visible="false">
@@ -90,6 +85,21 @@
       <Label fx:id="floatLabel" alignment="CENTER" layoutX="683.0" layoutY="327.0" prefHeight="70.0" prefWidth="578.0" textAlignment="CENTER">
          <font>
             <Font name="Comic Sans MS Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="roundLabel" alignment="CENTER_RIGHT" layoutX="1805.0" layoutY="70.0" prefHeight="39.0" prefWidth="101.0">
+         <font>
+            <Font name="Comic Sans MS Bold" size="25.0" />
+         </font>
+      </Label>
+      <Label fx:id="actionLabel" alignment="CENTER_RIGHT" layoutX="1738.0" layoutY="109.0" prefHeight="39.0" prefWidth="168.0">
+         <font>
+            <Font name="Comic Sans MS Bold" size="25.0" />
+         </font>
+      </Label>
+      <Label fx:id="quotaLabel" alignment="CENTER_RIGHT" layoutX="1621.0" layoutY="148.0" prefHeight="39.0" prefWidth="285.0">
+         <font>
+            <Font name="Comic Sans MS Bold" size="25.0" />
          </font>
       </Label>
    </children>

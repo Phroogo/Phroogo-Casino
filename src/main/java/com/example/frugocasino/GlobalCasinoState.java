@@ -6,7 +6,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
+import javafx.scene.control.Label;
 import java.io.IOException;
 
 public class GlobalCasinoState {
@@ -26,6 +26,9 @@ public class GlobalCasinoState {
     private static int moneyBalance = 10000;
     private static int phrogMoneyBalance = 100000;
     private static int totalPhrogMoneySpent = 0;
+    private static int round = 1;
+    private static int roundMoneyMade = 0;
+    private static int actionsLeft = 10;
 
     public static int getMoneyBalance() {
         return moneyBalance;
@@ -91,5 +94,48 @@ public class GlobalCasinoState {
         } else {
             return amount/1000 + 250;
         }
+    }
+
+    public static int getRound() {
+        return round;
+    }
+
+    public static void setRound(int round) {
+        GlobalCasinoState.round = round;
+    }
+
+    public static void displayInfo(Label moneyLabel, Label roundLabel, Label actionsLabel, Label qoutaLabel) {
+        moneyLabel.setText("$" + getMoneyBalance());
+        roundLabel.setText("Round " + round);
+        qoutaLabel.setText("$" + roundMoneyMade + "/$" + (round * 10000));
+        actionsLabel.setText("Actions: " + actionsLeft);
+    }
+
+    public static int getRoundMoneyMade() {
+        return roundMoneyMade;
+    }
+
+    public static void setRoundMoneyMade(int roundMoneyMade) {
+        GlobalCasinoState.roundMoneyMade = roundMoneyMade;
+    }
+
+    public static void changeRoundMoneyMade(int amount) {
+        roundMoneyMade += amount;
+    }
+
+    public static int getActionsLeft() {
+        return actionsLeft;
+    }
+
+    public static void actionDecrement() {
+        actionsLeft -= 1;
+    }
+
+    public static void actionDecrement(int x) {
+        actionsLeft -= x;
+    }
+
+    public static void setActionsLeft(int actionsLeft) {
+        GlobalCasinoState.actionsLeft = actionsLeft;
     }
 }

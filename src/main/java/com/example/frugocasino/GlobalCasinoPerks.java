@@ -59,23 +59,23 @@ public class GlobalCasinoPerks {
     }
 
     public static double getSlotMachineMoneyMultiplier() {
-        return ((double)slotMachineMoneyMultiplierLevel / 10);
+        return ((double)slotMachineMoneyMultiplierLevel / 10) + 1;
     }
 
     public static double getRouletteTableMoneyMultiplier() {
-        return ((double)rouletteTableMoneyMultiplierLevel / 10);
+        return ((double)rouletteTableMoneyMultiplierLevel / 10) + 1;
     }
 
     public static double getBlackjackMoneyMultiplier() {
-        return ((double)blackjackMoneyMultiplierLevel / 10);
+        return ((double)blackjackMoneyMultiplierLevel / 10) + 1;
     }
 
     public static double getTexasPokerMoneyMultiplier() {
-        return ((double)texasPokerMoneyMultiplierLevel / 10);
+        return ((double)texasPokerMoneyMultiplierLevel / 10) + 1;
     }
 
     public static double getGlobalMoneyMultiplier() {
-        return ((double)globalMoneyMultiplierLevel / 20);
+        return ((double)globalMoneyMultiplierLevel / 20) + 1;
     }
 
     public static int getSlotMachinePhrogMoneyMultiplierLevel() {
