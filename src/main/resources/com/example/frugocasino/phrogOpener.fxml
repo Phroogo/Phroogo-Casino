@@ -9,14 +9,14 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.frugocasino.CaseOpenerController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.frugocasino.PhrogOpenerController">
    <children>
       <Button fx:id="backButton" layoutX="14.0" layoutY="1027.0" mnemonicParsing="false" onAction="#switchToCasinoButton" prefHeight="33.0" prefWidth="69.0" text="Back">
          <font>
             <Font name="Comic Sans MS Bold" size="19.0" />
          </font>
       </Button>
-      <Label alignment="CENTER" layoutX="444.0" layoutY="5.0" prefHeight="189.0" prefWidth="1054.0" text="CASE OPENER" textAlignment="CENTER" textFill="#1989ab">
+      <Label alignment="CENTER" layoutX="444.0" layoutY="5.0" prefHeight="189.0" prefWidth="1054.0" text="PHROG OPENER" textAlignment="CENTER" textFill="#1989ab">
          <font>
             <Font name="Comic Sans MS Bold" size="96.0" />
          </font>

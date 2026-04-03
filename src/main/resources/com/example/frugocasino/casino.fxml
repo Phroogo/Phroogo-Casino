@@ -12,17 +12,17 @@
                <Font name="Comic Sans MS Bold" size="96.0" />
            </font>
        </Label>
-      <Button fx:id="slotMachine" layoutX="811.0" layoutY="400.0" mnemonicParsing="false" onAction="#switchToSceneButton" prefHeight="71.0" prefWidth="351.0" text="Slot Machine">
+      <Button fx:id="newSlotMachine" layoutX="811.0" layoutY="400.0" mnemonicParsing="false" onAction="#switchToSceneButton" prefHeight="71.0" prefWidth="351.0" text="Slot Machine">
          <font>
             <Font name="Comic Sans MS Bold" size="33.0" />
          </font>
       </Button>
-      <Button fx:id="roulette" layoutX="811.0" layoutY="500.0" mnemonicParsing="false" onAction="#switchToSceneButton" prefHeight="71.0" prefWidth="351.0" text="Roulette Table">
+      <Button fx:id="roulette" layoutX="811.0" layoutY="500.0" mnemonicParsing="false" onAction="#switchToSceneButton" prefHeight="71.0" prefWidth="351.0" text="Roulette">
          <font>
             <Font name="Comic Sans MS Bold" size="33.0" />
          </font>
       </Button>
-      <Button fx:id="blackjack" layoutX="811.0" layoutY="600.0" mnemonicParsing="false" onAction="#switchToSceneButton" prefHeight="71.0" prefWidth="351.0" text="Blackjack Table">
+      <Button fx:id="blackjack" layoutX="811.0" layoutY="600.0" mnemonicParsing="false" onAction="#switchToSceneButton" prefHeight="71.0" prefWidth="351.0" text="Blackjack">
          <font>
             <Font name="Comic Sans MS Bold" size="33.0" />
          </font>
@@ -32,7 +32,7 @@
             <Font name="Comic Sans MS Bold" size="33.0" />
          </font>
       </Button>
-      <Button fx:id="caseOpener" layoutX="811.0" layoutY="800.0" mnemonicParsing="false" onAction="#switchToSceneButton" prefHeight="71.0" prefWidth="351.0" text="Case Opener">
+      <Button fx:id="phrogOpener" layoutX="811.0" layoutY="800.0" mnemonicParsing="false" onAction="#switchToSceneButton" prefHeight="71.0" prefWidth="351.0" text="Phrog Opener">
          <font>
             <Font name="Comic Sans MS Bold" size="33.0" />
          </font>

@@ -58,8 +58,8 @@ public class CasinoMenuController{
     }
 
     public void freeMoney(ActionEvent actionEvent) {
-        state.setMoneyBalance(10000);
-        state.setActionsLeft(10);
+        state.setMoneyBalance(1000);
+        state.setActionsLeft(5);
         state.setRound(1);
         state.setRoundMoneyMade(0);
         moneyLabel.setText("$" + state.getMoneyBalance());

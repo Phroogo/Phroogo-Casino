@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class CaseOpenerController {
+public class PhrogOpenerController {
 
     public Button backButton, openCaseButton1, openCaseButtonMax, openCaseButtonCustom;
     public TextField openCaseButtonTF;

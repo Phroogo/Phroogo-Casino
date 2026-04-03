@@ -23,12 +23,12 @@ public class GlobalCasinoState {
     public final int expertPerkPrice = 500;
     public final int opPerkPrice = 1000;
     public final int legendaryPerkPrice = 10000;
-    private static int moneyBalance = 10000;
+    private static int moneyBalance = 1000;
     private static int phrogMoneyBalance = 100000;
     private static int totalPhrogMoneySpent = 0;
     private static int round = 1;
     private static int roundMoneyMade = 0;
-    private static int actionsLeft = 10;
+    private static int actionsLeft = 5;
 
     public int getMoneyBalance() {
         return moneyBalance;
@@ -107,7 +107,7 @@ public class GlobalCasinoState {
     public void displayInfo(Label moneyLabel, Label roundLabel, Label actionsLabel, Label qoutaLabel) {
         moneyLabel.setText("$" + getMoneyBalance());
         roundLabel.setText("Round " + round);
-        qoutaLabel.setText("$" + roundMoneyMade + "/$" + (round * 10000));
+        qoutaLabel.setText("$" + roundMoneyMade + "/$" + (round * 5000));
         actionsLabel.setText("Actions: " + actionsLeft);
     }
 
